@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShaders.cpp \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/renderer/ccShaders.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/platform/ios/CCGL.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/base/CCPlatformConfig.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/base/CCPlatformMacros.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/base/ccConfig.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/build/../cocos/platform/ios/CCPlatformDefine.h \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Position_uColor.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Position_uColor.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionColor.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionColor.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTexture.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTexture.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureA8Color.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureA8Color.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureColor.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureColor.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureColor_noMVP.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureColor_noMVP.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTextureColorAlphaTest.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTexture_uColor.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionTexture_uColor.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionColorLengthTexture.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_PositionColorLengthTexture.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Label.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Label_df.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Label_df_glow.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Label_normal.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_Label_outline.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_3D_PositionTex.vert \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_3D_Color.frag \
+  /Users/lilil/LilCompany/MazedTail/cocos2d/cocos/renderer/ccShader_3D_ColorTex.frag

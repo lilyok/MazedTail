@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CIDR_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/lib/libz.dylib">
+      <sourceFolder url="file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/lib/libz.dylib" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Classes">
+      <sourceFolder url="file://$MODULE_DIR$/../Classes" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../Resources">
+      <sourceFolder url="file://$MODULE_DIR$/../Resources" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/AUTHORS">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/AUTHORS" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/CHANGELOG">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/CHANGELOG" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/README.md">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/README.md" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/build">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/build" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/2d">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/2d" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/3d">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/3d" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/audio">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/audio" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCAutoreleasePool.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCAutoreleasePool.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCAutoreleasePool.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCAutoreleasePool.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConfiguration.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConfiguration.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConfiguration.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConfiguration.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConsole.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConsole.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConsole.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCConsole.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController-iOS.mm">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController-iOS.mm" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCController.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCData.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCData.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCData.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCData.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDataVisitor.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDataVisitor.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDataVisitor.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDataVisitor.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDirector.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDirector.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDirector.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCDirector.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEvent.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEvent.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEvent.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEvent.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventAcceleration.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventAcceleration.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventAcceleration.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventAcceleration.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventController.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventController.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventController.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventController.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventCustom.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventCustom.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventCustom.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventCustom.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventDispatcher.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventDispatcher.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventDispatcher.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventDispatcher.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventFocus.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventFocus.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventFocus.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventFocus.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventKeyboard.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventKeyboard.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventKeyboard.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventKeyboard.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListener.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListener.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListener.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListener.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerAcceleration.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerAcceleration.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerAcceleration.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerAcceleration.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerController.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerController.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerController.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerController.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerCustom.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerCustom.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerCustom.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerCustom.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerFocus.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerFocus.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerFocus.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerFocus.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerKeyboard.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerKeyboard.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerKeyboard.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerKeyboard.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerMouse.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerMouse.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerMouse.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerMouse.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerTouch.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerTouch.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerTouch.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventListenerTouch.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventMouse.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventMouse.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventMouse.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventMouse.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventTouch.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventTouch.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventTouch.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventTouch.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventType.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCEventType.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCGameController.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCGameController.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDelegate.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDelegate.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDispatcher.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDispatcher.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDispatcher.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCIMEDispatcher.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCMap.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCMap.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCNS.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCNS.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCNS.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCNS.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCPlatformConfig.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCPlatformConfig.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCPlatformMacros.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCPlatformMacros.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProfiling.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProfiling.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProfiling.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProfiling.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProtocols.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCProtocols.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRef.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRef.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRef.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRef.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRefPtr.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCRefPtr.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScheduler.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScheduler.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScheduler.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScheduler.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScriptSupport.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScriptSupport.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScriptSupport.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCScriptSupport.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCTouch.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCTouch.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCTouch.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCTouch.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.mm">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefault.mm" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefaultAndroid.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCUserDefaultAndroid.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCValue.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCValue.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCValue.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCValue.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCVector.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/CCVector.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ObjectFactory.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ObjectFactory.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ObjectFactory.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ObjectFactory.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/TGAlib.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/TGAlib.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/TGAlib.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/TGAlib.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ZipUtils.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ZipUtils.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ZipUtils.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ZipUtils.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/atitc.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/atitc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/atitc.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/atitc.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/base64.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/base64.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/base64.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/base64.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccCArray.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccCArray.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccCArray.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccCArray.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccConfig.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccConfig.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccFPSImages.c">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccFPSImages.c" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccFPSImages.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccFPSImages.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccMacros.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccMacros.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccTypes.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccTypes.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccTypes.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccTypes.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUTF8.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUTF8.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUTF8.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUTF8.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUtils.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUtils.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUtils.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/ccUtils.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/etc1.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/etc1.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/etc1.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/etc1.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/firePngData.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/firePngData.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/s3tc.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/s3tc.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/s3tc.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/s3tc.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/uthash.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/uthash.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/base/utlist.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/base/utlist.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/cocos2d.cpp">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/cocos2d.cpp" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/cocos2d.h">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/cocos2d.h" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/deprecated">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/deprecated" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/editor-support">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/editor-support" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/math">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/math" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/network">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/network" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/physics">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/physics" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/platform">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/platform" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/renderer">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/renderer" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/storage">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/storage" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/cocos/ui">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/cocos/ui" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/docs/RELEASE_NOTES.md">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/docs/RELEASE_NOTES.md" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/extensions">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/extensions" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/Box2D">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/Box2D" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/ConvertUTF">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/ConvertUTF" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/chipmunk">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/chipmunk" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/curl/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/curl/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/edtaa3func">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/edtaa3func" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/freetype2/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/freetype2/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/freetype2/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/freetype2/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/glfw3/prebuilt/mac/libglfw3.a">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/glfw3/prebuilt/mac/libglfw3.a" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/jpeg/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/jpeg/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/jpeg/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/jpeg/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/json">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/json" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/png/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/png/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/png/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/png/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/tiff/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/tiff/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/tiff/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/tiff/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/tinyxml2">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/tinyxml2" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/unzip">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/unzip" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/webp/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/webp/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/webp/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/webp/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/websockets/prebuilt/ios">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/websockets/prebuilt/ios" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/websockets/prebuilt/mac">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/websockets/prebuilt/mac" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../cocos2d/external/xxhash">
+      <sourceFolder url="file://$MODULE_DIR$/../cocos2d/external/xxhash" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

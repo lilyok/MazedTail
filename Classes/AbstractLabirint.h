@@ -96,6 +96,7 @@ protected:
     float touchY = -500000;
     int life_num = 3;
     float scale_map = 1.0;
+    float scale_hero = 1.0;
     float xZero = 0.0;
     float yZero = 0.0;
     cocos2d::Size visibleSize;

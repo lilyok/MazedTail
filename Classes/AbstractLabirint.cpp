@@ -34,7 +34,7 @@ bool AbstractLabirint::init(std::string map_name) {
     searchPaths.push_back("TileMaps");
     searchPaths.push_back("fonts");
     FileUtils::getInstance()->setSearchPaths(searchPaths);
-    this->map = TMXTiledMap::create("labirint.tmx");
+    this->map = TMXTiledMap::create(map_name);
     Size s = map->getContentSize();
 
     this->visibleSize = Director::getInstance()->getVisibleSize();
@@ -125,7 +125,7 @@ bool AbstractLabirint::init(std::string map_name) {
     this->mylife->setScale(scale_map);
     mylife->setOpacity(230);
     mylife->setBlendFunc((BlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA});
-    mylife->setPosition(origin.x + visibleSize.width / 2, yZero + mylife->getContentSize().height * scale_map / 2);
+    mylife->setPosition(origin.x + visibleSize.width / 2, origin.y + mylife->getContentSize().height*scale_map/2);
     addChild(mylife, 3);
 
     // load the Sprite Sheet
@@ -135,13 +135,33 @@ bool AbstractLabirint::init(std::string map_name) {
     spritecache->addSpriteFramesWithFile("tgirlgo.plist");
 
 
+    
+    TMXObjectGroup *heroObject = map->getObjectGroup("hero");
+    float x, y, obj_width, obj_height;
+    if (heroObject != nullptr){
+        ValueVector objectsPoint = heroObject->getObjects();
+        for (auto objPointMap : objectsPoint) {
+            ValueMap objPoint = objPointMap.asValueMap();
+            x = objPoint.at("x").asFloat();
+            y = objPoint.at("y").asFloat();
+            obj_width = objPoint.at("width").asFloat();
+            obj_height = objPoint.at("height").asFloat();
+            
+            break;
+        }
+    }
+
+    
     this->mysprite = Sprite::createWithSpriteFrameName("topleft01.png");
+    auto w = mysprite->getContentSize().width;
+    auto h = mysprite->getContentSize().height;
     // position the sprite on the center of the screen
     mysprite->setTag(HERO_SPRITE_TAG);
-    mysprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, origin.y + mysprite->getContentSize().height));
-    mysprite->setScale(scale_map * 1.5);
+    mysprite->setPosition(Vec2(xZero + scale_map*(x+obj_width/2.0f), yZero + scale_map*(y+obj_height/2.0f)));
+    scale_hero = fmax(obj_width/w, obj_height/h)*scale_map;
+    mysprite->setScale(scale_hero);
 
-
+ 
     Vector<SpriteFrame *> animLeftFrames;
     animLeftFrames.reserve(8);
     animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft01.png"));
@@ -207,9 +227,8 @@ bool AbstractLabirint::init(std::string map_name) {
     animateBottom = Animate::create(animationBottom);
     animateBottom->retain();
 
-    auto w = mysprite->getContentSize().width;
-    auto h = mysprite->getContentSize().height;
-    auto physicsBody = PhysicsBody::createBox(Size(w * scale_map / 3, h * scale_map),
+
+    auto physicsBody = PhysicsBody::createBox(Size(w * scale_hero / 3, h * scale_hero),
             PhysicsMaterial(1.0f, 0.0f, 0.0f), Vec2(0, 0));
     physicsBody->setRotationEnable(false);
     physicsBody->setDynamic(true);
@@ -217,7 +236,7 @@ bool AbstractLabirint::init(std::string map_name) {
     //set the body isn't affected by the physics world's gravitational force
     physicsBody->setGravityEnable(false);
 
-    addChild(this->mysprite, 1);
+    addChild(this->mysprite, 2);
 
     mysprite->setPhysicsBody(physicsBody);
 
@@ -362,7 +381,7 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 mysprite->runAction(action);
                 body->setRotationOffset(90);
                 if (pos.y >= 0) {
-                    pos.y = -mysprite->getContentSize().width * scale_map * 2 / 3;
+                    pos.y = -mysprite->getContentSize().height * scale_hero * 2 / 3;
                     pos.x = 0;
                 }
                 body->setPositionOffset(pos);
@@ -378,7 +397,7 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 mysprite->runAction(action);
                 body->setRotationOffset(90);
                 if (pos.y <= 0) {
-                    pos.y = mysprite->getContentSize().width * scale_map * 2 / 3;
+                    pos.y = mysprite->getContentSize().height * scale_hero * 2 / 3;
                     pos.x = 0;
                 }
                 body->setPositionOffset(pos);
@@ -409,7 +428,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 body->setRotationOffset(0);
                 if (pos.x <= 0) {
                     pos.y = 0;
-                    pos.x = mysprite->getContentSize().width * scale_map * 2 / 3;
+                    pos.x = mysprite->getContentSize().height * scale_hero * 2 / 3;
                 }
                 body->setPositionOffset(pos);
 
@@ -426,7 +445,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 mysprite->getPhysicsBody()->setRotationOffset(0);
                 if (pos.x >= 0) {
                     pos.y = 0;
-                    pos.x = -mysprite->getContentSize().width * scale_map * 2 / 3;
+                    pos.x = -mysprite->getContentSize().height * scale_hero * 2 / 3;
                 }
                 body->setPositionOffset(pos);
 

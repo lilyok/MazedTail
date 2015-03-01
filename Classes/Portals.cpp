@@ -32,29 +32,9 @@ bool Portals::init() {
     // 1. super init first
 
 
-    if (!AbstractLabirint::init("labirint.tmx")) {
+    if (!AbstractLabirint::init("tmp.tmx")) {
         return false;
     }
-
-    auto labirintcache = SpriteFrameCache::getInstance();
-    labirintcache->addSpriteFramesWithFile("lb.plist");
-    auto labirint = Sprite::createWithSpriteFrameName("labirint01.png");
-
-
-//    Vector<SpriteFrame *> animLabirintFrames;
-//    animLabirintFrames.reserve(4);
-//    animLabirintFrames.pushBack(labirintcache->getSpriteFrameByName("labirint03.png"));
-//    animLabirintFrames.pushBack(labirintcache->getSpriteFrameByName("labirint01.png"));
-//    animLabirintFrames.pushBack(labirintcache->getSpriteFrameByName("labirint02.png"));
-//    animLabirintFrames.pushBack(labirintcache->getSpriteFrameByName("labirint01.png"));
-//
-//
-//    // create the animation out of the frames
-//    Animation *animationLabirint = Animation::createWithSpriteFrames(animLabirintFrames, 0.5f);
-//    auto animateLabirint = Animate::create(animationLabirint);
-//    labirint->runAction(RepeatForever::create(animateLabirint));
-    labirint->setPosition(Vec2(labirint->getContentSize().width / 2, labirint->getContentSize().height / 2));
-    map->addChild(labirint, 2);
 
 
     TMXObjectGroup *holes = map->getObjectGroup("portals");
@@ -74,6 +54,11 @@ bool Portals::init() {
 
     //////////////////////////////////////////////////
 
+    for (auto spider: this->fallings){
+        auto h = spider->getContentSize().height*scale_map;
+        spider->getPhysicsBody()->setPositionOffset(Vec2(0, h/8));
+    }
+    
 
     this->m_emitter = ParticleFire::create();
     this->m_emitter->setScale(scale_map / 2);
@@ -82,9 +67,9 @@ bool Portals::init() {
 
     for (auto portal : this->portals) {
         ParticleSystemQuad *p_emitter = ParticleGalaxy::create();
-        p_emitter->setScale(scale_map / 2);
-        p_emitter->setPosition(0, 0);//32*scale_map,32*scale_map);
-        portal->addChild(p_emitter);
+        p_emitter->setScale(scale_map);
+        p_emitter->setPosition(32*scale_map,32*scale_map);
+        portal->addChild(p_emitter, 3);
     }
 
 

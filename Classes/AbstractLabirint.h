@@ -21,16 +21,16 @@
 #define ANIMATION_DELAY 0.0001f
 #define NEWLEVEL_TAG 40
 #define MIN_FOR_DIRECTION 10
-#define MY_VELOCITY 300
+#define MY_VELOCITY 500
 
 class AbstractLabirint : public cocos2d::Layer
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::Scene* createScene(std::string map_name);
+    static cocos2d::Scene* createScene(std::string map_name, std::string back_name);
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init(std::string map_name);
+    virtual bool init(std::string map_name, std::string back_name);
 
 
     // a selector callback
@@ -38,9 +38,9 @@ public:
     virtual void menuRestartCallback(cocos2d::Ref* pSender) {};
     virtual void menuNewLeveltCallback(cocos2d::Ref *pSender) {};
     // implement the "static create()" method manually
-    static AbstractLabirint* create(std::string map_name) {
+    static AbstractLabirint* create(std::string map_name, std::string back_name) {
         auto p = new AbstractLabirint();
-        if (p->init(map_name)) {
+        if (p->init(map_name, back_name)) {
             p->autorelease();
             return p;
         } else {
@@ -91,6 +91,7 @@ protected:
     virtual void onContactSeperate(const cocos2d::PhysicsContact& contact) {};
     bool isRestart = false;
     bool isNewLevel = false;
+    bool isPlus = false;
     int direction = NODIRECTION;
     float touchX = -500000;
     float touchY = -500000;

@@ -4,46 +4,60 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>labirint01.png</key>
+			<key>life0.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{1919,0},{1918,1919}}</string>
+				<string>{{0,65},{292,64}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{1918,1919}}</string>
+				<string>{{0,0},{292,64}}</string>
 				<key>sourceSize</key>
-				<string>{1918,1919}</string>
+				<string>{292,64}</string>
 			</dict>
 
-			<key>labirint02.png</key>
+			<key>life1.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,1920},{1918,1919}}</string>
+				<string>{{0,130},{292,64}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{1918,1919}}</string>
+				<string>{{0,0},{292,64}}</string>
 				<key>sourceSize</key>
-				<string>{1918,1919}</string>
+				<string>{292,64}</string>
 			</dict>
 
-			<key>labirint03.png</key>
+			<key>life2.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{1918,1919}}</string>
+				<string>{{0,195},{292,64}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{1918,1919}}</string>
+				<string>{{0,0},{292,64}}</string>
 				<key>sourceSize</key>
-				<string>{1918,1919}</string>
+				<string>{292,64}</string>
+			</dict>
+
+			<key>life3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{292,64}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{0,0},{292,64}}</string>
+				<key>sourceSize</key>
+				<string>{292,64}</string>
 			</dict>
 
 		</dict>
@@ -53,9 +67,9 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>size</key>
-			<string>{4096,4096}</string>
+			<string>{512,512}</string>
 			<key>textureFileName</key>
-			<string>lb.png</string>
+			<string>life.png</string>
 			</dict>
 		</dict>
 </plist>

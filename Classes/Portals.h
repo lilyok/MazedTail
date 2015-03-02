@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "AbstractLabirint.h"
 
+#define COUNT_OF_DELTA 100
 
 class Portals : public AbstractLabirint
 {
@@ -50,6 +51,8 @@ private:
     void collisionWithEnemy(Node * nodeA, Node * nodeB);
 
     void entranceIntoPortal(Node * nodeA, Node * nodeB);
+    
+    int num_of_delta = 0;
 
 };
 

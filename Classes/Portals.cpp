@@ -32,11 +32,12 @@ bool Portals::init() {
     // 1. super init first
 
 
-    if (!AbstractLabirint::init("tmp.tmx")) {
+    if (!AbstractLabirint::init("tmp.tmx", "back.png")) {
         return false;
     }
 
-
+ 
+    
     TMXObjectGroup *holes = map->getObjectGroup("portals");
 
     this->portals = makeObject(PORTAL_TAG, holes, scale_map, xZero, yZero, BRICK, 0, 0);
@@ -54,9 +55,26 @@ bool Portals::init() {
 
     //////////////////////////////////////////////////
 
+    int i = 0;
     for (auto spider: this->fallings){
-        auto h = spider->getContentSize().height*scale_map;
-        spider->getPhysicsBody()->setPositionOffset(Vec2(0, h/8));
+        auto h = spider->getContentSize().height;
+        auto w = spider->getContentSize().width;
+        spider->getPhysicsBody()->setPositionOffset(Vec2(0, h*scale_map/8));
+        
+        ParticleFire *p_emitter = ParticleFire::create();
+        auto j = i % 3;
+        if (j == 0)
+            p_emitter->setEndColor(Color4F(255, 0, 0, 255));
+        else if (j == 1)
+            p_emitter->setEndColor(Color4F(0, 0, 255, 255));
+        else
+            p_emitter->setEndColor(Color4F(255, 0, 255, 255));
+
+        
+        p_emitter->setScale(scale_map*3);
+        p_emitter->setPosition(w/2, h/2);
+        spider->addChild(p_emitter, 3);
+        i++;
     }
     
 
@@ -64,6 +82,8 @@ bool Portals::init() {
     this->m_emitter->setScale(scale_map / 2);
     this->m_emitter->stopSystem();
     addChild(m_emitter, 3);
+    
+    
 
     for (auto portal : this->portals) {
         ParticleSystemQuad *p_emitter = ParticleGalaxy::create();
@@ -78,9 +98,9 @@ bool Portals::init() {
 }
 
 void Portals::update(float delta) {
-
-    if (mysprite->getNumberOfRunningActions() <= 0) {
-        if (isRestart || isNewLevel) {
+   // cocos2d::log("delta = %f", delta);
+    if (isRestart || isNewLevel) {
+        if (mysprite->getNumberOfRunningActions() <= 0) {
             this->pausedNodes = cocos2d::Director::getInstance()->getActionManager()->pauseAllRunningActions();
             if (isRestart) {
                 restartItem->setVisible(true);
@@ -90,17 +110,27 @@ void Portals::update(float delta) {
                 stopScene();
                 newlevelItem->setVisible(true);
             }
-
         }
-    }
-
-    if (!isRestart && !isNewLevel) {
-        for (auto plus: pluses) {
-            if (plus->getOpacity() < 255) {
-                plus->setOpacity(plus->getOpacity() + 1);
+    } else {
+        if (!isRestart && !isNewLevel) {
+            for (auto plus: pluses) {
+                if (plus->getOpacity() < 255) {
+                    plus->setOpacity(plus->getOpacity() + 1);
+                    
+                    if (plus->getOpacity() == 255)
+                        isPlus = false;
+                }
             }
         }
-
+        
+        if (num_of_delta < COUNT_OF_DELTA) {
+            num_of_delta++;
+        } else {
+            for (auto spider : fallings){
+                spider->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+            }
+            num_of_delta = 0;
+        }
     }
 }
 
@@ -117,20 +147,25 @@ void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
         auto nodeB = contact.getShapeB()->getBody()->getNode();
 
         if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-            if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+            if ((nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) && isPlus) {
                 Node *node;
                 if (nodeA->getTag() == PLUS_TAG) node = nodeA;
                 else node = nodeB;
                 if (node->getOpacity() == 255) {
                     node->setOpacity(0);
-                    node->setGlobalZOrder(0);
+                 //   node->setGlobalZOrder(0);
                 }
+                isPlus = false;
             } else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
                 m_emitter->stopSystem();
             } else if (nodeA->getTag() == PORTAL_TAG or nodeB->getTag() == PORTAL_TAG) {
                 isPortal = true;
             }
-        }
+        } /*else if ((nodeA->getTag() == FALLING_TAG || nodeB->getTag() == FALLING_TAG)&&
+                   (nodeA->getTag() == COLLISION_TAG || nodeB->getTag() == COLLISION_TAG)) {
+            m_emitter->stopSystem();
+            
+        }*/
 
         if (!isSpiderPortal) {
             if ((nodeA->getTag() == PORTAL_TAG || nodeB->getTag() == PORTAL_TAG) &&
@@ -224,6 +259,7 @@ bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
         else if (nodeA->getTag() != NEWLEVEL_TAG and nodeB->getTag() != NEWLEVEL_TAG) {
 
             m_emitter->setPosition(contact.getContactData()->points[0]);
+            m_emitter->setScale(scale_map);
             m_emitter->resetSystem();
         } else {
             m_emitter = ParticleSmoke::create();
@@ -233,7 +269,12 @@ bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
             return false;
         }
 
-    }
+    }/* else if ((nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) &&
+               (nodeA->getTag() == COLLISION_TAG || nodeB->getTag() == COLLISION_TAG)) {
+        m_emitter->setPosition(contact.getContactData()->points[0]);
+        m_emitter->resetSystem();
+    }*/
+    
     return true;
 }
 

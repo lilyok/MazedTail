@@ -8,12 +8,12 @@
 USING_NS_CC;
 
 
-Scene *AbstractLabirint::createScene(std::string map_name) {
+Scene *AbstractLabirint::createScene(std::string map_name, std::string back_name) {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
     //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
-    auto layer = AbstractLabirint::create(map_name);
+    auto layer = AbstractLabirint::create(map_name, back_name);
     layer->setPhyWorld(scene->getPhysicsWorld());
     //layer->setPhyWorld(scene->getPhysicsWorld()); //lilil
     // add layer as a child to scene
@@ -23,7 +23,7 @@ Scene *AbstractLabirint::createScene(std::string map_name) {
     return scene;
 }
 
-bool AbstractLabirint::init(std::string map_name) {
+bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     //////////////////////////////
     // 1. super init first
     if (!Layer::init()) {
@@ -34,11 +34,28 @@ bool AbstractLabirint::init(std::string map_name) {
     searchPaths.push_back("TileMaps");
     searchPaths.push_back("fonts");
     FileUtils::getInstance()->setSearchPaths(searchPaths);
-    this->map = TMXTiledMap::create(map_name);
-    Size s = map->getContentSize();
 
     this->visibleSize = Director::getInstance()->getVisibleSize();
     this->origin = Director::getInstance()->getVisibleOrigin();
+    
+    
+    auto icon_scale = (this->visibleSize.height/16.0) / 64.0;
+    if (icon_scale > 1)
+        icon_scale = 1.0;
+    
+    
+    auto back_sprite = Sprite::create(back_name);
+
+    back_sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+    back_sprite->setTextureRect(Rect(origin.x, origin.y, visibleSize.width, visibleSize.height));
+    
+    back_sprite->setPosition(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2);
+    addChild(back_sprite, 0);
+    
+    
+    this->map = TMXTiledMap::create(map_name);
+    Size s = map->getContentSize();
+
     //////////////////////////////////////////////////
     if (visibleSize.height / s.height < visibleSize.width / s.width)
         this->scale_map = visibleSize.height / s.height;
@@ -61,8 +78,10 @@ bool AbstractLabirint::init(std::string map_name) {
             "CloseSelected.png",
             CC_CALLBACK_1(AbstractLabirint::menuCloseCallback, this));
 
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-            origin.y + closeItem->getContentSize().height / 2));
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width*icon_scale / 2,
+            origin.y + closeItem->getContentSize().height*icon_scale / 2));
+    
+    closeItem->setScale(icon_scale);
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
@@ -71,14 +90,15 @@ bool AbstractLabirint::init(std::string map_name) {
     closeItem->setGlobalZOrder(3);
     closeItem->getNormalImage()->setGlobalZOrder(3);
     closeItem->getSelectedImage()->setGlobalZOrder(3);
-
+    ///////////////////////////////////////////////////////////////////////////
     this->restartItem = MenuItemImage::create(
-            "CloseNormal.png",
-            "CloseSelected.png",
+            "RestartNormal.png",
+            "RestartSelected.png",
             CC_CALLBACK_1(AbstractLabirint::menuRestartCallback, this));
     restartItem->setVisible(false);
-    restartItem->setPosition(Vec2(origin.x + visibleSize.width / 2 - closeItem->getContentSize().width / 2,
-            origin.y + visibleSize.height / 2 + closeItem->getContentSize().height / 2));
+    restartItem->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            origin.y + visibleSize.height / 2 + restartItem->getContentSize().height*icon_scale / 2));
+    restartItem->setScale(icon_scale);
 
     // create menu, it's an autorelease object
     auto menuRestart = Menu::create(restartItem, NULL);
@@ -122,10 +142,10 @@ bool AbstractLabirint::init(std::string map_name) {
     //////////////////////////////////////////////////
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("life.plist");
     this->mylife = Sprite::createWithSpriteFrameName("life3.png");
-    this->mylife->setScale(scale_map);
+    this->mylife->setScale(icon_scale);
     mylife->setOpacity(230);
     mylife->setBlendFunc((BlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA});
-    mylife->setPosition(origin.x + visibleSize.width / 2, origin.y + mylife->getContentSize().height*scale_map/2);
+    mylife->setPosition(origin.x + visibleSize.width / 2, origin.y + mylife->getContentSize().height*icon_scale/2);
     addChild(mylife, 3);
 
     // load the Sprite Sheet
@@ -639,10 +659,11 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
             sprintf(res, "life%i.png", life_num);
             SpriteFrame *splife = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
             mylife->setSpriteFrame(splife);
-
+        
             plus->setSpriteFrame(sp);
-            plus->setGlobalZOrder(3);
+         //   plus->setGlobalZOrder(3);
             mysprite->runAction(Sequence::create(TintTo::create(0.5f, 252, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
+            isPlus = true;
         }
     }
 }

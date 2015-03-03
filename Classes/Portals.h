@@ -25,8 +25,7 @@ public:
     
     
     // a selector callback
-    void menuRestartCallback(cocos2d::Ref* pSender);
-    void menuNewLeveltCallback(cocos2d::Ref *pSender);
+//    void menuRestartCallback(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
     CREATE_FUNC(Portals);
 protected:
@@ -37,12 +36,16 @@ protected:
 private:
     void update(float delta) override;
     void stopScene();
+    void pauseScene();
+    void resumeScene();
+    
 //    void goToPoint(float dx, float dy);
     
     void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);
 
+//    bool isOutOfPortal = true;
     bool isPortal = true;
     bool isSpiderPortal = true;
     

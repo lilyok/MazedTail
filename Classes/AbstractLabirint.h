@@ -35,8 +35,9 @@ public:
 
     // a selector callback
     virtual void menuCloseCallback(cocos2d::Ref* pSender);
-    virtual void menuRestartCallback(cocos2d::Ref* pSender) {};
-    virtual void menuNewLeveltCallback(cocos2d::Ref *pSender) {};
+    virtual void menuPauseCallback(cocos2d::Ref* pSender);
+    virtual void menuRestartCallback(cocos2d::Ref* pSender);
+    virtual void menuContinueCallback(cocos2d::Ref *pSender);
     // implement the "static create()" method manually
     static AbstractLabirint* create(std::string map_name, std::string back_name) {
         auto p = new AbstractLabirint();
@@ -56,6 +57,7 @@ protected:
     cocos2d::Vector<Node*> pausedNodes;
     cocos2d::Sprite* mysprite;
     cocos2d::Sprite* mylife;
+    cocos2d::Sprite* menuSprite;
     cocos2d::Vector<cocos2d::Sprite*> pluses;
 
     cocos2d::Animate* animateBottom;
@@ -82,20 +84,39 @@ protected:
     cocos2d::Sprite* makePhysicsObjAt(int tag, cocos2d::Point p, cocos2d::Size size, int form, int v = 0, int n = -1, int mask = 0xFFFFFFFF);
 
     void stopAllObjectLayer(cocos2d::Vector<cocos2d::Sprite*> sprites);
+    void pauseAllObjectLayer(cocos2d::Vector<cocos2d::Sprite*> sprites);
+    void resumeAllObjectLayer(cocos2d::Vector<cocos2d::Sprite*> sprites);
+    void resumeAllObjects();
+    void pauseAllObjects();
     void stopAllObjects();
 
+    virtual void resumeScene();
+    virtual void pauseScene();
     virtual void stopScene();
+    void pause();
+    void resume(bool isResumeScene = true);
+    void hideBottom();
+    void finishMenuAction();
+    
     void goToPoint(float dx, float dy);
 
     virtual bool onContactBegin(const cocos2d::PhysicsContact& contact) {return true;};
     virtual void onContactSeperate(const cocos2d::PhysicsContact& contact) {};
+    
+    void prettyShowItem(cocos2d::MenuItemImage* item, cocos2d::Vec2 endPosition);
+
     bool isRestart = false;
+    bool isRestarted = false;
+    bool isNewLeveled = false;
     bool isNewLevel = false;
+    bool isPaused = false;
+    bool isClose = false;
     bool isPlus = false;
     int direction = NODIRECTION;
     float touchX = -500000;
     float touchY = -500000;
     int life_num = 3;
+    float icon_scale = 1.0;
     float scale_map = 1.0;
     float scale_hero = 1.0;
     float xZero = 0.0;
@@ -103,7 +124,11 @@ protected:
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
     cocos2d::MenuItemImage* restartItem;
-    cocos2d::MenuItemImage* newlevelItem;
+    cocos2d::MenuItemImage* continueItem;
+    cocos2d::MenuItemImage* closeItem;
+    cocos2d::MenuItemImage* pauseItem;
+    
+    
     cocos2d::TMXTiledMap *map;
 
 
@@ -116,6 +141,8 @@ protected:
     bool goToPointX(float dx, float dy, float vx_old, float vy_old, float vx, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vy);
 
     bool goToPointY(float dx, float dy, float vx_old, float vy_old, float vy, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vx);
+    
+    void stopTakingPoints();
 };
 
 

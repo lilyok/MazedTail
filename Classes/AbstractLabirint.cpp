@@ -39,9 +39,20 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     this->origin = Director::getInstance()->getVisibleOrigin();
     
     
-    auto icon_scale = (this->visibleSize.height/16.0) / 64.0;
+    icon_scale = (this->visibleSize.height/16.0) / 64.0;
     if (icon_scale > 1)
         icon_scale = 1.0;
+    
+    
+    
+    menuSprite = Sprite::create("black_pixel.png");
+    menuSprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+    menuSprite->setTextureRect(Rect(origin.x, origin.y, visibleSize.width, visibleSize.height));
+    
+    menuSprite->setPosition(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2);
+    menuSprite->setOpacity(0);
+    addChild(menuSprite, 3);
+    
     
     
     auto back_sprite = Sprite::create(back_name);
@@ -73,20 +84,32 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
+
+
+    
+    this->pauseItem = MenuItemImage::create(
+                                            "PauseNormal.png",
+                                            "PauseSelected.png",
+                                            CC_CALLBACK_1(AbstractLabirint::menuPauseCallback, this));
+    
+    pauseItem->setPosition(Vec2(origin.x + visibleSize.width - pauseItem->getContentSize().width*icon_scale / 2,
+                                origin.y + pauseItem->getContentSize().height*icon_scale / 2));
+    
+    pauseItem->setScale(icon_scale);
+    pauseItem->setVisible(true);
+    pauseItem->setGlobalZOrder(3);
+    pauseItem->getNormalImage()->setGlobalZOrder(3);
+    pauseItem->getSelectedImage()->setGlobalZOrder(3);
+    ///////////////////////////////////////////////////////////////////////////
+    this->closeItem = MenuItemImage::create(
             "CloseNormal.png",
             "CloseSelected.png",
             CC_CALLBACK_1(AbstractLabirint::menuCloseCallback, this));
 
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width*icon_scale / 2,
-            origin.y + closeItem->getContentSize().height*icon_scale / 2));
-    
+    closeItem->setOpacity(0);
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width/2
+                                , origin.y + visibleSize.height + closeItem->getContentSize().height));
     closeItem->setScale(icon_scale);
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
     closeItem->setGlobalZOrder(3);
     closeItem->getNormalImage()->setGlobalZOrder(3);
     closeItem->getSelectedImage()->setGlobalZOrder(3);
@@ -95,35 +118,30 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
             "RestartNormal.png",
             "RestartSelected.png",
             CC_CALLBACK_1(AbstractLabirint::menuRestartCallback, this));
-    restartItem->setVisible(false);
-    restartItem->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y + visibleSize.height / 2 + restartItem->getContentSize().height*icon_scale / 2));
+    restartItem->setOpacity(0);
+    restartItem->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                  origin.y + visibleSize.height + restartItem->getContentSize().height));
     restartItem->setScale(icon_scale);
-
-    // create menu, it's an autorelease object
-    auto menuRestart = Menu::create(restartItem, NULL);
-    menuRestart->setPosition(Vec2::ZERO);
-    this->addChild(menuRestart, 1);
     restartItem->setGlobalZOrder(3);
     restartItem->getNormalImage()->setGlobalZOrder(3);
     restartItem->getSelectedImage()->setGlobalZOrder(3);
     ///////////////////////////////////////////////////////////////////////////
-    this->newlevelItem = MenuItemImage::create(
-            "CloseNormal.png",
-            "CloseSelected.png",
-            CC_CALLBACK_1(AbstractLabirint::menuNewLeveltCallback, this));
-    newlevelItem->setVisible(false);
-    newlevelItem->setPosition(Vec2(origin.x + visibleSize.width / 2 - closeItem->getContentSize().width / 2,
-            origin.y + visibleSize.height / 2 + closeItem->getContentSize().height / 2));
-
-
-    // create menu, it's an autorelease object
-    auto menuNewLevel = Menu::create(newlevelItem, NULL);
-    menuNewLevel->setPosition(Vec2::ZERO);
-    this->addChild(menuNewLevel, 1);
-    newlevelItem->setGlobalZOrder(3);
-    newlevelItem->getNormalImage()->setGlobalZOrder(3);
-    newlevelItem->getSelectedImage()->setGlobalZOrder(3);
+    this->continueItem = MenuItemImage::create(
+            "PlayNormal.png",
+            "PlaySelected.png",
+            CC_CALLBACK_1(AbstractLabirint::menuContinueCallback, this));
+    continueItem->setOpacity(0);
+    continueItem->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                   origin.y + visibleSize.height + continueItem->getContentSize().height));
+    continueItem->setScale(icon_scale);
+    continueItem->setGlobalZOrder(3);
+    continueItem->getNormalImage()->setGlobalZOrder(3);
+    continueItem->getSelectedImage()->setGlobalZOrder(3);
+    
+    auto menu = Menu::create(pauseItem, closeItem, restartItem, continueItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+    
 
     //////////////////////////////////////////////////
 
@@ -248,7 +266,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     animateBottom->retain();
 
 
-    auto physicsBody = PhysicsBody::createBox(Size(w * scale_hero / 3, h * scale_hero),
+    auto physicsBody = PhysicsBody::createBox(Size(w * scale_hero / 3, h * scale_hero/2),
             PhysicsMaterial(1.0f, 0.0f, 0.0f), Vec2(0, 0));
     physicsBody->setRotationEnable(false);
     physicsBody->setDynamic(true);
@@ -302,19 +320,11 @@ void AbstractLabirint::onExit() {
 }
 
 void AbstractLabirint::update(float delta) {
-
-    if (mysprite->getNumberOfRunningActions() <= 0) {
-        if (isRestart || isNewLevel) {
-            this->pausedNodes = cocos2d::Director::getInstance()->getActionManager()->pauseAllRunningActions();
-            if (isRestart) {
-                restartItem->setVisible(true);
-                mysprite->getPhysicsBody()->setGravityEnable(true);
-            }
-            else {
-                stopScene();
-                newlevelItem->setVisible(true);
-            }
-
+    if ((closeItem->getNumberOfRunningActions() <= 0) && (closeItem->getOpacity() == 0)) {
+        if (isClose) {
+            isClose = false;
+            auto newScene = MenuScene::createScene();
+            cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
         }
     }
 }
@@ -343,14 +353,19 @@ void AbstractLabirint::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event
 }
 
 void AbstractLabirint::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event) {
-    direction = NODIRECTION;
-    stopAllObjects();
-    touchX = -500000;
-    touchY = -500000;
+    stopTakingPoints();
 }
 
 void AbstractLabirint::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event) {
     onTouchEnded(touch, event);
+}
+
+
+void AbstractLabirint::stopTakingPoints(){
+    direction = NODIRECTION;
+    stopAllObjects();
+    touchX = -500000;
+    touchY = -500000;
 }
 
 void AbstractLabirint::goToPoint(float dx, float dy) {
@@ -401,7 +416,7 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 mysprite->runAction(action);
                 body->setRotationOffset(90);
                 if (pos.y >= 0) {
-                    pos.y = -mysprite->getContentSize().height * scale_hero * 2 / 3;
+                    pos.y = -mysprite->getContentSize().height * scale_hero * 5 / 12;
                     pos.x = 0;
                 }
                 body->setPositionOffset(pos);
@@ -417,7 +432,7 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 mysprite->runAction(action);
                 body->setRotationOffset(90);
                 if (pos.y <= 0) {
-                    pos.y = mysprite->getContentSize().height * scale_hero * 2 / 3;
+                    pos.y = mysprite->getContentSize().height * scale_hero * 5 / 12;
                     pos.x = 0;
                 }
                 body->setPositionOffset(pos);
@@ -436,7 +451,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
     else vy = vy * std::__1::abs(dy / dx);
 
 
-    if ((std::__1::abs(vy_old - vy) >= MIN_FOR_DIRECTION) || (std::__1::abs(vx_old - vx) >= MIN_FOR_DIRECTION)) {
+    if ((fabs(vy_old - vy) >= MIN_FOR_DIRECTION) || (fabs(vx_old - vx) >= MIN_FOR_DIRECTION)) {
         if (dx > 0) {
             if (direction != RIGHT) {
                 stopAllObjects();
@@ -448,7 +463,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 body->setRotationOffset(0);
                 if (pos.x <= 0) {
                     pos.y = 0;
-                    pos.x = mysprite->getContentSize().height * scale_hero * 2 / 3;
+                    pos.x = mysprite->getContentSize().height * scale_hero * 5 / 12;
                 }
                 body->setPositionOffset(pos);
 
@@ -465,7 +480,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 mysprite->getPhysicsBody()->setRotationOffset(0);
                 if (pos.x >= 0) {
                     pos.y = 0;
-                    pos.x = -mysprite->getContentSize().height * scale_hero * 2 / 3;
+                    pos.x = -mysprite->getContentSize().height * scale_hero * 5 / 12;
                 }
                 body->setPositionOffset(pos);
 
@@ -484,6 +499,18 @@ void AbstractLabirint::stopAllObjects() {
         mysprite->stopActionByTag(RIGHT);
 
         mysprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+    }
+}
+
+void AbstractLabirint::pauseAllObjects() {
+    if (mysprite->getNumberOfRunningActions() > 0) {
+        mysprite->pause();
+    }
+}
+
+void AbstractLabirint::resumeAllObjects() {
+    if (mysprite->getNumberOfRunningActions() > 0) {
+        mysprite->resume();
     }
 }
 
@@ -641,6 +668,32 @@ void AbstractLabirint::stopAllObjectLayer(Vector<Sprite *> sprites) {
     }
 }
 
+
+void AbstractLabirint::pauseAllObjectLayer(Vector<Sprite *> sprites) {
+    for (auto sprite : sprites) {
+        if (sprite->getNumberOfRunningActions() > 0) {
+            sprite->pause();
+        }
+    }
+}
+
+
+void AbstractLabirint::resumeAllObjectLayer(Vector<Sprite *> sprites) {
+    for (auto sprite : sprites) {
+        if (sprite->getNumberOfRunningActions() > 0) {
+            sprite->resume();
+        }
+    }
+}
+
+void AbstractLabirint::resumeScene() {
+    resumeAllObjects();
+}
+
+void AbstractLabirint::pauseScene() {
+    pauseAllObjects();
+}
+
 void AbstractLabirint::stopScene() {
     stopAllObjects();
 }
@@ -661,16 +714,130 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
             mylife->setSpriteFrame(splife);
         
             plus->setSpriteFrame(sp);
-         //   plus->setGlobalZOrder(3);
             mysprite->runAction(Sequence::create(TintTo::create(0.5f, 252, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
             isPlus = true;
         }
     }
 }
 
+void AbstractLabirint::finishMenuAction(){
+    if (continueItem->getNumberOfRunningActions() > 0){
+        continueItem->stopAllActions();
+    }
+    if (restartItem->getNumberOfRunningActions() > 0){
+        restartItem->stopAllActions();
+    }
+    if (closeItem->getNumberOfRunningActions() > 0){
+        closeItem->stopAllActions();
+    }
+    
+    if (isPaused) {
+        continueItem->setScale(icon_scale);
+        continueItem->setOpacity(0);
+        
+        restartItem->setScale(icon_scale);
+        restartItem->setOpacity(0);
+        
+        closeItem->setScale(icon_scale);
+        closeItem->setOpacity(0);
+    } else {
+        if (isNewLevel){
+            continueItem->setScale(1.5*icon_scale);
+            restartItem->setScale(icon_scale);
+            closeItem->setScale(icon_scale);
+        }
+        continueItem->setOpacity(255);
+        restartItem->setOpacity(255);
+        closeItem->setOpacity(255);
+    }
+    
+}
+void AbstractLabirint::prettyShowItem(MenuItemImage* item, Vec2 endPosition){
+    if (item->getOpacity() == 0)
+        item->runAction(cocos2d::FadeTo::create(1.0, 255));
+    else
+        item->runAction(cocos2d::FadeTo::create(1.0, 0));
+    
+    item->runAction(cocos2d::MoveTo::create(1.0, endPosition));
+}
+
+void AbstractLabirint::pause(){
+    if(!isPaused) {
+        isPaused = true;
+        finishMenuAction();
+        pauseScene();
+        
+        menuSprite->runAction(cocos2d::FadeTo::create(1.0, 150));
+        
+        if (!isRestart && !isNewLevel) {
+            prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,
+                                              origin.y + visibleSize.height/2 + continueItem->getContentSize().height*icon_scale*1.5));
+            prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+            prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
+                                           origin.y + visibleSize.height/2 - continueItem->getContentSize().height*icon_scale*1.5));
+        } else if (isNewLevel) {
+            prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,
+                                              origin.y + visibleSize.height/2));
+            
+            continueItem->runAction(cocos2d::ScaleTo::create(1.0, icon_scale*1.5));
+            prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2 - continueItem->getContentSize().width*icon_scale*1.5,
+                                             origin.y + visibleSize.height/2));
+            prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2 + continueItem->getContentSize().width*icon_scale*1.5,
+                                           origin.y + visibleSize.height/2));
+        }else {
+            prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2 + continueItem->getContentSize().height*icon_scale));
+            prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
+                                           origin.y + visibleSize.height/2 - continueItem->getContentSize().height*icon_scale));
+        }
+    } else {
+        if (!isRestart)
+            resume();
+    }
+}
+
+
+void AbstractLabirint::resume(bool isResumeScene){
+    isPaused = false;
+    finishMenuAction();
+    prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,
+                                      origin.y + visibleSize.height + continueItem->getContentSize().height));
+    prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2,
+                                     origin.y + visibleSize.height + restartItem->getContentSize().height));
+    prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
+                                   origin.y + visibleSize.height + closeItem->getContentSize().height));
+    if (isNewLevel) {
+        continueItem->runAction(cocos2d::ScaleTo::create(1.0, icon_scale));
+    }
+    menuSprite->runAction(cocos2d::FadeTo::create(1.0, 0));
+    
+    if (isResumeScene)
+        resumeScene();
+}
+
+void AbstractLabirint::hideBottom(){
+    if (!isRestart)
+        prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2, origin.y - continueItem->getContentSize().height));
+    prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2, origin.y - continueItem->getContentSize().height));
+    prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2, origin.y - continueItem->getContentSize().height));
+    
+}
+
+void AbstractLabirint::menuPauseCallback(Ref * pSender) {
+    pause();
+}
+
+void AbstractLabirint::menuContinueCallback(Ref * pSender) {
+    if (!isNewLevel)
+        resume();
+}
+
+void AbstractLabirint::menuRestartCallback(Ref * pSender) {
+    resume(false);
+    isRestarted = true;
+}
 
 void AbstractLabirint::menuCloseCallback(Ref * pSender) {
-    auto newScene = MenuScene::createScene();
-    cocos2d::Director::getInstance()->replaceScene(newScene);
-    newlevelItem->setVisible(false);
+    hideBottom();
+    isClose = true;
+    
 }

@@ -80,6 +80,7 @@
 		921542FF1AA4A5D500C33E8E /* PlaySelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 921542F91AA4A5D500C33E8E /* PlaySelected.png */; };
 		921543001AA4A5D500C33E8E /* RestartNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 921542FA1AA4A5D500C33E8E /* RestartNormal.png */; };
 		921543011AA4A5D500C33E8E /* RestartSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 921542FB1AA4A5D500C33E8E /* RestartSelected.png */; };
+		921543051AA4C1F400C33E8E /* black_pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 921543041AA4C1F400C33E8E /* black_pixel.png */; };
 		92568E841A9D10210065A049 /* Portals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E821A9D10210065A049 /* Portals.cpp */; };
 		92568E871A9D10DD0065A049 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E851A9D10DD0065A049 /* MenuScene.cpp */; };
 		92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92568E8C1A9D116E0065A049 /* Marker Felt.ttf */; };
@@ -300,6 +301,7 @@
 		921542F91AA4A5D500C33E8E /* PlaySelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaySelected.png; sourceTree = "<group>"; };
 		921542FA1AA4A5D500C33E8E /* RestartNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartNormal.png; sourceTree = "<group>"; };
 		921542FB1AA4A5D500C33E8E /* RestartSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartSelected.png; sourceTree = "<group>"; };
+		921543041AA4C1F400C33E8E /* black_pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_pixel.png; sourceTree = "<group>"; };
 		92568E821A9D10210065A049 /* Portals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Portals.cpp; path = ../Classes/Portals.cpp; sourceTree = "<group>"; };
 		92568E831A9D10210065A049 /* Portals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Portals.h; path = ../Classes/Portals.h; sourceTree = "<group>"; };
 		92568E851A9D10DD0065A049 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/MenuScene.cpp; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				921543041AA4C1F400C33E8E /* black_pixel.png */,
 				921542F61AA4A5D500C33E8E /* PauseNormal.png */,
 				921542F71AA4A5D500C33E8E /* PauseSelected.png */,
 				921542F81AA4A5D500C33E8E /* PlayNormal.png */,
@@ -737,6 +740,7 @@
 				921542EA1AA34EA200C33E8E /* labirint.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				921543051AA4C1F400C33E8E /* black_pixel.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,

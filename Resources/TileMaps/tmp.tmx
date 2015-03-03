@@ -3607,7 +3607,7 @@
    <tile gid="62"/>
   </data>
  </layer>
- <objectgroup name="collisions" visible="0">
+ <objectgroup name="collisions">
   <object id="1" x="-6.05327" y="-7.10543e-15" width="121.065" height="2875.3"/>
   <object id="3" x="581.114" y="-7.10543e-15" width="4527.85" height="121.065"/>
   <object id="4" x="-6.05327" y="2748.18" width="5121.07" height="121.065"/>
@@ -3644,19 +3644,19 @@
   <object id="41" x="4416.62" y="1287.53" width="126.751" height="513.676"/>
   <object id="42" x="4420.95" y="2180.45" width="693.796" height="126.751"/>
   <object id="54" name="dummy" x="4994.58" y="2318.53" width="113.759" height="427.952"/>
-  <object id="55" name="newlevel" x="130.011" y="5.41712" width="444.204" height="124.594"/>
+  <object id="55" name="newlevel" x="130.011" y="5.41712" width="450.719" height="267.916"/>
  </objectgroup>
- <objectgroup name="portals" visible="0">
-  <object id="44" name="orange1" x="157.107" y="860.916" width="64" height="64"/>
-  <object id="45" name="orange2" x="2397.28" y="2528.97" width="64" height="64"/>
-  <object id="46" name="red1" x="542.785" y="2655.56" width="64" height="64"/>
-  <object id="47" name="red2" x="3485.92" y="157.595" width="64" height="64"/>
-  <object id="48" name="green1" x="156.177" y="2333.32" width="64" height="64"/>
-  <object id="49" name="green2" x="928.719" y="2083.62" width="64" height="64"/>
-  <object id="50" name="pink1" x="2846.31" y="348.189" width="64" height="64"/>
-  <object id="51" name="pink2" x="607.139" y="860.579" width="64" height="64"/>
-  <object id="52" name="blue1" x="3998.84" y="287.305" width="64" height="64"/>
-  <object id="53" name="blue2" x="3739.93" y="798.69" width="64" height="64"/>
+ <objectgroup name="portals">
+  <object id="44" name="orange1" x="184.107" y="891.916" width="8" height="8"/>
+  <object id="45" name="orange2" x="2425.28" y="2556.97" width="8" height="8"/>
+  <object id="46" name="red1" x="566.785" y="2684.56" width="8" height="8"/>
+  <object id="47" name="red2" x="3514.92" y="189.595" width="8" height="8"/>
+  <object id="48" name="green1" x="183.177" y="2365.32" width="8" height="8"/>
+  <object id="49" name="green2" x="952.719" y="2111.62" width="8" height="8"/>
+  <object id="50" name="pink1" x="2873.31" y="381.189" width="8" height="8"/>
+  <object id="51" name="pink2" x="631.139" y="887.579" width="8" height="8"/>
+  <object id="52" name="blue1" x="4024.84" y="317.305" width="8" height="8"/>
+  <object id="53" name="blue2" x="3769.93" y="828.69" width="8" height="8"/>
  </objectgroup>
  <objectgroup name="fallings" visible="0">
   <object id="56" x="4458.29" y="222.102" width="180" height="180">

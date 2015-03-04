@@ -331,7 +331,7 @@ void AbstractLabirint::update(float delta) {
 
 
 bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
-    if (!isRestart && !isNewLevel) {
+    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
 
@@ -346,7 +346,7 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
 }
 
 void AbstractLabirint::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
-    if (!isRestart && !isNewLevel) {
+    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
     }
@@ -769,13 +769,14 @@ void AbstractLabirint::pause(){
         
         menuSprite->runAction(cocos2d::FadeTo::create(1.0, 150));
         
-        if (!isRestart && !isNewLevel) {
+        if (!isRestart && !isNewLevel && !isNewLeveled) {
             prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,
                                               origin.y + visibleSize.height/2 + continueItem->getContentSize().height*icon_scale*1.5));
             prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
             prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
-                                           origin.y + visibleSize.height/2 - continueItem->getContentSize().height*icon_scale*1.5));
-        } else if (isNewLevel) {
+                                           origin.y + visibleSize.height/2 - closeItem->getContentSize().height*icon_scale*1.5));
+        }
+        else if (isNewLeveled) {
             prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,
                                               origin.y + visibleSize.height/2));
             
@@ -784,13 +785,13 @@ void AbstractLabirint::pause(){
                                              origin.y + visibleSize.height/2));
             prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2 + continueItem->getContentSize().width*icon_scale*1.5,
                                            origin.y + visibleSize.height/2));
-        }else {
+        } else if (isRestart) {
             prettyShowItem(restartItem, Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2 + continueItem->getContentSize().height*icon_scale));
             prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
                                            origin.y + visibleSize.height/2 - continueItem->getContentSize().height*icon_scale));
         }
     } else {
-        if (!isRestart)
+        if ((!isRestart) && (!isNewLeveled))
             resume();
     }
 }
@@ -827,7 +828,7 @@ void AbstractLabirint::menuPauseCallback(Ref * pSender) {
 }
 
 void AbstractLabirint::menuContinueCallback(Ref * pSender) {
-    if (!isNewLevel)
+    if (!isNewLeveled)
         resume();
 }
 

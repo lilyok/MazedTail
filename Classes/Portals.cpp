@@ -347,7 +347,7 @@ void Portals::stopScene() {
 }
 
 void Portals::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
-    if (!isRestart && !isNewLevel && isPortal) {
+    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled && isPortal) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
     }

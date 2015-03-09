@@ -1,19 +1,19 @@
 //
-//  Portals.h
+//  Doors.h
 //  Dusk
 //
 //  Created by lilil on 08.01.15.
 //
 //
 
-#ifndef __Dusk__Portals__
-#define __Dusk__Portals__
+#ifndef __Dusk__Doors__
+#define __Dusk__Doors__
 
 #include "cocos2d.h"
 #include "AbstractLabirint.h"
-#define SPIDER_DELTA 100
 
-class Portals : public AbstractLabirint
+
+class Doors : public AbstractLabirint
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -24,40 +24,37 @@ public:
     
     
     // a selector callback
-//    void menuRestartCallback(cocos2d::Ref* pSender);
+    //    void menuRestartCallback(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
-    CREATE_FUNC(Portals);
+    CREATE_FUNC(Doors);
 protected:
     cocos2d::Vector<cocos2d::Sprite*> portals;
     cocos2d::Vector<cocos2d::Sprite*> fallings;
     cocos2d::ParticleSystemQuad* m_emitter;
+    cocos2d::Vector<cocos2d::Sprite*> doors;
+    cocos2d::Vector<cocos2d::Sprite*> buttons;
+
     
 private:
     void stopScene();
     void pauseScene();
     void resumeScene();
-    
-    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
+        
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);
-    
-    void ownEvent();
+
     cocos2d::Scene* returnRestartedScene();
     cocos2d::Scene* returnNewScene();
 
-    bool isPortal = true;
-    bool isSpiderPortal = true;
     
     bool checkCollision(cocos2d::PhysicsContact const &contact, Node *nodeA, Node *nodeB);
-
+    
     void collisionWithEnemy(Node * nodeA, Node * nodeB);
-
-    void entranceIntoPortal(Node * nodeA, Node * nodeB);
     
     
-    int num_spider_delta = 0;
+    int num_of_delta = 0;
     
 };
 
 
-#endif /* defined(__Dusk__Portals__) */
+#endif /* defined(__Dusk__Doors__) */

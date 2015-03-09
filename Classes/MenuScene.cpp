@@ -8,6 +8,8 @@
 
 #include "MenuScene.h"
 #include "Portals.h"
+#include "Doors.h"
+
 
 USING_NS_CC;
 
@@ -76,14 +78,14 @@ bool MenuScene::init()
 
 void MenuScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Scene *pScene = Portals::createScene();
-    cocos2d::Director::getInstance()->replaceScene(pScene);
+    Scene *pScene = Doors::createScene();//Portals::createScene();
+    cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, pScene));
 }
 
 void MenuScene::menuRestartCallback(cocos2d::Ref* pSender)
 {
     Scene *pScene = Portals::createScene();
-    cocos2d::Director::getInstance()->replaceScene(pScene);
+    cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, pScene));
 }
 
 

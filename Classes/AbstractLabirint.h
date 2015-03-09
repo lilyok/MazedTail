@@ -22,6 +22,7 @@
 #define NEWLEVEL_TAG 40
 #define MIN_FOR_DIRECTION 10
 #define MY_VELOCITY 500
+#define COUNT_OF_DELTA 5
 
 class AbstractLabirint : public cocos2d::Layer
 {
@@ -50,6 +51,10 @@ public:
         }
     }
 
+
+    virtual cocos2d::Scene* returnRestartedScene() { return this->getScene(); };
+    virtual cocos2d::Scene* returnNewScene() { return this->getScene(); };
+    virtual void ownEvent() {};
 
 protected:
     cocos2d::Vector<cocos2d::Sprite*> collisions;
@@ -98,8 +103,6 @@ protected:
     void hideBottom();
     void finishMenuAction();
     
-    void goToPoint(float dx, float dy);
-
     virtual bool onContactBegin(const cocos2d::PhysicsContact& contact) {return true;};
     virtual void onContactSeperate(const cocos2d::PhysicsContact& contact) {};
     
@@ -121,6 +124,9 @@ protected:
     float scale_hero = 1.0;
     float xZero = 0.0;
     float yZero = 0.0;
+    int num_of_delta = 0;
+
+    
     cocos2d::Size visibleSize;
     cocos2d::Vec2 origin;
     cocos2d::MenuItemImage* restartItem;
@@ -138,6 +144,11 @@ protected:
 
     void collisionWithHealth(Node * nodeA, Node * nodeB);
 
+    
+    void goHero();
+    
+    void goToPoint(float dx, float dy);
+    
     bool goToPointX(float dx, float dy, float vx_old, float vy_old, float vx, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vy);
 
     bool goToPointY(float dx, float dy, float vx_old, float vy_old, float vy, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vx);

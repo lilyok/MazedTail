@@ -5,6 +5,8 @@
 //
 //
 #include "Portals.h"
+#include "Doors.h"
+
 #include "MenuScene.h"
 
 USING_NS_CC;
@@ -32,7 +34,7 @@ bool Portals::init() {
     // 1. super init first
     
     
-    if (!AbstractLabirint::init("tmp.tmx", "back.png")) {
+    if (!AbstractLabirint::init("portals.tmx", "back.png")) {
         return false;
     }
     
@@ -88,8 +90,9 @@ bool Portals::init() {
     for (auto portal : this->portals) {
         ParticleSystemQuad *p_emitter = ParticleGalaxy::create();
         p_emitter->setScale(scale_map);
-        p_emitter->setPosition(32*scale_map,32*scale_map);
+        p_emitter->setPosition(0, 0);
         portal->addChild(p_emitter, 3);
+        reorderChild(portal, 3);
     }
     
     
@@ -97,56 +100,29 @@ bool Portals::init() {
     return true;
 }
 
-void Portals::update(float delta) {
-    AbstractLabirint::update(delta);
-    if ((isRestarted) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
-        isRestarted = false;
-        isRestart = false;
-        auto newScene = Portals::createScene();
-        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
-    }
-    else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
-        isNewLeveled = false;
-        isNewLevel = false;
-        auto newScene = Portals::createScene();
-        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
-    }
-    else if (isNewLevel) {
-        isPaused = false;
-        isNewLevel = false;
-        isNewLeveled = true;
-        pauseScene();
-        pause();
-        
-    }
-    else if (!isPaused&&!isRestart && !isNewLevel&&!isNewLeveled) {
-        for (auto plus: pluses) {
-            if (plus->getOpacity() < 255) {
-                plus->setOpacity(plus->getOpacity() + 1);
-                
-                if (plus->getOpacity() == 255)
-                    isPlus = false;
-            }
+void Portals::ownEvent(){
+    if (num_spider_delta < SPIDER_DELTA) {
+        num_spider_delta++;
+    } else {
+        for (auto spider : fallings){
+            spider->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
         }
-    
-        if (num_of_delta < COUNT_OF_DELTA) {
-            num_of_delta++;
-        } else {
-            for (auto spider : fallings){
-                spider->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
-            }
-            num_of_delta = 0;
-        }
+        num_spider_delta = 0;
     }
+}
+
+Scene* Portals::returnRestartedScene(){
+    return Portals::createScene();
+}
+
+Scene* Portals::returnNewScene(){
+    return Doors::createScene();
 }
 
 void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
     if (!isRestart && !isNewLevel) {
         if ((touchX != -500000) && (touchY != -500000)) {
-            auto dx = touchX - mysprite->getPositionX();
-            auto dy = touchY - mysprite->getPositionY() + mysprite->getContentSize().height * scale_map / 2;
-            direction = NODIRECTION;
-            goToPoint(dx, dy);
+            goHero();
         }
         
         auto nodeA = contact.getShapeA()->getBody()->getNode();
@@ -159,7 +135,6 @@ void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
                 else node = nodeB;
                 if (node->getOpacity() == 255) {
                     node->setOpacity(0);
-                    //   node->setGlobalZOrder(0);
                 }
                 isPlus = false;
             } else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
@@ -208,13 +183,16 @@ bool Portals::onContactBegin(const cocos2d::PhysicsContact &contact) {
 void Portals::entranceIntoPortal(Node *nodeA, Node *nodeB) {
     std::__1::string portal_name;
     Node *node;
+    Node *current_portal;
     if (nodeA->getTag() == PORTAL_TAG) {
         portal_name = nodeA->getName();
         node = nodeB;
+        current_portal = nodeA;
     }
     else {
         portal_name = nodeB->getName();
         node = nodeA;
+        current_portal = nodeB;
     }
     
     node->runAction(Sequence::create(TintTo::create(0.0f, 0, 255, 144), TintTo::create(0.5, 255, 255, 255), NULL));
@@ -222,28 +200,42 @@ void Portals::entranceIntoPortal(Node *nodeA, Node *nodeB) {
     int num = 1;
     if (portal_name.at(pos) == '1') num = 2;
     std::__1::string res = portal_name.substr(0, pos).append(std::__1::to_string(num));
-    // cocos2d::log("start = %s, stop = %s", portal_name.c_str(), res.c_str());
     Vec2 nextPortalPos = Vec2(0, 0);
     Vec2 dPos = Vec2(0, 0);
     for (auto portal : portals) {
         if (portal->getName() == res) {
             nextPortalPos = portal->getPosition();
             auto dPos = Vec2(nextPortalPos.x - node->getPosition().x, 0);
-            // stopAllObjects();
             
             if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
+                auto xDes = 0.0;
+                auto yDes = 0.0;
+                if (mysprite->getPositionX() - current_portal->getPositionX() != 0)
+                    xDes = current_portal->getPositionX() - mysprite->getPositionX();
+                if (mysprite->getPositionY() - current_portal->getPositionY() != 0)
+                    yDes = current_portal->getPositionY() - mysprite->getPositionY();
+                
                 stopAllObjects();
+            
                 direction = NODIRECTION;
                 stopAllObjects();
                 touchX = -500000;
                 touchY = -500000;
                 isPortal = false;
-                node->setPosition(nextPortalPos);
+                
+                mysprite->setPosition(Vec2(nextPortalPos.x + 1.5*xDes,
+                                           nextPortalPos.y + 1.5*yDes));
             }
             else if (isSpiderPortal) {
                 isSpiderPortal = false;
-                node->setPositionX(nextPortalPos.x);
-                node->setPositionY(nextPortalPos.y - portal->getContentSize().height * scale_map);
+                auto xDes = 0.0;
+                auto yDes = 0.0;
+                if (node->getPositionX() - current_portal->getPositionX() != 0)
+                    xDes = current_portal->getPositionX() - node->getPositionX();
+                if (node->getPositionY() - current_portal->getPositionY() != 0)
+                    yDes = current_portal->getPositionY() - node->getPositionY();
+                node->setPosition(Vec2(nextPortalPos.x + 1.5*xDes,
+                                           nextPortalPos.y + 1.5*yDes));
             }
             break;
         }
@@ -265,9 +257,6 @@ bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
             m_emitter->setScale(scale_map);
             m_emitter->resetSystem();
         } else {
-            m_emitter = ParticleSmoke::create();
-            m_emitter->setPosition(contact.getContactData()->points[0]);
-            m_emitter->resetSystem();
             isNewLevel = true;
             return false;
         }

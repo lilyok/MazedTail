@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/MenuScene.cpp \
                    ../../Classes/Portals.cpp \
+                   ../../Classes/Doors.cpp \
                    ../../Classes/AbstractLabirint.cpp
 
 

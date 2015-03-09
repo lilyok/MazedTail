@@ -266,7 +266,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     animateBottom->retain();
     
     
-    auto physicsBody = PhysicsBody::createBox(Size(w * scale_hero / 3, h * scale_hero/2),
+    auto physicsBody = PhysicsBody::createBox(Size(h * scale_hero, h * scale_hero),
                                               PhysicsMaterial(1.0f, 0.0f, 0.0f), Vec2(0, 0));
     physicsBody->setRotationEnable(false);
     physicsBody->setDynamic(true);
@@ -327,6 +327,46 @@ void AbstractLabirint::update(float delta) {
             cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
         }
     }
+    if ((isRestarted) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
+        isRestarted = false;
+        isRestart = false;
+        auto newScene = returnRestartedScene();
+        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
+    }
+    else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
+        isNewLeveled = false;
+        isNewLevel = false;
+        auto newScene = returnNewScene();
+        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
+    }
+    else if (isNewLevel) {
+        isPaused = false;
+        isNewLevel = false;
+        isNewLeveled = true;
+        pauseScene();
+        pause();
+        
+    }
+    else if (!isPaused&&!isRestart && !isNewLevel&&!isNewLeveled) {
+        for (auto plus: pluses) {
+            if (plus->getOpacity() < 255) {
+                plus->setOpacity(plus->getOpacity() + 1);
+                
+                if (plus->getOpacity() == 255)
+                    isPlus = false;
+            }
+        }
+        
+        if (num_of_delta < COUNT_OF_DELTA) {
+            num_of_delta++;
+        } else {
+            goHero();
+            num_of_delta = 0;
+        }
+        
+        ownEvent();
+    }
+    
 }
 
 
@@ -335,10 +375,7 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
         
-        auto dx = touch->getLocation().x - mysprite->getPositionX();
-        auto dy = touch->getLocation().y - mysprite->getPositionY() + mysprite->getContentSize().height * scale_map / 2;
-        direction = NODIRECTION;
-        goToPoint(dx, dy);
+        goHero();
     }
     
     
@@ -369,6 +406,13 @@ void AbstractLabirint::stopTakingPoints(){
     stopAllObjects();
     touchX = -500000;
     touchY = -500000;
+}
+
+void AbstractLabirint::goHero() {
+    auto dx = touchX - mysprite->getPositionX();
+    auto dy = touchY - mysprite->getPositionY() + mysprite->getContentSize().height * scale_map / 2;
+    direction = NODIRECTION;
+    goToPoint(dx, dy);
 }
 
 void AbstractLabirint::goToPoint(float dx, float dy) {
@@ -417,12 +461,10 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 auto action = RepeatForever::create(animateBottom);
                 action->setTag(BOTTOM);
                 mysprite->runAction(action);
-                body->setRotationOffset(90);
                 if (pos.y >= 0) {
                     pos.y = -mysprite->getContentSize().height * scale_hero * 5 / 12;
                     pos.x = 0;
                 }
-                body->setPositionOffset(pos);
             }
         }
         else {
@@ -433,12 +475,10 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 auto action = RepeatForever::create(animateTop);
                 action->setTag(TOP);
                 mysprite->runAction(action);
-                body->setRotationOffset(90);
                 if (pos.y <= 0) {
                     pos.y = mysprite->getContentSize().height * scale_hero * 5 / 12;
                     pos.x = 0;
                 }
-                body->setPositionOffset(pos);
             }
         }
         
@@ -463,13 +503,10 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 isChangedDirection = true;
                 direction = RIGHT;
                 mysprite->runAction(action);
-                body->setRotationOffset(0);
                 if (pos.x <= 0) {
                     pos.y = 0;
                     pos.x = mysprite->getContentSize().height * scale_hero * 5 / 12;
                 }
-                body->setPositionOffset(pos);
-                
             }
         }
         else {
@@ -485,7 +522,7 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                     pos.y = 0;
                     pos.x = -mysprite->getContentSize().height * scale_hero * 5 / 12;
                 }
-                body->setPositionOffset(pos);
+              //  body->setPositionOffset(pos);
                 
                 
             }
@@ -620,7 +657,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, int form
     body->setDynamic(false);
     body->setContactTestBitmask(mask);
     sprite->setPosition(p);
-    addChild(sprite, 3);
+    addChild(sprite, 1);
     
     
     auto moveBy2 = MoveBy::create(1, Vec2(0, v));
@@ -831,8 +868,7 @@ void AbstractLabirint::menuPauseCallback(Ref * pSender) {
 }
 
 void AbstractLabirint::menuContinueCallback(Ref * pSender) {
-    if (!isNewLeveled)
-        resume();
+    resume();
 }
 
 void AbstractLabirint::menuRestartCallback(Ref * pSender) {

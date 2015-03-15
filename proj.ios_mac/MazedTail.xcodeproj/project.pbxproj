@@ -87,6 +87,10 @@
 		92E0FAD21AAE15A100D3DC91 /* reds.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FACC1AAE15A100D3DC91 /* reds.png */; };
 		92E0FAD31AAE15A100D3DC91 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FACD1AAE15A100D3DC91 /* test.png */; };
 		92E0FAD51AAE3CA900D3DC91 /* back1.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAD41AAE3CA900D3DC91 /* back1.png */; };
+		92E0FAD81AB45CAE00D3DC91 /* bunny.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAD61AB45CAE00D3DC91 /* bunny.plist */; };
+		92E0FAD91AB45CAE00D3DC91 /* bunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAD71AB45CAE00D3DC91 /* bunny.png */; };
+		92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FADA1AB4A0B400D3DC91 /* BotsManager.cpp */; };
+		92E0FAE21AB4B05C00D3DC91 /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FAE01AB4B05C00D3DC91 /* Bot.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -315,6 +319,12 @@
 		92E0FACC1AAE15A100D3DC91 /* reds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reds.png; sourceTree = "<group>"; };
 		92E0FACD1AAE15A100D3DC91 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		92E0FAD41AAE3CA900D3DC91 /* back1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back1.png; sourceTree = "<group>"; };
+		92E0FAD61AB45CAE00D3DC91 /* bunny.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bunny.plist; sourceTree = "<group>"; };
+		92E0FAD71AB45CAE00D3DC91 /* bunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bunny.png; sourceTree = "<group>"; };
+		92E0FADA1AB4A0B400D3DC91 /* BotsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BotsManager.cpp; path = ../Classes/BotsManager.cpp; sourceTree = "<group>"; };
+		92E0FADB1AB4A0B400D3DC91 /* BotsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BotsManager.h; path = ../Classes/BotsManager.h; sourceTree = "<group>"; };
+		92E0FAE01AB4B05C00D3DC91 /* Bot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bot.cpp; path = ../Classes/Bot.cpp; sourceTree = "<group>"; };
+		92E0FAE11AB4B05C00D3DC91 /* Bot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bot.h; path = ../Classes/Bot.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -401,6 +411,10 @@
 				62347EE8B70E825A2F78D137 /* AbstractLabirint.h */,
 				92E0FAAC1AACB93D00D3DC91 /* Doors.cpp */,
 				92E0FABD1AAE022100D3DC91 /* Doors.h */,
+				92E0FADA1AB4A0B400D3DC91 /* BotsManager.cpp */,
+				92E0FADB1AB4A0B400D3DC91 /* BotsManager.h */,
+				92E0FAE01AB4B05C00D3DC91 /* Bot.cpp */,
+				92E0FAE11AB4B05C00D3DC91 /* Bot.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -528,6 +542,8 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92E0FAD61AB45CAE00D3DC91 /* bunny.plist */,
+				92E0FAD71AB45CAE00D3DC91 /* bunny.png */,
 				92E0FAD41AAE3CA900D3DC91 /* back1.png */,
 				92E0FAC71AAE15A100D3DC91 /* TileMaps */,
 				92E0FAAD1AACB93D00D3DC91 /* Doors.h */,
@@ -760,10 +776,12 @@
 				92E0FAD21AAE15A100D3DC91 /* reds.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
+				92E0FAD81AB45CAE00D3DC91 /* bunny.plist in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				92E0FAD31AAE15A100D3DC91 /* test.png in Resources */,
 				921542FE1AA4A5D500C33E8E /* PlayNormal.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
+				92E0FAD91AB45CAE00D3DC91 /* bunny.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				921543001AA4A5D500C33E8E /* RestartNormal.png in Resources */,
@@ -803,6 +821,8 @@
 				92568E841A9D10210065A049 /* Portals.cpp in Sources */,
 				92E0FAAE1AACB93D00D3DC91 /* Doors.cpp in Sources */,
 				92568E871A9D10DD0065A049 /* MenuScene.cpp in Sources */,
+				92E0FAE21AB4B05C00D3DC91 /* Bot.cpp in Sources */,
+				92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,

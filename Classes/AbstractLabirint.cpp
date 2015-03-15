@@ -461,10 +461,6 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 auto action = RepeatForever::create(animateBottom);
                 action->setTag(BOTTOM);
                 mysprite->runAction(action);
-                if (pos.y >= 0) {
-                    pos.y = -mysprite->getContentSize().height * scale_hero * 5 / 12;
-                    pos.x = 0;
-                }
             }
         }
         else {
@@ -475,10 +471,6 @@ bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old
                 auto action = RepeatForever::create(animateTop);
                 action->setTag(TOP);
                 mysprite->runAction(action);
-                if (pos.y <= 0) {
-                    pos.y = mysprite->getContentSize().height * scale_hero * 5 / 12;
-                    pos.x = 0;
-                }
             }
         }
         
@@ -503,10 +495,6 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 isChangedDirection = true;
                 direction = RIGHT;
                 mysprite->runAction(action);
-                if (pos.x <= 0) {
-                    pos.y = 0;
-                    pos.x = mysprite->getContentSize().height * scale_hero * 5 / 12;
-                }
             }
         }
         else {
@@ -517,13 +505,6 @@ bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old
                 isChangedDirection = true;
                 direction = LEFT;
                 mysprite->runAction(action);
-                mysprite->getPhysicsBody()->setRotationOffset(0);
-                if (pos.x >= 0) {
-                    pos.y = 0;
-                    pos.x = -mysprite->getContentSize().height * scale_hero * 5 / 12;
-                }
-              //  body->setPositionOffset(pos);
-                
                 
             }
         }

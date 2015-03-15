@@ -1,14 +1,13 @@
 //
-//  Portals.cpp
-//
 //  Created by lilil on 08.01.15.
 //
 //
 #include "Doors.h"
+
 #include "MenuScene.h"
 
 USING_NS_CC;
-#define FALLING_TAG 20
+#define BUNNY_TAG 20
 #define DOOR_TAG 100
 #define BUTTON_TAG 105
 
@@ -20,7 +19,7 @@ USING_NS_CC;
 Scene *Doors::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
-   // scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
     auto layer = Doors::create();
     layer->setPhyWorld(scene->getPhysicsWorld());
@@ -62,15 +61,15 @@ bool Doors::init() {
     this->doors = makeObject(DOOR_TAG, doortmx, scale_map, xZero, yZero, BRICK, 0, 0);
     for (auto door : this->doors) {
         auto w = door->getContentSize().width;
-        auto h = door->getContentSize().height;
+        //auto h = door->getContentSize().height;
 
-        auto p_emitter = ParticleFire::createWithTotalParticles(20);
+        auto p_emitter = ParticleFire::createWithTotalParticles(60);
         p_emitter->setTag(FIRE_TAG);
         auto name = door->getName();
         if (name == "red")
-            p_emitter->setEndColor(Color4F(255, 0, 0, 255));
+            p_emitter->setEndColor(Color4F(220, 0, 0, 255));
         else if (name == "orange")
-            p_emitter->setEndColor(Color4F(255, 190, 0, 255));
+            p_emitter->setEndColor(Color4F(255, 220, 0, 255));
         else if (name == "green")
             p_emitter->setEndColor(Color4F(0, 255, 0, 255));
         else if (name == "blue")
@@ -81,11 +80,18 @@ bool Doors::init() {
 
 
         p_emitter->setScale(scale_map*2);
-        p_emitter->setPosition(w/2, h/2);
-        p_emitter->setGravity(Vec2(0, -30));
+        p_emitter->setPosition(w/2, 0);//h/2);
+       // p_emitter->setGravity(Vec2(0, -30));
         p_emitter->setTag(FIRE_TAG);
         door->addChild(p_emitter, 3);
         reorderChild(door, 3);
+    }
+    
+    
+    botsManager = new BotsManager(xZero, yZero, map, "bunny", "bunny.plist", "bunny_", scale_map, BUNNY_TAG);
+    bunnies = botsManager->getBotsSprites();
+    for(auto bunny:bunnies){
+        AbstractLabirint::addChild(bunny, 2);
     }
     
     this->m_emitter = ParticleFire::create();
@@ -143,7 +149,7 @@ void Doors::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 
 bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-        if (nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) {
+        if (nodeA->getTag() == BUNNY_TAG or nodeB->getTag() == BUNNY_TAG) {
             collisionWithEnemy(nodeA, nodeB);
         }
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
@@ -163,6 +169,7 @@ bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
                 if (door->getName() == btn_name) {
                     door->removeChildByTag(FIRE_TAG);
                     door->getPhysicsBody()->setCollisionBitmask(0);
+                    door->getPhysicsBody()->setContactTestBitmask(0);
                 }
             }
             
@@ -176,7 +183,14 @@ bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             return false;
         }
         
+    } else if (nodeA->getTag() == BUNNY_TAG or nodeB->getTag() == BUNNY_TAG) {
+        if (nodeA->getTag() == BUNNY_TAG)
+            botsManager->changeDirection(nodeA->getName());
+        else
+            botsManager->changeDirection(nodeB->getName());
+
     }
+    
     
     return true;
 }
@@ -189,19 +203,21 @@ void Doors::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-        int colorint = 0;
-        Sprite *falling;
-        if (nodeA->getTag() == FALLING_TAG) {
-            colorint = stoi(nodeA->getName()) % 3;
-            falling = fallings.at(stoi(nodeA->getName()));
-        }
-        else {
-            colorint = stoi(nodeB->getName()) % 3;
-            falling = fallings.at(stoi(nodeB->getName()));
-            
-        }
+        Sprite *bunny;
+        if (nodeA->getTag() == BUNNY_TAG)
+            bunny = bunnies.at(stoi(nodeA->getName()));
+        else
+            bunny = bunnies.at(stoi(nodeB->getName()));
+
+        int num = stoi(bunny->getName());
+        if (stoi(bunny->getName()) % 3 == 0)
+            bunny->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
+        else if (stoi(bunny->getName()) % 3 == 1)
+            bunny->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
+        else
+            bunny->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
         
-        falling->runAction(Sequence::create(TintTo::create(0.5f, 44, 215, 243), TintTo::create(0.5, 255, 255, 255), NULL));
+        
         
         if (life_num == 0) {
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
@@ -219,34 +235,31 @@ void Doors::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 void Doors::resumeScene() {
     AbstractLabirint::resumeScene();
     
-    for (auto sprite: fallings) {
+    for (auto sprite: bunnies) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
-        sprite->getPhysicsBody()->setGravityEnable(true);
     }
     
-    resumeAllObjectLayer(fallings);
+    resumeAllObjectLayer(bunnies);
     resumeAllObjectLayer(pluses);
 }
 
 void Doors::pauseScene() {
     AbstractLabirint::pauseScene();
     
-    for (auto sprite: fallings) {
+    for (auto sprite: bunnies) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-        sprite->getPhysicsBody()->setGravityEnable(false);
     }
-    pauseAllObjectLayer(fallings);
+    pauseAllObjectLayer(bunnies);
     pauseAllObjectLayer(pluses);
 }
 
 void Doors::stopScene() {
     AbstractLabirint::stopScene();
     
-    for (auto sprite: fallings) {
+    for (auto sprite: bunnies) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-        sprite->getPhysicsBody()->setGravityEnable(false);
     }
-    stopAllObjectLayer(fallings);
+    stopAllObjectLayer(bunnies);
     stopAllObjectLayer(pluses);
 }
 

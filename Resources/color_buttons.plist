@@ -7,141 +7,141 @@
 			<key>blue_normal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,324},{160,161}}</string>
+				<string>{{161,161},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{160,161}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>blue_selected.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{322,98},{128,97}}</string>
+				<string>{{322,322},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{128,97}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>green_normal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{161,0},{160,161}}</string>
+				<string>{{322,161},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{160,161}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>green_selected.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{290,324},{128,97}}</string>
+				<string>{{322,0},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{128,97}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>orange_normal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{161,162},{160,161}}</string>
+				<string>{{161,322},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{160,161}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>orange_selected.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{322,196},{128,97}}</string>
+				<string>{{483,0},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{128,97}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>pink_normal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{161,0},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{160,161}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>pink_selected.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{161,324},{128,97}}</string>
+				<string>{{0,322},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{128,97}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>red_normal.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,162},{160,161}}</string>
+				<string>{{0,161},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{160,161}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{160,161}</string>
+				<string>{160,160}</string>
 			</dict>
 
 			<key>red_selected.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{322,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{128,97}}</string>
+				<string>{{0,0},{160,160}}</string>
 				<key>sourceSize</key>
-				<string>{128,97}</string>
+				<string>{160,160}</string>
 			</dict>
 
 		</dict>
@@ -151,7 +151,7 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>size</key>
-			<string>{512,512}</string>
+			<string>{1024,512}</string>
 			<key>textureFileName</key>
 			<string>color_buttons.png</string>
 			</dict>

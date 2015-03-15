@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "AbstractLabirint.h"
+#include "BotsManager.h"
 
 
 class Doors : public AbstractLabirint
@@ -28,8 +29,8 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(Doors);
 protected:
-    cocos2d::Vector<cocos2d::Sprite*> portals;
-    cocos2d::Vector<cocos2d::Sprite*> fallings;
+    BotsManager*  botsManager;
+    cocos2d::Vector<cocos2d::Sprite*> bunnies;
     cocos2d::ParticleSystemQuad* m_emitter;
     cocos2d::Vector<cocos2d::Sprite*> doors;
     cocos2d::Vector<cocos2d::Sprite*> buttons;

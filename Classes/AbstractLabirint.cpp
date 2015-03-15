@@ -352,8 +352,11 @@ void AbstractLabirint::update(float delta) {
             if (plus->getOpacity() < 255) {
                 plus->setOpacity(plus->getOpacity() + 1);
                 
-                if (plus->getOpacity() == 255)
+                if (plus->getOpacity() == 255) {
+                    if (isPlus)
+                        collisionWithHealth(plus, mysprite);
                     isPlus = false;
+                }
             }
         }
         
@@ -724,6 +727,7 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
     Node *node;
     if (nodeA->getTag() == PLUS_TAG) node = nodeA;
     else node = nodeB;
+    isPlus = true;
     if (node->getOpacity() == 255) {
         auto plus = pluses.at(stoi(node->getName()));
         
@@ -736,7 +740,8 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
             
             plus->setSpriteFrame(sp);
             mysprite->runAction(Sequence::create(TintTo::create(0.5f, 252, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
-            isPlus = true;
+            
+            plus->setOpacity(1);
         }
     }
 }

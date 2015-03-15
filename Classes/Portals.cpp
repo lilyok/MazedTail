@@ -63,7 +63,12 @@ bool Portals::init() {
         auto w = spider->getContentSize().width;
         spider->getPhysicsBody()->setPositionOffset(Vec2(0, h*scale_map/8));
         
-        ParticleFire *p_emitter = ParticleFire::create();
+        ParticleFire *p_emitter = ParticleFire::createWithTotalParticles(10);
+        p_emitter->setEmitterMode(ParticleSystem::Mode::RADIUS);
+        p_emitter->setStartRadius(0);
+        p_emitter->setStartRadiusVar(scale_map*fmin(h,w)/2);
+        p_emitter->setEndRadiusVar(scale_map*fmin(h,w)/2);
+        
         auto j = i % 3;
         if (j == 0)
             p_emitter->setEndColor(Color4F(255, 0, 0, 255));

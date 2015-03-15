@@ -8,11 +8,6 @@
 
 #include "BotsManager.h"
 USING_NS_CC;
-#define ANIMATION_DELAY 0.0001f
-#define LEFT 0
-#define RIGHT 1
-#define TOP 2
-#define BOTTOM 3
 
 BotsManager::BotsManager(float xZero, float yZero, TMXTiledMap *map, std::string layer_name, std::string plist_name, std::string sprite_name, float scale_map, int tag) {
 

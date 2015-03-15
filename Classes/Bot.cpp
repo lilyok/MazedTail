@@ -9,7 +9,7 @@
 #include "Bot.h"
 
 USING_NS_CC;
-#define ANIMATION_DELAY 0.001f
+#define ANIMATION_DELAY 0.02f
 #define LEFT 0
 #define RIGHT 1
 #define TOP 2

@@ -78,6 +78,8 @@
 		92568E841A9D10210065A049 /* Portals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E821A9D10210065A049 /* Portals.cpp */; };
 		92568E871A9D10DD0065A049 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E851A9D10DD0065A049 /* MenuScene.cpp */; };
 		92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92568E8C1A9D116E0065A049 /* Marker Felt.ttf */; };
+		92BEBA531AB61A3F006746DE /* life.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92BEBA511AB61A3F006746DE /* life.plist */; };
+		92BEBA541AB61A3F006746DE /* life.png in Resources */ = {isa = PBXBuildFile; fileRef = 92BEBA521AB61A3F006746DE /* life.png */; };
 		92E0FAAE1AACB93D00D3DC91 /* Doors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FAAC1AACB93D00D3DC91 /* Doors.cpp */; };
 		92E0FAB11AACCD7100D3DC91 /* color_buttons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAAF1AACCD7100D3DC91 /* color_buttons.plist */; };
 		92E0FAB21AACCD7100D3DC91 /* color_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAB01AACCD7100D3DC91 /* color_buttons.png */; };
@@ -308,6 +310,8 @@
 		92568E851A9D10DD0065A049 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/MenuScene.cpp; sourceTree = "<group>"; };
 		92568E861A9D10DD0065A049 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/MenuScene.h; sourceTree = "<group>"; };
 		92568E8C1A9D116E0065A049 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
+		92BEBA511AB61A3F006746DE /* life.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = life.plist; sourceTree = "<group>"; };
+		92BEBA521AB61A3F006746DE /* life.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = life.png; sourceTree = "<group>"; };
 		92E0FAAC1AACB93D00D3DC91 /* Doors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Doors.cpp; path = ../Classes/Doors.cpp; sourceTree = "<group>"; };
 		92E0FAAD1AACB93D00D3DC91 /* Doors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Doors.h; path = ../Classes/Doors.h; sourceTree = "<group>"; };
 		92E0FAAF1AACCD7100D3DC91 /* color_buttons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = color_buttons.plist; sourceTree = "<group>"; };
@@ -542,6 +546,8 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92BEBA511AB61A3F006746DE /* life.plist */,
+				92BEBA521AB61A3F006746DE /* life.png */,
 				92E0FAD61AB45CAE00D3DC91 /* bunny.plist */,
 				92E0FAD71AB45CAE00D3DC91 /* bunny.png */,
 				92E0FAD41AAE3CA900D3DC91 /* back1.png */,
@@ -645,7 +651,7 @@
 				LastUpgradeCheck = 0610;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = MDDB52YB8L;
+						DevelopmentTeam = 8KZGAWC7FN;
 					};
 				};
 			};
@@ -758,6 +764,7 @@
 				921542F31AA36BF800C33E8E /* spider.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				92E0FAB11AACCD7100D3DC91 /* color_buttons.plist in Resources */,
+				92BEBA541AB61A3F006746DE /* life.png in Resources */,
 				921543011AA4A5D500C33E8E /* RestartSelected.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				92E0FACF1AAE15A100D3DC91 /* doors.tmx in Resources */,
@@ -794,6 +801,7 @@
 				921542F51AA486B300C33E8E /* back.png in Resources */,
 				623474E7C414F2CC49BCA808 /* tgirlgo.png in Resources */,
 				62347DF95CABFF9627DD5CBA /* plus.plist in Resources */,
+				92BEBA531AB61A3F006746DE /* life.plist in Resources */,
 				623477A9165040346181CE38 /* plus.png in Resources */,
 				921542FC1AA4A5D500C33E8E /* PauseNormal.png in Resources */,
 				921542FD1AA4A5D500C33E8E /* PauseSelected.png in Resources */,
@@ -900,7 +908,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vasil Ivanov (68T7T5CPM9)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -931,7 +939,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vasil Ivanov (68T7T5CPM9)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

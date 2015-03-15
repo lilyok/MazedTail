@@ -66,8 +66,8 @@ bool Portals::init() {
         ParticleFire *p_emitter = ParticleFire::createWithTotalParticles(10);
         p_emitter->setEmitterMode(ParticleSystem::Mode::RADIUS);
         p_emitter->setStartRadius(0);
-        p_emitter->setStartRadiusVar(scale_map*fmin(h,w)/2);
-        p_emitter->setEndRadiusVar(scale_map*fmin(h,w)/2);
+        p_emitter->setStartRadiusVar(fmin(h,w)/2);
+        p_emitter->setEndRadiusVar(fmin(h,w)/2);
         
         auto j = i % 3;
         if (j == 0)

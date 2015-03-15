@@ -15,7 +15,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/MenuScene.cpp \
                    ../../Classes/Portals.cpp \
                    ../../Classes/Doors.cpp \
-                   ../../Classes/AbstractLabirint.cpp
+                   ../../Classes/AbstractLabirint.cpp \
+                   ../../Classes/Bot.cpp \
+                   ../../Classes/BotsManager.cpp
+
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

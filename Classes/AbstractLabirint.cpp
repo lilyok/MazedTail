@@ -380,13 +380,13 @@ void AbstractLabirint::goToPoint(float dx, float dy) {
             isChangedDirection = true;
             
             if (fabs(dx) > fabs(dy)){
-                vy = vy * dy / dx;
+                vy = vy * fabs(dy / dx);
                 if (dx > 0)
                     mysprite->setRotation(180);
                 else if (dx < 0)
                     mysprite->setRotation(0);
             } else if (fabs(dx) < fabs(dy)){
-                vx = vx * dx / dy;
+                vx = vx * fabs(dx / dy);
                 if (dy > 0)
                     mysprite->setRotation(90);
                 else if (dy < 0)

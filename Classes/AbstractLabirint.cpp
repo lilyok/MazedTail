@@ -363,7 +363,7 @@ void AbstractLabirint::update(float delta) {
         if (num_of_delta < COUNT_OF_DELTA) {
             num_of_delta++;
         } else {
-            goHero();
+            //goHero();
             num_of_delta = 0;
         }
         
@@ -389,6 +389,7 @@ void AbstractLabirint::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event
     if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
+        goHero();
     } else {
         stopTakingPoints();
     }
@@ -441,7 +442,8 @@ void AbstractLabirint::goToPoint(float dx, float dy) {
             isChangedDirection = goToPointY(dx, dy, vx_old, vy_old, vy, body, pos, vx);
         }
         if (isChangedDirection) {
-            mysprite->getPhysicsBody()->setVelocity(Vec2(vx, vy));
+         //   mysprite->getPhysicsBody()->resetForces();
+            mysprite->getPhysicsBody()->setVelocity(Vec2(vx, vy));//applyForce(Vec2(vx, vy));
         }
     }
     else {
@@ -727,7 +729,6 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
     Node *node;
     if (nodeA->getTag() == PLUS_TAG) node = nodeA;
     else node = nodeB;
-    isPlus = true;
     if (node->getOpacity() == 255) {
         auto plus = pluses.at(stoi(node->getName()));
         
@@ -740,8 +741,8 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
             
             plus->setSpriteFrame(sp);
             mysprite->runAction(Sequence::create(TintTo::create(0.5f, 252, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
-            
-            plus->setOpacity(1);
+            isPlus = true;
+            plus->setOpacity(10);
         }
     }
 }

@@ -134,15 +134,7 @@ void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
         auto nodeB = contact.getShapeB()->getBody()->getNode();
         
         if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-            if ((nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) && isPlus) {
-                Node *node;
-                if (nodeA->getTag() == PLUS_TAG) node = nodeA;
-                else node = nodeB;
-                if (node->getOpacity() == 255) {
-                    node->setOpacity(0);
-                }
-                isPlus = false;
-            } else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
+           if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
                 m_emitter->stopSystem();
             } else if (nodeA->getTag() == PORTAL_TAG or nodeB->getTag() == PORTAL_TAG) {
                 isPortal = true;

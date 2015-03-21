@@ -132,15 +132,7 @@ void Doors::onContactSeperate(const cocos2d::PhysicsContact &contact) {
         auto nodeB = contact.getShapeB()->getBody()->getNode();
         
         if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-            if ((nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) && isPlus) {
-                Node *node;
-                if (nodeA->getTag() == PLUS_TAG) node = nodeA;
-                else node = nodeB;
-                if (node->getOpacity() == 255) {
-                    node->setOpacity(0);
-                }
-                isPlus = false;
-            } else if (nodeA->getTag() != NEWLEVEL_TAG and nodeB->getTag() != NEWLEVEL_TAG) {
+            if (nodeA->getTag() != NEWLEVEL_TAG and nodeB->getTag() != NEWLEVEL_TAG) {
                 m_emitter->stopSystem();
             }
         }

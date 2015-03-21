@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="64" tileheight="64" nextobjectid="74">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="64" tileheight="64" nextobjectid="78">
  <tileset firstgid="1" name="test" tilewidth="64" tileheight="64">
   <image source="test.png" width="384" height="256"/>
  </tileset>
@@ -3625,7 +3625,7 @@
   <object id="17" x="2241.95" y="578.567" width="59.1716" height="959.895"/>
   <object id="18" x="2690.6" y="1475.29" width="65.7462" height="959.895"/>
   <object id="19" x="3139.67" y="1474.29" width="65.7462" height="966.469"/>
-  <object id="20" x="4609.38" y="447.074" width="65.7462" height="1084.81"/>
+  <object id="20" x="4609.38" y="447.074" width="65.7462" height="1090.46"/>
   <object id="21" x="447.074" y="1474.86" width="65.7462" height="894.149"/>
   <object id="22" x="5049.46" y="53.597" width="65.7462" height="2373.44"/>
   <object id="23" x="893.723" y="1919.79" width="72.3208" height="453.649"/>
@@ -3647,17 +3647,17 @@
   <object id="40" name="dummy" x="4996.71" y="2445.76" width="118.343" height="355.03"/>
   <object id="41" name="newlevel" x="78.8955" y="-6.57462" width="328.731" height="289.283"/>
  </objectgroup>
- <objectgroup name="hero">
+ <objectgroup name="hero" visible="0">
   <object id="42" x="4720.58" y="2531.23" width="150" height="150"/>
  </objectgroup>
- <objectgroup name="buttons">
+ <objectgroup name="buttons" visible="0">
   <object id="43" name="blue" x="2315.42" y="651.462" width="160" height="160"/>
   <object id="44" name="pink" x="3988.24" y="72.3323" width="160" height="160"/>
   <object id="45" name="red" x="1867.63" y="69.3323" width="160" height="160"/>
   <object id="46" name="green" x="3216.56" y="1544.76" width="160" height="160"/>
   <object id="47" name="orange" x="1422.69" y="2643.77" width="160" height="160"/>
  </objectgroup>
- <objectgroup name="doors">
+ <objectgroup name="doors" visible="0">
   <object id="48" name="red" x="386.765" y="1079.44" width="119.481" height="393.276"/>
   <object id="51" name="orange" x="1781.72" y="650.888" width="132.63" height="375.955"/>
   <object id="52" name="blue" x="1794.45" y="1543.61" width="119.481" height="371.783"/>
@@ -3669,7 +3669,7 @@
   <object id="63" name="pink" x="3707.68" y="639.441" width="128.963" height="376.142"/>
   <object id="64" name="pink" x="2681.35" y="2444.92" width="128.963" height="354.648"/>
  </objectgroup>
- <objectgroup name="health">
+ <objectgroup name="health" visible="0">
   <object id="59" x="2426.04" y="2143.33" width="170.94" height="170.94">
    <ellipse/>
   </object>
@@ -3683,7 +3683,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="bunny">
+ <objectgroup name="bunny" visible="0">
   <object id="65" x="2975.66" y="121.681" width="200" height="200">
    <ellipse/>
   </object>

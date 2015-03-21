@@ -20,10 +20,8 @@ public:
     void changeDirection();
     cocos2d::Sprite* bot;
     
-    cocos2d::Animate* botAnimateBottom;
-    cocos2d::Animate* botAnimateLeft;
-    cocos2d::Animate* botAnimateRight;
-    cocos2d::Animate* botAnimateTop;
+    cocos2d::Animate* botAnimateGoing;
+
     
     float scale_bot = 1.0;
     float scale_map = 1.0;

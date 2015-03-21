@@ -132,9 +132,10 @@ void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
         
         auto nodeA = contact.getShapeA()->getBody()->getNode();
         auto nodeB = contact.getShapeB()->getBody()->getNode();
-        
         if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-           if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
+            if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG)
+                isPlus = false;
+            else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
                 m_emitter->stopSystem();
             } else if (nodeA->getTag() == PORTAL_TAG or nodeB->getTag() == PORTAL_TAG) {
                 isPortal = true;
@@ -212,12 +213,7 @@ void Portals::entranceIntoPortal(Node *nodeA, Node *nodeB) {
                 if (mysprite->getPositionY() - current_portal->getPositionY() != 0)
                     yDes = current_portal->getPositionY() - mysprite->getPositionY();
                 
-                stopAllObjects();
-            
-                direction = NODIRECTION;
-                stopAllObjects();
-                touchX = -500000;
-                touchY = -500000;
+                stopTakingPoints();
                 isPortal = false;
                 
                 mysprite->setPosition(Vec2(nextPortalPos.x + 1.5*xDes,
@@ -336,6 +332,7 @@ void Portals::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
     if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled && isPortal) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
+        goHero();
     }
 }
 

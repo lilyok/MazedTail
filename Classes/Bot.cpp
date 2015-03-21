@@ -21,71 +21,23 @@ Bot::Bot(float xZero, float yZero, float obj_width, float obj_height, float x, f
     this->scale_map = scale_map;
     auto spritecache = SpriteFrameCache::getInstance();
     spritecache->addSpriteFramesWithFile(plist_name);
-    Vector<SpriteFrame *> animLeftFrames;
-    animLeftFrames.reserve(8);
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left03.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left06.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left07.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
+    Vector<SpriteFrame *> animGoingFrames;
+    animGoingFrames.reserve(8);
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left03.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left06.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left07.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
     
     // create the animation out of the frames
-    Animation *animationLeft = Animation::createWithSpriteFrames(animLeftFrames, ANIMATION_DELAY / scale_map);
-    botAnimateLeft = Animate::create(animationLeft);
-    botAnimateLeft->retain();
+    Animation *animationGoing = Animation::createWithSpriteFrames(animGoingFrames, ANIMATION_DELAY / scale_map);
+    botAnimateGoing = Animate::create(animationGoing);
+    botAnimateGoing->retain();
     
-    Vector<SpriteFrame *> animRightFrames;
-    animRightFrames.reserve(8);
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right01.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right02.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right03.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right02.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right01.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right06.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right07.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"right02.png"));
-    
-    // create the animation out of the frames
-    Animation *animationRight = Animation::createWithSpriteFrames(animRightFrames, ANIMATION_DELAY / scale_map);
-    botAnimateRight = Animate::create(animationRight);
-    botAnimateRight->retain();
-    
-    Vector<SpriteFrame *> animTopFrames;
-    animTopFrames.reserve(8);
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top01.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top02.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top03.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top02.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top01.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top06.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top07.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"top02.png"));
-    
-    // create the animation out of the frames
-    Animation *animationTop = Animation::createWithSpriteFrames(animTopFrames, ANIMATION_DELAY / scale_map);
-    botAnimateTop = Animate::create(animationTop);
-    botAnimateTop->retain();
-    
-    Vector<SpriteFrame *> animBottomFrames;
-    animBottomFrames.reserve(8);
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom01.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom02.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom03.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom02.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom01.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom06.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom07.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"bottom02.png"));
-    
-    // create the animation out of the frames
-    Animation *animationBottom = Animation::createWithSpriteFrames(animBottomFrames, ANIMATION_DELAY / scale_map);
-    botAnimateBottom = Animate::create(animationBottom);
-    botAnimateBottom->retain();
-    
-    bot =Sprite::createWithSpriteFrameName(sprite_name+"bottom01.png");
+    bot =Sprite::createWithSpriteFrameName(sprite_name+"left01.png");
     auto w = bot->getContentSize().width;
     auto h = bot->getContentSize().height;
     bot->setTag(tag);
@@ -93,7 +45,7 @@ Bot::Bot(float xZero, float yZero, float obj_width, float obj_height, float x, f
     scale_bot = fmax(obj_width/w, obj_height/h)*scale_map;
     bot->setScale(scale_bot);
     direction = BOTTOM;
-    auto action = RepeatForever::create(botAnimateBottom);
+    auto action = RepeatForever::create(botAnimateGoing);
     action->setTag(BOTTOM);
     bot->runAction(action);
     
@@ -105,7 +57,7 @@ Bot::Bot(float xZero, float yZero, float obj_width, float obj_height, float x, f
     //set the body isn't affected by the physics world's gravitational force
     physicsBody->setGravityEnable(false);
     
-    physicsBody->setVelocity(Vec2(0, -VELOCITY * scale_map));
+    physicsBody->setVelocity(Vec2(-VELOCITY * scale_map, 0));
     bot->setPhysicsBody(physicsBody);
     
     bot->setName(name);
@@ -120,24 +72,18 @@ Bot::Bot(float xZero, float yZero, float obj_width, float obj_height, float x, f
 }
 
 void Bot::changeDirection(){
-    bot->stopActionByTag(direction);
     direction = (direction + 1) % DIRECTION_LIMIT;
-    cocos2d::Action* action;
     if (direction == LEFT) {
-        action = RepeatForever::create(botAnimateLeft);
+        bot->setRotation(0);
         bot->getPhysicsBody()->setVelocity(Vec2(-VELOCITY * scale_map, 0));
     } else if (direction == RIGHT) {
-        action = RepeatForever::create(botAnimateRight);
+        bot->setRotation(180);
         bot->getPhysicsBody()->setVelocity(Vec2(VELOCITY * scale_map, 0));
     } else if (direction == TOP) {
-        action = RepeatForever::create(botAnimateTop);
+        bot->setRotation(90);
         bot->getPhysicsBody()->setVelocity(Vec2(0, VELOCITY * scale_map));
     } else if (direction == BOTTOM) {
-        action = RepeatForever::create(botAnimateBottom);
+        bot->setRotation(-90);
         bot->getPhysicsBody()->setVelocity(Vec2(0, -VELOCITY * scale_map));
-
     }
-    action->setTag(direction);
-    bot->runAction(action);
-    
 }

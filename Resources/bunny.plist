@@ -4,284 +4,74 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>bunny_bottom01.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{482,183},{137,176}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{137,176}}</string>
-				<key>sourceSize</key>
-				<string>{137,176}</string>
-			</dict>
-
-			<key>bunny_bottom02.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{189,318},{147,182}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{147,182}}</string>
-				<key>sourceSize</key>
-				<string>{147,182}</string>
-			</dict>
-
-			<key>bunny_bottom03.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{368,535},{144,188}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{144,188}}</string>
-				<key>sourceSize</key>
-				<string>{144,188}</string>
-			</dict>
-
-			<key>bunny_bottom06.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{337,0},{147,182}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{147,182}}</string>
-				<key>sourceSize</key>
-				<string>{147,182}</string>
-			</dict>
-
-			<key>bunny_bottom07.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{337,346},{144,188}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{144,188}}</string>
-				<key>sourceSize</key>
-				<string>{144,188}</string>
-			</dict>
-
 			<key>bunny_left01.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{177,878},{176,137}}</string>
+				<string>{{174,0},{161,137}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{176,137}}</string>
+				<string>{{0,0},{161,137}}</string>
 				<key>sourceSize</key>
-				<string>{176,137}</string>
+				<string>{161,137}</string>
 			</dict>
 
 			<key>bunny_left02.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,580},{183,148}}</string>
+				<string>{{0,290},{168,148}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{183,148}}</string>
+				<string>{{0,0},{168,148}}</string>
 				<key>sourceSize</key>
-				<string>{184,149}</string>
+				<string>{169,149}</string>
 			</dict>
 
 			<key>bunny_left03.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,145},{188,144}}</string>
+				<string>{{0,145},{173,144}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{188,144}}</string>
+				<string>{{0,0},{173,144}}</string>
 				<key>sourceSize</key>
-				<string>{189,145}</string>
+				<string>{174,145}</string>
 			</dict>
 
 			<key>bunny_left06.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,729},{183,148}}</string>
+				<string>{{169,290},{168,148}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{183,148}}</string>
+				<string>{{0,0},{168,148}}</string>
 				<key>sourceSize</key>
-				<string>{184,148}</string>
+				<string>{169,148}</string>
 			</dict>
 
 			<key>bunny_left07.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,0},{188,144}}</string>
+				<string>{{0,0},{173,144}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{188,144}}</string>
+				<string>{{0,0},{173,144}}</string>
 				<key>sourceSize</key>
-				<string>{188,144}</string>
-			</dict>
-
-			<key>bunny_right01.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,878},{176,137}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{176,137}}</string>
-				<key>sourceSize</key>
-				<string>{176,137}</string>
-			</dict>
-
-			<key>bunny_right02.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{184,729},{183,148}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{183,148}}</string>
-				<key>sourceSize</key>
-				<string>{184,149}</string>
-			</dict>
-
-			<key>bunny_right03.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,290},{188,144}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{188,144}}</string>
-				<key>sourceSize</key>
-				<string>{188,144}</string>
-			</dict>
-
-			<key>bunny_right06.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{184,580},{183,148}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{183,148}}</string>
-				<key>sourceSize</key>
-				<string>{183,148}</string>
-			</dict>
-
-			<key>bunny_right07.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{0,435},{188,144}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{188,144}}</string>
-				<key>sourceSize</key>
-				<string>{188,144}</string>
-			</dict>
-
-			<key>bunny_top01.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{482,360},{137,161}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{137,161}}</string>
-				<key>sourceSize</key>
-				<string>{137,161}</string>
-			</dict>
-
-			<key>bunny_top02.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{189,0},{147,158}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{147,158}}</string>
-				<key>sourceSize</key>
-				<string>{147,158}</string>
-			</dict>
-
-			<key>bunny_top03.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{337,183},{144,162}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{144,162}}</string>
-				<key>sourceSize</key>
-				<string>{144,162}</string>
-			</dict>
-
-			<key>bunny_top06.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{189,159},{147,158}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{147,158}}</string>
-				<key>sourceSize</key>
-				<string>{147,158}</string>
-			</dict>
-
-			<key>bunny_top07.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{368,724},{144,165}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false/>
-				<key>sourceColorRect</key>
-				<string>{{0,0},{144,165}}</string>
-				<key>sourceSize</key>
-				<string>{144,165}</string>
+				<string>{173,144}</string>
 			</dict>
 
 		</dict>
@@ -291,7 +81,7 @@
 			<key>format</key>
 			<integer>2</integer>
 			<key>size</key>
-			<string>{1024,1024}</string>
+			<string>{512,512}</string>
 			<key>textureFileName</key>
 			<string>bunny.png</string>
 			</dict>

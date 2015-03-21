@@ -170,7 +170,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     auto spritecache = SpriteFrameCache::getInstance();
     
     // the .plist file can be generated with any of the tools mentioned below
-    spritecache->addSpriteFramesWithFile("tgirlgo.plist");
+    spritecache->addSpriteFramesWithFile("tgirl.plist");
     
     
     
@@ -190,7 +190,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     }
     
     
-    this->mysprite = Sprite::createWithSpriteFrameName("topleft01.png");
+    this->mysprite = Sprite::createWithSpriteFrameName("topgoing01.png");
     auto w = mysprite->getContentSize().width;
     auto h = mysprite->getContentSize().height;
     // position the sprite on the center of the screen
@@ -200,70 +200,21 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     mysprite->setScale(scale_hero);
     
     
-    Vector<SpriteFrame *> animLeftFrames;
-    animLeftFrames.reserve(8);
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft01.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft02.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft03.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft02.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft01.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft06.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft07.png"));
-    animLeftFrames.pushBack(spritecache->getSpriteFrameByName("topleft02.png"));
+    Vector<SpriteFrame *> animGoingFrames;
+    animGoingFrames.reserve(8);
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing03.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing06.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing07.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing02.png"));
     
     // create the animation out of the frames
-    Animation *animationLeft = Animation::createWithSpriteFrames(animLeftFrames, ANIMATION_DELAY / scale_map);
-    animateLeft = Animate::create(animationLeft);
-    animateLeft->retain();
-    
-    Vector<SpriteFrame *> animRightFrames;
-    animRightFrames.reserve(8);
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright01.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright02.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright03.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright02.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright01.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright06.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright07.png"));
-    animRightFrames.pushBack(spritecache->getSpriteFrameByName("topright02.png"));
-    
-    // create the animation out of the frames
-    Animation *animationRight = Animation::createWithSpriteFrames(animRightFrames, ANIMATION_DELAY / scale_map);
-    animateRight = Animate::create(animationRight);
-    animateRight->retain();
-    
-    Vector<SpriteFrame *> animTopFrames;
-    animTopFrames.reserve(8);
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop01.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop02.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop03.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop02.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop01.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop06.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop07.png"));
-    animTopFrames.pushBack(spritecache->getSpriteFrameByName("toptop02.png"));
-    
-    
-    // create the animation out of the frames
-    Animation *animationTop = Animation::createWithSpriteFrames(animTopFrames, ANIMATION_DELAY / scale_map);
-    animateTop = Animate::create(animationTop);
-    animateTop->retain();
-    
-    Vector<SpriteFrame *> animBottomFrames;
-    animBottomFrames.reserve(8);
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom01.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom02.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom03.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom02.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom01.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom06.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom07.png"));
-    animBottomFrames.pushBack(spritecache->getSpriteFrameByName("topbottom02.png"));
-    
-    // create the animation out of the frames
-    Animation *animationBottom = Animation::createWithSpriteFrames(animBottomFrames, ANIMATION_DELAY / scale_map);
-    animateBottom = Animate::create(animationBottom);
-    animateBottom->retain();
+    Animation *animationGoing = Animation::createWithSpriteFrames(animGoingFrames, ANIMATION_DELAY / scale_map);
+    animateGoing = Animate::create(animationGoing);
+    animateGoing->retain();
     
     
     auto physicsBody = PhysicsBody::createBox(Size(h * scale_hero, h * scale_hero),
@@ -273,11 +224,11 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     physicsBody->setContactTestBitmask(0xFFFFFFFF);
     //set the body isn't affected by the physics world's gravitational force
     physicsBody->setGravityEnable(false);
-    
+    physicsBody->setVelocityLimit(MY_VELOCITY*scale_map);
+    physicsBody->setMass(0.001);
     addChild(this->mysprite, 2);
     
     mysprite->setPhysicsBody(physicsBody);
-    
     //    this->scheduleUpdate();
     return true;
 }
@@ -312,10 +263,8 @@ void AbstractLabirint::onExit() {
     // You don't need to unregister listeners here as new API
     // removes all linked listeners automatically in CCNode's destructor
     // which is the base class for all cocos2d DRAWING classes
-    animateLeft->release();
-    animateBottom->release();
-    animateRight->release();
-    animateTop->release();
+    animateGoing->release();
+
     Layer::onExit();
 }
 
@@ -355,18 +304,11 @@ void AbstractLabirint::update(float delta) {
                 if (plus->getOpacity() == 255) {
                     if (isPlus)
                         collisionWithHealth(plus, mysprite);
-                    isPlus = false;
                 }
             }
         }
         
-        if (num_of_delta < COUNT_OF_DELTA) {
-            num_of_delta++;
-        } else {
-            //goHero();
-            num_of_delta = 0;
-        }
-        
+        goHero();
         ownEvent();
     }
     
@@ -377,7 +319,7 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
     if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
-        
+        startGoingAnimation();
         goHero();
     }
     
@@ -406,16 +348,15 @@ void AbstractLabirint::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *e
 
 
 void AbstractLabirint::stopTakingPoints(){
-    direction = NODIRECTION;
     stopAllObjects();
+    mysprite->getPhysicsBody()->resetForces();
     touchX = -500000;
     touchY = -500000;
 }
 
 void AbstractLabirint::goHero() {
     auto dx = touchX - mysprite->getPositionX();
-    auto dy = touchY - mysprite->getPositionY() + mysprite->getContentSize().height * scale_map / 2;
-    direction = NODIRECTION;
+    auto dy = touchY - mysprite->getPositionY() + mysprite->getContentSize().height * scale_hero / 2;
     goToPoint(dx, dy);
 }
 
@@ -424,108 +365,60 @@ void AbstractLabirint::goToPoint(float dx, float dy) {
         float vx_old = mysprite->getPhysicsBody()->getVelocity().x;
         float vy_old = mysprite->getPhysicsBody()->getVelocity().y;
         bool isChangedDirection = false;
-        float vx;
-        float vy;
+        float vx = 0;
+        float vy = 0;
         if (dx > 0) vx = MY_VELOCITY * scale_map;
-        else vx = -MY_VELOCITY * scale_map;
+        else if (dx < 0) vx = -MY_VELOCITY * scale_map;
         
         if (dy > 0) vy = MY_VELOCITY * scale_map;
-        else vy = -MY_VELOCITY * scale_map;
+        else if (dy < 0) vy = -MY_VELOCITY * scale_map;
         
         auto body = mysprite->getPhysicsBody();
-        auto pos = body->getPositionOffset();
         
-        if (std::abs(dx) > std::abs(dy)) {
-            isChangedDirection = goToPointX(dx, dy, vx_old, vy_old, vx, body, pos, vy);
+        if ((vx_old > 0 and dx < 0) or (vx_old < 0 and dx > 0) or (vy_old > 0 and dy < 0) or (vy_old < 0 and dy > 0) or
+            (vx_old == 0 and dx != 0) or (vy_old == 0 and dy != 0)){
+            isChangedDirection = true;
+            
+            if (fabs(dx) > fabs(dy)){
+                vy = vy * dy / dx;
+                if (dx > 0)
+                    mysprite->setRotation(180);
+                else if (dx < 0)
+                    mysprite->setRotation(0);
+            } else if (fabs(dx) < fabs(dy)){
+                vx = vx * dx / dy;
+                if (dy > 0)
+                    mysprite->setRotation(90);
+                else if (dy < 0)
+                    mysprite->setRotation(-90);
+            }
         }
-        else {
-            isChangedDirection = goToPointY(dx, dy, vx_old, vy_old, vy, body, pos, vx);
-        }
+
         if (isChangedDirection) {
-         //   mysprite->getPhysicsBody()->resetForces();
-            mysprite->getPhysicsBody()->setVelocity(Vec2(vx, vy));//applyForce(Vec2(vx, vy));
+            mysprite->getPhysicsBody()->resetForces();
+            body->applyForce(Vec2(vx, vy));
         }
     }
     else {
         stopAllObjects();
+        mysprite->getPhysicsBody()->resetForces();
         mysprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-    }
-}
-
-bool AbstractLabirint::goToPointY(float dx, float dy, float vx_old, float vy_old, float vy, PhysicsBody *body,
-                                  Vec2 &pos, float &vx) {
-    bool isChangedDirection = false;
-    if (dy == 0) vx = 0.0;
-    else vx = vx * std::__1::abs(dx / dy);
-    if ((std::__1::abs(vy_old - vy) >= MIN_FOR_DIRECTION) || (std::__1::abs(vx_old - vx) >= MIN_FOR_DIRECTION)) {
-        if (dy < 0) {
-            if (direction != BOTTOM) {
-                stopAllObjects();
-                isChangedDirection = true;
-                direction = BOTTOM;
-                auto action = RepeatForever::create(animateBottom);
-                action->setTag(BOTTOM);
-                mysprite->runAction(action);
-            }
-        }
-        else {
-            if (direction != TOP) {
-                stopAllObjects();
-                isChangedDirection = true;
-                direction = TOP;
-                auto action = RepeatForever::create(animateTop);
-                action->setTag(TOP);
-                mysprite->runAction(action);
-            }
-        }
         
     }
-    return isChangedDirection;
 }
 
-bool AbstractLabirint::goToPointX(float dx, float dy, float vx_old, float vy_old, float vx, PhysicsBody *body,
-                                  Vec2 &pos, float &vy) {
-    bool isChangedDirection = false;
-    
-    if (dx == 0) vy = 0.0;
-    else vy = vy * std::__1::abs(dy / dx);
-    
-    
-    if ((fabs(vy_old - vy) >= MIN_FOR_DIRECTION) || (fabs(vx_old - vx) >= MIN_FOR_DIRECTION)) {
-        if (dx > 0) {
-            if (direction != RIGHT) {
-                stopAllObjects();
-                auto action = RepeatForever::create(animateRight);
-                action->setTag(RIGHT);
-                isChangedDirection = true;
-                direction = RIGHT;
-                mysprite->runAction(action);
-            }
-        }
-        else {
-            if (direction != LEFT) {
-                stopAllObjects();
-                auto action = RepeatForever::create(animateLeft);
-                action->setTag(LEFT);
-                isChangedDirection = true;
-                direction = LEFT;
-                mysprite->runAction(action);
-                
-            }
-        }
-    }
-    return isChangedDirection;
+void AbstractLabirint::startGoingAnimation() {
+    auto action = RepeatForever::create(animateGoing);
+    action->setTag(GOING);
+    mysprite->runAction(action);
 }
 
 void AbstractLabirint::stopAllObjects() {
     if (mysprite->getNumberOfRunningActions() > 0) {
-        mysprite->stopActionByTag(TOP);
-        mysprite->stopActionByTag(BOTTOM);
-        mysprite->stopActionByTag(LEFT);
-        mysprite->stopActionByTag(RIGHT);
-        
-        mysprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        mysprite->stopActionByTag(GOING);
     }
+    mysprite->getPhysicsBody()->resetForces();
+
 }
 
 void AbstractLabirint::pauseAllObjects() {
@@ -677,6 +570,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, bool isD
         body->setRotationEnable(false);
     }
     body->setDynamic(isDynamic);
+    body->setMass(0.0001);
     body->setContactTestBitmask(mask); //(0xFFFFFFFF);
     sprite->setPhysicsBody(body);
     sprite->setPosition(p);
@@ -729,6 +623,7 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
     Node *node;
     if (nodeA->getTag() == PLUS_TAG) node = nodeA;
     else node = nodeB;
+    isPlus = true;
     if (node->getOpacity() == 255) {
         auto plus = pluses.at(stoi(node->getName()));
         
@@ -741,7 +636,7 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
             
             plus->setSpriteFrame(sp);
             mysprite->runAction(Sequence::create(TintTo::create(0.5f, 252, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
-            isPlus = true;
+            
             plus->setOpacity(10);
         }
     }

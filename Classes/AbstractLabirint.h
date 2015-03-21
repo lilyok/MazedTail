@@ -7,11 +7,8 @@
 #define __AbstractLabirint_H_
 
 #include "cocos2d.h"
-#define LEFT 0
-#define RIGHT 1
-#define TOP 2
-#define BOTTOM 3
-#define NODIRECTION -1
+#define GOING 0
+
 
 #define HERO_SPRITE_TAG 5
 #define COLLISION_TAG 10
@@ -65,10 +62,7 @@ protected:
     cocos2d::Sprite* menuSprite;
     cocos2d::Vector<cocos2d::Sprite*> pluses;
 
-    cocos2d::Animate* animateBottom;
-    cocos2d::Animate* animateLeft;
-    cocos2d::Animate* animateRight;
-    cocos2d::Animate* animateTop;
+    cocos2d::Animate* animateGoing;
 
     virtual void onEnter();
     virtual void onExit();
@@ -115,7 +109,6 @@ protected:
     bool isPaused = false;
     bool isClose = false;
     bool isPlus = false;
-    int direction = NODIRECTION;
     float touchX = -500000;
     float touchY = -500000;
     int life_num = 3;
@@ -124,7 +117,6 @@ protected:
     float scale_hero = 1.0;
     float xZero = 0.0;
     float yZero = 0.0;
-    int num_of_delta = 0;
 
     
     cocos2d::Size visibleSize;
@@ -148,10 +140,7 @@ protected:
     void goHero();
     
     void goToPoint(float dx, float dy);
-    
-    bool goToPointX(float dx, float dy, float vx_old, float vy_old, float vx, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vy);
-
-    bool goToPointY(float dx, float dy, float vx_old, float vy_old, float vy, cocos2d::PhysicsBody *body, cocos2d::Vec2 &pos, float &vx);
+    void startGoingAnimation();
     
     void stopTakingPoints();
 };

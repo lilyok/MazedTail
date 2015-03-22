@@ -3611,16 +3611,16 @@
   <object id="1" x="-6.05327" y="-7.10543e-15" width="134.328" height="2870.88"/>
   <object id="3" x="584.114" y="5" width="4527.85" height="121.065"/>
   <object id="4" x="-6.05327" y="2748.18" width="5121.07" height="121.065"/>
-  <object id="5" x="5000" y="12.1065" width="115.012" height="2288.14"/>
+  <object id="5" x="5000" y="12.1065" width="115.012" height="2293.78"/>
   <object id="6" x="1277.24" y="12.1065" width="133.172" height="562.954"/>
   <object id="7" x="6.05327" y="581.114" width="817.191" height="108.959"/>
   <object id="8" x="12.1065" y="1610.17" width="556.901" height="108.959"/>
   <object id="9" x="6.05327" y="1150.12" width="823.245" height="127.119"/>
-  <object id="10" x="702.286" y="593.22" width="123.854" height="690.073"/>
+  <object id="10" x="702.286" y="593.22" width="121.032" height="681.606"/>
   <object id="11" x="12.1065" y="2185.23" width="1131.96" height="127.119"/>
   <object id="12" x="1144.07" y="2312.35"/>
   <object id="13" x="708.232" y="1029.06" width="1331.72" height="121.065"/>
-  <object id="14" x="1924.94" y="641.646" width="115.012" height="514.528"/>
+  <object id="14" x="1924.94" y="641.646" width="115.012" height="508.155"/>
   <object id="17" x="1943.1" y="641.646" width="290.557" height="127.119"/>
   <object id="18" x="2687.65" y="18.1598" width="127.119" height="1125.91"/>
   <object id="20" x="1016.95" y="1598.06" width="141.079" height="716.139"/>
@@ -3637,11 +3637,11 @@
   <object id="34" x="3068.71" y="1606.07" width="306.871" height="120.08"/>
   <object id="35" x="3268.85" y="1092.4" width="700.467" height="126.751"/>
   <object id="36" x="3845.56" y="517.018" width="687.125" height="126.751"/>
-  <object id="37" x="4409.61" y="513.676" width="126.751" height="320.213"/>
+  <object id="37" x="4412.61" y="515.676" width="126.751" height="314.568"/>
   <object id="38" x="3066.38" y="2181.13" width="893.929" height="126.751"/>
   <object id="39" x="3842.56" y="1674.45" width="113.409" height="627.085"/>
-  <object id="40" x="3850.9" y="1668.45" width="687.125" height="133.422"/>
-  <object id="41" x="4416.62" y="1287.53" width="126.751" height="513.676"/>
+  <object id="40" x="3842.9" y="1664.45" width="698.415" height="133.422"/>
+  <object id="41" x="4416.62" y="1284.53" width="126.751" height="513.676"/>
   <object id="42" x="4420.95" y="2180.45" width="693.796" height="126.751"/>
   <object id="54" name="dummy" x="4994.58" y="2318.53" width="113.759" height="427.952"/>
   <object id="55" name="newlevel" x="130.011" y="5.41712" width="450.719" height="267.916"/>

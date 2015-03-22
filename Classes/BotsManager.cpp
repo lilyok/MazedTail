@@ -33,6 +33,12 @@ void BotsManager::changeDirection(std::string name) {
     bots[stoi(name)]->changeDirection();
 }
 
+void BotsManager::changeDirectionAll() {
+    for(auto bot : bots)
+        bot->changeDirection();
+}
+
+
 Vector<Sprite*> BotsManager::getBotsSprites(){
     Vector<Sprite*> sprites;
     for (auto bot: bots)

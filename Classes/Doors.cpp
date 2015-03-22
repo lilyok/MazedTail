@@ -112,7 +112,14 @@ Scene* Doors::returnNewScene(){
     return Doors::createScene();
 }
 
-
+void Doors::ownEvent(){
+    if (num_bot_delta < BOT_DELTA) {
+        num_bot_delta++;
+    } else {
+        botsManager->changeDirectionAll();
+        num_bot_delta = 0;
+    }
+}
 
 bool Doors::onContactBegin(const cocos2d::PhysicsContact &contact) {
     if (!isRestart && !isNewLevel && !isPaused) {
@@ -177,7 +184,10 @@ bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             return false;
         }
         
-    } else if (nodeA->getTag() == BUNNY_TAG or nodeB->getTag() == BUNNY_TAG) {
+    } else if ((nodeA->getTag() == BUNNY_TAG or nodeB->getTag() == BUNNY_TAG)  and
+               (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
+                nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
+                nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
         if (nodeA->getTag() == BUNNY_TAG)
             botsManager->changeDirection(nodeA->getName());
         else

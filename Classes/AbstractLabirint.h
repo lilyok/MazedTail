@@ -8,7 +8,7 @@
 
 #include "cocos2d.h"
 #define GOING 0
-
+#define NOTOUCH -500000
 
 #define HERO_SPRITE_TAG 5
 #define COLLISION_TAG 10
@@ -109,8 +109,8 @@ protected:
     bool isPaused = false;
     bool isClose = false;
     bool isPlus = false;
-    float touchX = -500000;
-    float touchY = -500000;
+    float touchX = NOTOUCH;
+    float touchY = NOTOUCH;
     int life_num = 3;
     float icon_scale = 1.0;
     float scale_map = 1.0;
@@ -137,9 +137,9 @@ protected:
     void collisionWithHealth(Node * nodeA, Node * nodeB);
 
     
-    void goHero();
+    void goHero(bool isStarted = false);
     
-    void goToPoint(float dx, float dy);
+    void goToPoint(float dx, float dy, bool isStarted = false);
     void startGoingAnimation();
     
     void stopTakingPoints();

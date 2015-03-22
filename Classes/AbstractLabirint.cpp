@@ -212,7 +212,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     animGoingFrames.pushBack(spritecache->getSpriteFrameByName("topgoing02.png"));
     
     // create the animation out of the frames
-    Animation *animationGoing = Animation::createWithSpriteFrames(animGoingFrames, ANIMATION_DELAY / scale_map);
+    Animation *animationGoing = Animation::createWithSpriteFrames(animGoingFrames, ANIMATION_DELAY);// / scale_map);
     animateGoing = Animate::create(animationGoing);
     animateGoing->retain();
     
@@ -307,8 +307,9 @@ void AbstractLabirint::update(float delta) {
                 }
             }
         }
-        
-        goHero();
+        if ((touchX != NOTOUCH) && (touchY != NOTOUCH))
+            goHero();
+
         ownEvent();
     }
     
@@ -320,7 +321,7 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
         startGoingAnimation();
-        goHero();
+        goHero(true);
     }
     
     
@@ -328,10 +329,10 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
 }
 
 void AbstractLabirint::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
-    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled) {
+    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled && touchX != NOTOUCH && touchY != NOTOUCH) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
-        goHero();
+        goHero(true);
     } else {
         stopTakingPoints();
     }
@@ -348,20 +349,19 @@ void AbstractLabirint::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *e
 
 
 void AbstractLabirint::stopTakingPoints(){
+    touchX = NOTOUCH;
+    touchY = NOTOUCH;
     stopAllObjects();
-    mysprite->getPhysicsBody()->resetForces();
-    touchX = -500000;
-    touchY = -500000;
 }
 
-void AbstractLabirint::goHero() {
+void AbstractLabirint::goHero(bool isStarted) {
     auto dx = touchX - mysprite->getPositionX();
     auto dy = touchY - mysprite->getPositionY() + mysprite->getContentSize().height * scale_hero / 2;
-    goToPoint(dx, dy);
+    goToPoint(dx, dy, isStarted);
 }
 
-void AbstractLabirint::goToPoint(float dx, float dy) {
-    if ((touchX != -500000) && (touchY != -500000)) {
+void AbstractLabirint::goToPoint(float dx, float dy, bool isStarted) {
+    if ((touchX != NOTOUCH) && (touchY != NOTOUCH)) {
         float vx_old = mysprite->getPhysicsBody()->getVelocity().x;
         float vy_old = mysprite->getPhysicsBody()->getVelocity().y;
         bool isChangedDirection = false;
@@ -375,8 +375,8 @@ void AbstractLabirint::goToPoint(float dx, float dy) {
         
         auto body = mysprite->getPhysicsBody();
         
-        if ((vx_old > 0 and dx < 0) or (vx_old < 0 and dx > 0) or (vy_old > 0 and dy < 0) or (vy_old < 0 and dy > 0) or
-            (vx_old == 0 and dx != 0) or (vy_old == 0 and dy != 0)){
+        if (isStarted or (vx_old > 0 and dx < 0) or (vx_old < 0 and dx > 0) or (vy_old > 0 and dy < 0) or (vy_old < 0 and dy > 0) or
+            ((vx_old == 0 or vy_old == 0) and (dx != 0 or dy != 0))){
             isChangedDirection = true;
             
             if (fabs(dx) > fabs(dy)){
@@ -392,32 +392,33 @@ void AbstractLabirint::goToPoint(float dx, float dy) {
                 else if (dy < 0)
                     mysprite->setRotation(-90);
             }
+
         }
 
         if (isChangedDirection) {
-            mysprite->getPhysicsBody()->resetForces();
+            body->resetForces();
+            body->setGravityEnable(false);
             body->applyForce(Vec2(vx, vy));
         }
     }
     else {
         stopAllObjects();
-        mysprite->getPhysicsBody()->resetForces();
-        mysprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-        
     }
 }
 
 void AbstractLabirint::startGoingAnimation() {
-    auto action = RepeatForever::create(animateGoing);
-    action->setTag(GOING);
-    mysprite->runAction(action);
+    if (!mysprite->getActionByTag(GOING)) {
+        auto action = RepeatForever::create(animateGoing);
+        action->setTag(GOING);
+        mysprite->runAction(action);
+    }
 }
 
 void AbstractLabirint::stopAllObjects() {
-    if (mysprite->getNumberOfRunningActions() > 0) {
-        mysprite->stopActionByTag(GOING);
-    }
+    mysprite->stopActionByTag(GOING);
     mysprite->getPhysicsBody()->resetForces();
+    mysprite->getPhysicsBody()->setGravityEnable(false);
+    mysprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
 
 }
 
@@ -566,11 +567,13 @@ Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, bool isD
         body->getShape(0)->setRestitution(rest);
         body->getShape(0)->setFriction(fric);
         body->getShape(0)->setDensity(dens);
-        body->setVelocity(Vec2(100, 0));
+        body->setMass(0.001);
+        body->setVelocityLimit(MY_VELOCITY*scale_map);
+        body->applyImpulse(Vec2(0.5*scale_map, 0.5*scale_map));
         body->setRotationEnable(false);
     }
     body->setDynamic(isDynamic);
-    body->setMass(0.0001);
+    
     body->setContactTestBitmask(mask); //(0xFFFFFFFF);
     sprite->setPhysicsBody(body);
     sprite->setPosition(p);

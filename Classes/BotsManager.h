@@ -21,6 +21,7 @@ public:
     
     cocos2d::Vector<cocos2d::Sprite*> getBotsSprites();
     void changeDirection(std::string name);
+    void changeDirectionAll();
     
     std::vector<Bot*> bots;
 

@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "AbstractLabirint.h"
 #include "BotsManager.h"
+#define BOT_DELTA 50
 
 
 class Doors : public AbstractLabirint
@@ -40,7 +41,8 @@ private:
     void stopScene();
     void pauseScene();
     void resumeScene();
-        
+    void ownEvent();
+    
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);
 
@@ -53,8 +55,8 @@ private:
     void collisionWithEnemy(Node * nodeA, Node * nodeB);
     
     
-    int num_of_delta = 0;
-    
+    int num_bot_delta = 0;
+
 };
 
 

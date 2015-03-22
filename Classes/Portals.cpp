@@ -110,7 +110,12 @@ void Portals::ownEvent(){
         num_spider_delta++;
     } else {
         for (auto spider : fallings){
-            spider->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+            spider->getPhysicsBody()->resetForces();
+            spider->getPhysicsBody()->setVelocity(Vec2(0,0));
+            float vx = 0.5 * (1 - rand() % 3);
+            float vy = 1;
+            spider->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
+            
         }
         num_spider_delta = 0;
     }
@@ -126,7 +131,7 @@ Scene* Portals::returnNewScene(){
 
 void Portals::onContactSeperate(const cocos2d::PhysicsContact &contact) {
     if (!isRestart && !isNewLevel) {
-        if ((touchX != -500000) && (touchY != -500000)) {
+        if ((touchX != NOTOUCH) && (touchY != NOTOUCH)) {
             goHero();
         }
         
@@ -329,10 +334,12 @@ void Portals::stopScene() {
 }
 
 void Portals::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
-    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled && isPortal) {
+    if (!isRestart && !isNewLevel && !isRestarted && !isNewLeveled && isPortal && touchX != NOTOUCH && touchY != NOTOUCH) {
         touchX = touch->getLocation().x;
         touchY = touch->getLocation().y;
         goHero();
+    } else {
+        stopTakingPoints();
     }
 }
 

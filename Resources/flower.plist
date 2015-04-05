@@ -7,7 +7,7 @@
 			<key>blueflower.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,354},{46,46}}</string>
+				<string>{{0,307},{46,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
@@ -35,15 +35,15 @@
 			<key>orangeflower.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,307},{46,46}}</string>
+				<string>{{385,0},{46,255}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>
 				<false/>
 				<key>sourceColorRect</key>
-				<string>{{0,0},{46,46}}</string>
+				<string>{{9,1},{46,255}}</string>
 				<key>sourceSize</key>
-				<string>{46,46}</string>
+				<string>{64,256}</string>
 			</dict>
 
 			<key>orangewall.png</key>
@@ -63,7 +63,7 @@
 			<key>pinkflower.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,401},{46,46}}</string>
+				<string>{{0,354},{46,46}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>

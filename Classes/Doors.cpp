@@ -5,6 +5,7 @@
 #include "Doors.h"
 
 #include "MenuScene.h"
+#include "Rotators.h"
 
 USING_NS_CC;
 #define BUNNY_TAG 20
@@ -19,7 +20,7 @@ USING_NS_CC;
 Scene *Doors::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
-    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+   // scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
     auto layer = Doors::create();
     layer->setPhyWorld(scene->getPhysicsWorld());
@@ -42,7 +43,7 @@ bool Doors::init() {
   
     TMXObjectGroup *buttontmx = map->getObjectGroup("buttons");
     
-    this->buttons = makeObject(BUTTON_TAG, buttontmx, scale_map, xZero, yZero, BRICK, 0, 0);
+    this->buttons = makeObject(BUTTON_TAG, buttontmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
     
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("color_buttons.plist");
     
@@ -58,7 +59,7 @@ bool Doors::init() {
 
     TMXObjectGroup *doortmx = map->getObjectGroup("doors");
     
-    this->doors = makeObject(DOOR_TAG, doortmx, scale_map, xZero, yZero, BRICK, 0, 0);
+    this->doors = makeObject(DOOR_TAG, doortmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
     for (auto door : this->doors) {
         auto w = door->getContentSize().width;
         //auto h = door->getContentSize().height;
@@ -109,7 +110,7 @@ Scene* Doors::returnRestartedScene(){
 }
 
 Scene* Doors::returnNewScene(){
-    return Doors::createScene();
+    return Rotators::createScene();
 }
 
 void Doors::ownEvent(){

@@ -52,8 +52,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     menuSprite->setPosition(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2);
     menuSprite->setOpacity(0);
     addChild(menuSprite, 3);
-    
-    
+
     
     auto back_sprite = Sprite::create(back_name);
     
@@ -147,7 +146,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     
     TMXObjectGroup *walls = map->getObjectGroup("collisions");
     
-    this->collisions = makeObject(COLLISION_TAG, walls, scale_map, xZero, yZero, BRICK, 0, 0);
+    this->collisions = makeObject(COLLISION_TAG, walls, scale_map, xZero, yZero, BRICK, false, 0, 0);
     
     auto healthcache = SpriteFrameCache::getInstance();
     healthcache->addSpriteFramesWithFile("plus.plist");
@@ -484,7 +483,7 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
 
 
 Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, float scale_map, float xZero, float yZero,
-                                              int form, int v, int n, int mask) {
+                                              int form, bool isDynamic, int v, int n, int mask) {
     Vector<Sprite *> sprites;
     if (objects != nullptr) {
         float x, y, w, h;
@@ -503,7 +502,7 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
             auto tagname = tag;
             if (name == "dummy") tagname = 0;
             else if (name == "newlevel") tagname = NEWLEVEL_TAG;
-            auto sprite = this->makePhysicsObjAt(tagname, _point, _size, form, v, n, mask);
+            auto sprite = this->makePhysicsObjAt(name, tagname, _point, _size, form, v, n, mask);
             
             if (name == "") name = std::to_string(i);
             i++;
@@ -515,14 +514,20 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
     return sprites;
 }
 
-Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, int form, int v, int n, int mask) {
+Sprite *AbstractLabirint::makeTexturedSprite(std::string name, int tag, Point p, Size size) {
     auto sprite = Sprite::create();
-    
     sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
     sprite->setTextureRect(Rect(p.x - size.width / 2, p.y - size.height / 2, size.width, size.height));
     sprite->setOpacity(0);
+    return sprite;
+}
+
+Sprite *AbstractLabirint::makePhysicsObjAt(std::string name, int tag, Point p, Size size, int form, bool isDynamic, int v, int n, int mask) {
+    auto sprite = makeTexturedSprite(name, tag, p, size);
+    
     PhysicsBody *body;
     
+   // size = sprite->getContentSize();
     
     if (form == BRICK) {
         body = PhysicsBody::createBox(size,
@@ -534,7 +539,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, int form
     
     sprite->setPhysicsBody(body);
     sprite->setTag(tag);
-    body->setDynamic(false);
+    body->setDynamic(isDynamic);
     body->setContactTestBitmask(mask);
     sprite->setPosition(p);
     addChild(sprite, 1);

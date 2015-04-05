@@ -17,7 +17,7 @@ USING_NS_CC;
 Scene *Portals::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
-   // scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
     auto layer = Portals::create();
     layer->setPhyWorld(scene->getPhysicsWorld());
@@ -42,7 +42,7 @@ bool Portals::init() {
     
     TMXObjectGroup *holes = map->getObjectGroup("portals");
     
-    this->portals = makeObject(PORTAL_TAG, holes, scale_map, xZero, yZero, BRICK, 0, 0);
+    this->portals = makeObject(PORTAL_TAG, holes, scale_map, xZero, yZero, BRICK, false, 0, 0);
     
     
     auto spidercache = SpriteFrameCache::getInstance();

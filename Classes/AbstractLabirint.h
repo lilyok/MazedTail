@@ -74,13 +74,14 @@ protected:
     virtual void onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event);
 
     void setPhyWorld(cocos2d::PhysicsWorld* world){m_world = world;}
+    virtual cocos2d::Sprite *makeTexturedSprite(std::string name, int tag, cocos2d::Point p, cocos2d::Size size);
     cocos2d::Vector<cocos2d::Sprite*>  makeObject(int tag, cocos2d::TMXObjectGroup *objects,
             cocos2d::SpriteFrameCache* spritecache, std::string name, int spritecount,
             int animsize, float scale_map, float xZero, float yZero, int form, float time,  bool isDynamic, float rest,
             float fric, float dens, int mask = 0xFFFFFFFF);
-    cocos2d::Vector<cocos2d::Sprite*> makeObject(int tag, cocos2d::TMXObjectGroup *objects, float scale_map, float xZero, float yZero, int form, int v = 0, int n = -1, int mask = 0xFFFFFFFF);
+    cocos2d::Vector<cocos2d::Sprite*> makeObject(int tag, cocos2d::TMXObjectGroup *objects, float scale_map, float xZero, float yZero, int form,  bool isDynamic=false, int v = 0, int n = -1, int mask = 0xFFFFFFFF);
     cocos2d::Sprite* makePhysicsObjAt(int tag, cocos2d::Point p, cocos2d::Size size, bool isDynamic, float rest, float fric, float dens, int form, cocos2d::Animate* anim, std::string name, int mask = 0xFFFFFFFF);
-    cocos2d::Sprite* makePhysicsObjAt(int tag, cocos2d::Point p, cocos2d::Size size, int form, int v = 0, int n = -1, int mask = 0xFFFFFFFF);
+    cocos2d::Sprite* makePhysicsObjAt(std::string name, int tag, cocos2d::Point p, cocos2d::Size size, int form,  bool isDynamic=false, int v = 0, int n = -1, int mask = 0xFFFFFFFF);
 
     void stopAllObjectLayer(cocos2d::Vector<cocos2d::Sprite*> sprites);
     void pauseAllObjectLayer(cocos2d::Vector<cocos2d::Sprite*> sprites);

@@ -216,19 +216,31 @@ void Rotators::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Rotators::resumeScene() {
     AbstractLabirint::resumeScene();
-
+    for (auto sprite: torts) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+    }
+    
+    resumeAllObjectLayer(torts);
     resumeAllObjectLayer(pluses);
 }
 
 void Rotators::pauseScene() {
     AbstractLabirint::pauseScene();
-
+    for (auto sprite: torts) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    pauseAllObjectLayer(torts);
     pauseAllObjectLayer(pluses);
 }
 
 void Rotators::stopScene() {
     AbstractLabirint::stopScene();
-    
+    for (auto sprite: torts) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();        
+    }
+    stopAllObjectLayer(torts);
     stopAllObjectLayer(pluses);
 }
 

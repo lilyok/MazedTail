@@ -253,6 +253,7 @@ void Doors::pauseScene() {
     
     for (auto sprite: bunnies) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
     }
     pauseAllObjectLayer(bunnies);
     pauseAllObjectLayer(pluses);
@@ -263,6 +264,7 @@ void Doors::stopScene() {
     
     for (auto sprite: bunnies) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
     }
     stopAllObjectLayer(bunnies);
     stopAllObjectLayer(pluses);

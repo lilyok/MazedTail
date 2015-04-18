@@ -3658,7 +3658,7 @@
   <object id="37" x="-8.88178e-16" y="-5.78035" width="121.387" height="2878.61"/>
   <object id="39" x="3.19744e-14" y="2809.25" width="5115.61" height="63.5838"/>
   <object id="40" name="dummy" x="4951.76" y="2364.5" width="161.85" height="439.306"/>
-  <object id="41" name="newlevel" x="121.387" y="-7.99361e-15" width="520.231" height="289.017"/>
+  <object id="41" name="newlevel" x="121.387" y="-7.99361e-15" width="517.498" height="74.4775"/>
   <object id="44" x="4982.66" y="11.5607" width="132.948" height="2791.91"/>
  </objectgroup>
  <objectgroup name="hero">

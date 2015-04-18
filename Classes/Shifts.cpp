@@ -65,23 +65,27 @@ int Shifts::getShiftNum(Point p){
 }
 
 void Shifts::ownEvent(){
-    if (num_shift_delta < SHIFT_DELTA) {
+    if (num_shift_delta < SHIFT_DELTA*scale_map) {
         num_shift_delta++;
     } else {
-        auto h = visibleSize.height;
+        auto h = map->getContentSize().height*scale_map;//visibleSize.height;
         int currentShift = getShiftNum(mysprite->getPosition());
         
         for (auto shift : shifts) {
-            if ((shift->getName() != std::__1::to_string(currentShift)) and
-                (shift->getName() != "7")){
+            if ((shift->getName() == std::__1::to_string((currentShift + 2)%8) )/*or
+                 shift->getName() == std::__1::to_string((currentShift + 3)%8) or
+                 shift->getName() == std::__1::to_string((currentShift + 4)%8)) and
+                (shift->getName() != "7")*/){
                 auto p = shift->getPosition();
                 auto sh = shift->getContentSize().height*scale_map;
                 
-                if (p.y - sh/2 < h)
-                    shift->runAction(MoveTo::create(0.5, Vec2(p.x, p.y + h/5)));
-                else {
-                    shift->runAction(Sequence::create(MoveTo::create(0.5, Vec2(p.x, p.y)), MoveTo::create(0,Vec2(p.x,p.y-2*h)),NULL));
+                    
+                if (p.y - sh/2 >= h) {
+                    p.y -= 2*h;
+                    shift->setPosition(p);
                 }
+                shift->runAction(MoveTo::create(0.5, Vec2(p.x, p.y + h/5)));
+         
             }
         }
         num_shift_delta = 0;

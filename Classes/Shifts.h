@@ -15,7 +15,7 @@
 #include "BotsManager.h"
 
 #define BUTTERFLY_DELTA 75
-#define SHIFT_DELTA 20
+#define SHIFT_DELTA 200
 
 class Shifts: public AbstractLabirint{
 public:

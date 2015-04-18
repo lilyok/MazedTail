@@ -44,37 +44,13 @@ bool Shifts::init() {
     this->shifts = makeObject(SHIFT_TAG, shifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
 
     auto spidercache = SpriteFrameCache::getInstance();
-    spidercache->addSpriteFramesWithFile("spider.plist");
-    auto spidersCount = 3;
-    auto spidersAnimSize = 2;
+    spidercache->addSpriteFramesWithFile("bf.plist");
+    auto bfCount = 3;
+    auto bfAnimSize = 2;
     
-    TMXObjectGroup *fallings = map->getObjectGroup("chiks");
-    this->chiks = makeObject(FALLING_TAG, fallings, spidercache, "spider", spidersCount, spidersAnimSize, scale_map,
+    TMXObjectGroup *fallings = map->getObjectGroup("butterfly");
+    this->butterfly = makeObject(FALLING_TAG, fallings, spidercache, "bf", bfCount, bfAnimSize, scale_map,
                                 xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
-//    botsManager = new BotsManager(xZero, yZero, map, "chiks", "tort.plist", "tort_", scale_map, TORT_TAG);
-//    chiks = botsManager->getBotsSprites();
-//    for(auto chik:chiks){
-//        AbstractLabirint::addChild(chik, 2);
-//    }
-
-//    for (auto shift : this->shifts) {
-//        shift
-//    }
-//
-//        auto p = shift->getPosition();
-//        auto size = shift->getContentSize();
-//        
-//        shift->getPhysicsBody()->setMass(INFINITY);
-//        shift = Sprite::create("greenwall.png");
-//        
-//        shift->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
-//        
-//        
-//        shift->setTextureRect(Rect(p.x - size.width/2, p.y - size.height/2, size.width, size.height));
-//        shift->setOpacity(255);
-//
-//    }
-
     this->scheduleUpdate();
     return true;
 }
@@ -110,26 +86,19 @@ void Shifts::ownEvent(){
         }
         num_shift_delta = 0;
     }
-    if (num_spider_delta < SPIDER_DELTA) {
+    if (num_spider_delta < BUTTERFLY_DELTA) {
         num_spider_delta++;
     } else {
-        for (auto chik : chiks){
-            chik->getPhysicsBody()->resetForces();
-            chik->getPhysicsBody()->setVelocity(Vec2(0,0));
+        for (auto b : butterfly){
+            b->getPhysicsBody()->resetForces();
+            b->getPhysicsBody()->setVelocity(Vec2(0,0));
             float vx = 0.5 * (1 - rand() % 3);
             float vy = 1;
-            chik->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
+            b->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
             
         }
         num_spider_delta = 0;
     }
-    
-//    if (num_bot_delta < BOT_DELTA) {
-//        num_bot_delta++;
-//    } else {
-//        botsManager->changeDirectionAll();
-//        num_bot_delta = 0;
-//    }
 }
 
 Sprite *Shifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
@@ -182,119 +151,87 @@ void Shifts::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 }
 
 bool Shifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
-//    if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-//        if (nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG) {
-//            collisionWithEnemy(nodeA, nodeB);
-//        }
-//        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
-//            collisionWithHealth(nodeA, nodeB);
-//            return false;
-//        } else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
-//            auto btn_name = nodeB->getName();
-//            if (nodeA->getTag() == BUTTON_TAG)
-//                btn_name = nodeA->getName();
-//            
-//            for (auto btn : buttons) {
-//                if (btn->getName() == btn_name)
-//                    
-//                    btn->runAction(Sequence::create(TintTo::create(0.75f, 200, 255, 0), TintTo::create(0.75, 255, 255, 255), NULL));
-//            }
-//            
-//            for (auto door : Shifts) {
-//                if (door->getName() == btn_name) {
-//                    if (door->getRotation() < 45)
-//                        door->runAction(RotateTo::create(0.5, 90));
-//                    else
-//                        door->runAction(RotateTo::create(0.5, 0));
-//                    
-//                }
-//            }
-//            
-//            return false;
-//        }
-//        else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
-//            isNewLevel = true;
-//            return false;
-//        }
-//        
-//    }  else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
-//                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
-//                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
-//                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
-//                    if (nodeA->getTag() == TORT_TAG)
-//                        botsManager->changeDirection(nodeA->getName());
-//                    else
-//                        botsManager->changeDirection(nodeB->getName());
-//                    
-//    }
-    
+    if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
+        if (nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) {
+            collisionWithEnemy(nodeA, nodeB);
+        }
+        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+            collisionWithHealth(nodeA, nodeB);
+            return false;
+        }
+        else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
+            isNewLevel = true;
+            return false;
+        }
+        
+    }
     return true;
 }
 
 
 void Shifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
-//    if (life_num > 0) {
-//        life_num--;
-//        
-//        char *res = new char[50];
-//        sprintf(res, "life%i.png", life_num);
-//        SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
-//        mylife->setSpriteFrame(sp);
-//        Sprite *tort;
-//        if (nodeA->getTag() == TORT_TAG)
-//            tort = torts.at(stoi(nodeA->getName()));
-//        else
-//            tort = torts.at(stoi(nodeB->getName()));
-//        
-//        int num = stoi(tort->getName());
-//        if (stoi(tort->getName()) % 3 == 0)
-//            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-//        else if (stoi(tort->getName()) % 3 == 1)
-//            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-//        else
-//            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-//        
-//        
-//        
-//        if (life_num == 0) {
-//            mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
-//            isRestart = true;
-//            stopTakingPoints();
-//            isPaused = false;
-//            pauseScene();
-//            pause();
-//        } else
-//            mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
-//    }
+    if (life_num > 0) {
+        life_num--;
+        
+        char *res = new char[50];
+        sprintf(res, "life%i.png", life_num);
+        SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
+        mylife->setSpriteFrame(sp);
+        Sprite *bf;
+        if (nodeA->getTag() == FALLING_TAG)
+            bf = butterfly.at(stoi(nodeA->getName()));
+        else
+            bf = butterfly.at(stoi(nodeB->getName()));
+        
+        int num = stoi(bf->getName());
+        if (num % 3 == 0)
+            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 255, 255), TintTo::create(0.5, 255, 255, 255), NULL));
+        else if (stoi(bf->getName()) % 3 == 1)
+            bf->runAction(Sequence::create(TintTo::create(0.5f, 255, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
+        else
+            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 0, 255), TintTo::create(0.5, 255, 255, 255), NULL));
+        
+        
+        
+        if (life_num == 0) {
+            mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
+            isRestart = true;
+            stopTakingPoints();
+            isPaused = false;
+            pauseScene();
+            pause();
+        } else
+            mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
+    }
 }
 
 void Shifts::resumeScene() {
     AbstractLabirint::resumeScene();
-    for (auto sprite: chiks) {
+    for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
     }
     
-    resumeAllObjectLayer(chiks);
+    resumeAllObjectLayer(butterfly);
     resumeAllObjectLayer(pluses);
 }
 
 void Shifts::pauseScene() {
     AbstractLabirint::pauseScene();
-    for (auto sprite: chiks) {
+    for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(chiks);
+    pauseAllObjectLayer(butterfly);
     pauseAllObjectLayer(pluses);
 }
 
 void Shifts::stopScene() {
     AbstractLabirint::stopScene();
-    for (auto sprite: chiks) {
+    for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();        
     }
-    stopAllObjectLayer(chiks);
+    stopAllObjectLayer(butterfly);
     stopAllObjectLayer(pluses);
 }
 

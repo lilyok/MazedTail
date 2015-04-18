@@ -8,6 +8,7 @@
 
 #include "Rotators.h"
 #include "MenuScene.h"
+#include "Shifts.h"
 USING_NS_CC;
 
 #define TORT_TAG 20
@@ -193,7 +194,7 @@ void Rotators::collisionWithEnemy(Node *nodeA, Node *nodeB) {
             tort = torts.at(stoi(nodeB->getName()));
         
         int num = stoi(tort->getName());
-        if (stoi(tort->getName()) % 3 == 0)
+        if (num % 3 == 0)
             tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
         else if (stoi(tort->getName()) % 3 == 1)
             tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
@@ -249,7 +250,7 @@ Scene* Rotators::returnRestartedScene(){
 }
 
 Scene* Rotators::returnNewScene(){
-    return Rotators::createScene();
+    return Shifts::createScene();
 }
 
 

@@ -14,7 +14,8 @@
 #include "cocos2d.h"
 #include "BotsManager.h"
 
-#define BOT_DELTA 50
+#define SPIDER_DELTA 75
+#define SHIFT_DELTA 20
 
 class Shifts: public AbstractLabirint{
 public:
@@ -33,12 +34,14 @@ public:
     
 private:
     cocos2d::Vector<cocos2d::Sprite*> shifts;
-    cocos2d::Vector<cocos2d::Sprite*> torts;
-    BotsManager*  botsManager;
+    cocos2d::Vector<cocos2d::Sprite*> chiks;
 
     void ownEvent();
-    int num_bot_delta = 0;
-    int num_shift = 1;
+    int getShiftNum(cocos2d::Point);
+    
+    int num_spider_delta = 0;
+    int num_shift_delta = 0;
+    int num_shift = 2;
     
 
     bool onContactBegin(const cocos2d::PhysicsContact& contact);

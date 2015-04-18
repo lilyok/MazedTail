@@ -10,9 +10,8 @@
 #include "MenuScene.h"
 USING_NS_CC;
 
-#define TORT_TAG 20
+#define FALLING_TAG 20
 
-#define BUTTON_TAG 105
 #define SHIFT_TAG 100
 
 
@@ -44,6 +43,20 @@ bool Shifts::init() {
     TMXObjectGroup *shifttmx = map->getObjectGroup("shifts");
     this->shifts = makeObject(SHIFT_TAG, shifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
 
+    auto spidercache = SpriteFrameCache::getInstance();
+    spidercache->addSpriteFramesWithFile("spider.plist");
+    auto spidersCount = 3;
+    auto spidersAnimSize = 2;
+    
+    TMXObjectGroup *fallings = map->getObjectGroup("chiks");
+    this->chiks = makeObject(FALLING_TAG, fallings, spidercache, "spider", spidersCount, spidersAnimSize, scale_map,
+                                xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
+//    botsManager = new BotsManager(xZero, yZero, map, "chiks", "tort.plist", "tort_", scale_map, TORT_TAG);
+//    chiks = botsManager->getBotsSprites();
+//    for(auto chik:chiks){
+//        AbstractLabirint::addChild(chik, 2);
+//    }
+
 //    for (auto shift : this->shifts) {
 //        shift
 //    }
@@ -66,16 +79,28 @@ bool Shifts::init() {
     return true;
 }
 
+int Shifts::getShiftNum(Point p){
+    float w = visibleSize.width / 8;
+    for (auto i = 1; i <= 8; i++) {
+        if (p.x < w*i)
+            return 8 - i;
+    }
+    return 7;
+}
+
 void Shifts::ownEvent(){
-    if (num_bot_delta < BOT_DELTA) {
-        num_bot_delta++;
+    if (num_shift_delta < SHIFT_DELTA) {
+        num_shift_delta++;
     } else {
         auto h = visibleSize.height;
+        int currentShift = getShiftNum(mysprite->getPosition());
+        
         for (auto shift : shifts) {
-            if (shift->getName() == std::__1::to_string(num_shift)) {
+            if ((shift->getName() != std::__1::to_string(currentShift)) and
+                (shift->getName() != "7")){
                 auto p = shift->getPosition();
                 auto sh = shift->getContentSize().height*scale_map;
-
+                
                 if (p.y - sh/2 < h)
                     shift->runAction(MoveTo::create(0.5, Vec2(p.x, p.y + h/5)));
                 else {
@@ -83,8 +108,28 @@ void Shifts::ownEvent(){
                 }
             }
         }
-        num_bot_delta = 0;
+        num_shift_delta = 0;
     }
+    if (num_spider_delta < SPIDER_DELTA) {
+        num_spider_delta++;
+    } else {
+        for (auto chik : chiks){
+            chik->getPhysicsBody()->resetForces();
+            chik->getPhysicsBody()->setVelocity(Vec2(0,0));
+            float vx = 0.5 * (1 - rand() % 3);
+            float vy = 1;
+            chik->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
+            
+        }
+        num_spider_delta = 0;
+    }
+    
+//    if (num_bot_delta < BOT_DELTA) {
+//        num_bot_delta++;
+//    } else {
+//        botsManager->changeDirectionAll();
+//        num_bot_delta = 0;
+//    }
 }
 
 Sprite *Shifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
@@ -225,31 +270,31 @@ void Shifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Shifts::resumeScene() {
     AbstractLabirint::resumeScene();
-    for (auto sprite: torts) {
+    for (auto sprite: chiks) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
     }
     
-    resumeAllObjectLayer(torts);
+    resumeAllObjectLayer(chiks);
     resumeAllObjectLayer(pluses);
 }
 
 void Shifts::pauseScene() {
     AbstractLabirint::pauseScene();
-    for (auto sprite: torts) {
+    for (auto sprite: chiks) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(torts);
+    pauseAllObjectLayer(chiks);
     pauseAllObjectLayer(pluses);
 }
 
 void Shifts::stopScene() {
     AbstractLabirint::stopScene();
-    for (auto sprite: torts) {
+    for (auto sprite: chiks) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();        
     }
-    stopAllObjectLayer(torts);
+    stopAllObjectLayer(chiks);
     stopAllObjectLayer(pluses);
 }
 

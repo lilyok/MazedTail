@@ -35,13 +35,15 @@ public:
 private:
     cocos2d::Vector<cocos2d::Sprite*> shifts;
     cocos2d::Vector<cocos2d::Sprite*> butterfly;
-
+    cocos2d::Vector<cocos2d::ParticleSystemQuad*> m_emitters;
+    
+    void startFires(int i);
     void ownEvent();
     int getShiftNum(cocos2d::Point);
     
     int num_spider_delta = 0;
     int num_shift_delta = 0;
-    int num_shift = 2;
+    int num_shift = -1;
     
 
     bool onContactBegin(const cocos2d::PhysicsContact& contact);

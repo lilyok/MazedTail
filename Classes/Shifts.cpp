@@ -52,12 +52,21 @@ bool Shifts::init() {
     this->butterfly = makeObject(FALLING_TAG, fallings, spidercache, "bf", bfCount, bfAnimSize, scale_map,
                                 xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
     
+    m_emitters = initFires();
+    last_m_emitters = initFires();
+    
+    this->scheduleUpdate();
+    return true;
+}
+
+Vector<ParticleSystemQuad*> Shifts::initFires() {
+    Vector<ParticleSystemQuad*> m;
     for (auto i = 0; i < 14; i++) {
         auto m_emitter = ParticleFire::create();
         m_emitter->setScale(scale_map);
         
         m_emitter->stopSystem();
-        m_emitter->setEndColor(Color4F(0, 120, 225, 255));
+        m_emitter->setEndColor(Color4F(0, 120, 225, 120));
         if (i >= 7) {
             m_emitter->setGravity(Vec2(0, -150));
             m_emitter->setSpeed(-200);
@@ -67,21 +76,18 @@ bool Shifts::init() {
             m_emitter->setSpeed(200);
         }
         addChild(m_emitter, 3);
-        m_emitters.pushBack(m_emitter);
+        m.pushBack(m_emitter);
     }
-    
-    this->scheduleUpdate();
-    return true;
+    return m;
 }
 
-
-void Shifts::startFires(int i) {
+void Shifts::startFires(int i, Vector<ParticleSystemQuad*> m) {
     float w = visibleSize.width / 8;
     float h = 0;
     auto start = (7 - i) * w;
     int k = 0;
-    long m_size = m_emitters.size() / 2;
-    for (auto m_emitter : m_emitters){
+    long m_size = m.size() / 2;
+    for (auto m_emitter : m){
         if (k >= m_size) {
             k = 0;
             h = visibleSize.height - h;
@@ -110,7 +116,8 @@ void Shifts::ownEvent(){
         int currentShift = getShiftNum(mysprite->getPosition());
         
         for (auto shift : shifts) {
-            if (shift->getName() == std::__1::to_string((currentShift + 2)%8)){
+            if (shift->getName() == std::__1::to_string((currentShift + 2)%8) or
+                shift->getName() == std::__1::to_string((currentShift + 6)%8)){
                 auto p = shift->getPosition();
                 auto sh = shift->getContentSize().height*scale_map;
                 
@@ -122,7 +129,8 @@ void Shifts::ownEvent(){
                 shift->runAction(MoveTo::create(0.5, Vec2(p.x, p.y + h/5)));
                 
                 if (num_shift != currentShift) {
-                    startFires((currentShift + 2)%8);
+                    startFires((currentShift + 2)%8, m_emitters);
+                    startFires((currentShift + 6)%8, last_m_emitters);
                     num_shift = currentShift;
                 }
          

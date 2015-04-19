@@ -36,8 +36,10 @@ private:
     cocos2d::Vector<cocos2d::Sprite*> shifts;
     cocos2d::Vector<cocos2d::Sprite*> butterfly;
     cocos2d::Vector<cocos2d::ParticleSystemQuad*> m_emitters;
+    cocos2d::Vector<cocos2d::ParticleSystemQuad*> last_m_emitters;
     
-    void startFires(int i);
+    cocos2d::Vector<cocos2d::ParticleSystemQuad*> initFires();
+    void startFires(int i, cocos2d::Vector<cocos2d::ParticleSystemQuad*> m);
     void ownEvent();
     int getShiftNum(cocos2d::Point);
     

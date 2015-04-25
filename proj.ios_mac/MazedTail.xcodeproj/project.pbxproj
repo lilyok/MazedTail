@@ -108,6 +108,10 @@
 		92FA9C841AE2B33500354941 /* back3.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C831AE2B33500354941 /* back3.png */; };
 		92FA9C871AE2CEB700354941 /* bf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C851AE2CEB700354941 /* bf.plist */; };
 		92FA9C881AE2CEB700354941 /* bf.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C861AE2CEB700354941 /* bf.png */; };
+		92FA9C8B1AEC23C500354941 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C891AEC23C500354941 /* blue.png */; };
+		92FA9C8C1AEC23C500354941 /* lifts.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C8A1AEC23C500354941 /* lifts.tmx */; };
+		92FA9C911AEC23F000354941 /* Lifts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92FA9C8F1AEC23F000354941 /* Lifts.cpp */; };
+		92FA9C931AEC26AD00354941 /* back4.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C921AEC26AD00354941 /* back4.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -361,6 +365,11 @@
 		92FA9C831AE2B33500354941 /* back3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back3.png; sourceTree = "<group>"; };
 		92FA9C851AE2CEB700354941 /* bf.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bf.plist; sourceTree = "<group>"; };
 		92FA9C861AE2CEB700354941 /* bf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bf.png; sourceTree = "<group>"; };
+		92FA9C891AEC23C500354941 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		92FA9C8A1AEC23C500354941 /* lifts.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = lifts.tmx; sourceTree = "<group>"; };
+		92FA9C8F1AEC23F000354941 /* Lifts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Lifts.cpp; path = ../Classes/Lifts.cpp; sourceTree = "<group>"; };
+		92FA9C901AEC23F000354941 /* Lifts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lifts.h; path = ../Classes/Lifts.h; sourceTree = "<group>"; };
+		92FA9C921AEC26AD00354941 /* back4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back4.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -455,6 +464,8 @@
 				92E0FAE11AB4B05C00D3DC91 /* Bot.h */,
 				9287F16C1ABF52B800750CAD /* Rotators.cpp */,
 				9287F16D1ABF52B800750CAD /* Rotators.h */,
+				92FA9C8F1AEC23F000354941 /* Lifts.cpp */,
+				92FA9C901AEC23F000354941 /* Lifts.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -582,6 +593,7 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92FA9C921AEC26AD00354941 /* back4.png */,
 				92FA9C851AE2CEB700354941 /* bf.plist */,
 				92FA9C861AE2CEB700354941 /* bf.png */,
 				92FA9C831AE2B33500354941 /* back3.png */,
@@ -631,6 +643,8 @@
 		92FA9C6A1ADB019E00354941 /* TileMaps */ = {
 			isa = PBXGroup;
 			children = (
+				92FA9C891AEC23C500354941 /* blue.png */,
+				92FA9C8A1AEC23C500354941 /* lifts.tmx */,
 				92FA9C6C1ADB019E00354941 /* doors.tmx */,
 				92FA9C6D1ADB019E00354941 /* green.png */,
 				92FA9C6E1ADB019E00354941 /* oranges.png */,
@@ -813,12 +827,14 @@
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				921542F31AA36BF800C33E8E /* spider.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
+				92FA9C8C1AEC23C500354941 /* lifts.tmx in Resources */,
 				92E0FAB11AACCD7100D3DC91 /* color_buttons.plist in Resources */,
 				92BEBA541AB61A3F006746DE /* life.png in Resources */,
 				921543011AA4A5D500C33E8E /* RestartSelected.png in Resources */,
 				92FA9C871AE2CEB700354941 /* bf.plist in Resources */,
 				92FA9C761ADB019E00354941 /* doors.tmx in Resources */,
 				92D2AEBF1AD1CD95007B363F /* tort.png in Resources */,
+				92FA9C8B1AEC23C500354941 /* blue.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
@@ -859,6 +875,7 @@
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				92FA9C791ADB019E00354941 /* portals.tmx in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				92FA9C931AEC26AD00354941 /* back4.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				92FA9C7C1ADB019E00354941 /* shifts.tmx in Resources */,
 				921542F51AA486B300C33E8E /* back.png in Resources */,
@@ -892,6 +909,7 @@
 				92568E841A9D10210065A049 /* Portals.cpp in Sources */,
 				92E0FAAE1AACB93D00D3DC91 /* Doors.cpp in Sources */,
 				92568E871A9D10DD0065A049 /* MenuScene.cpp in Sources */,
+				92FA9C911AEC23F000354941 /* Lifts.cpp in Sources */,
 				92E0FAE21AB4B05C00D3DC91 /* Bot.cpp in Sources */,
 				92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,

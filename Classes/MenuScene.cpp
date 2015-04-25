@@ -11,7 +11,7 @@
 #include "Doors.h"
 #include "Rotators.h"
 #include "Shifts.h"
-
+#include "Lifts.h"
 
 USING_NS_CC;
 
@@ -80,7 +80,7 @@ bool MenuScene::init()
 
 void MenuScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Scene *pScene = Shifts::createScene();//Portals::createScene();
+    Scene *pScene = Lifts::createScene();//Portals::createScene();
     cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, pScene));
 }
 

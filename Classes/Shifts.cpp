@@ -8,6 +8,8 @@
 
 #include "Shifts.h"
 #include "MenuScene.h"
+#include "Lifts.h"
+
 USING_NS_CC;
 
 #define FALLING_TAG 20
@@ -292,7 +294,7 @@ Scene* Shifts::returnRestartedScene(){
 }
 
 Scene* Shifts::returnNewScene(){
-    return Shifts::createScene();
+    return Lifts::createScene();
 }
 
 

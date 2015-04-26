@@ -38,11 +38,6 @@ bool Lifts::init() {
         return false;
     }
     
-    
-    TMXObjectGroup *lifttmx = map->getObjectGroup("lifts");
-    this->lifts = makeObject(LIFT_TAG, lifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
-    setLiftStatus();
-    
     TMXObjectGroup *btntmx = map->getObjectGroup("buttons");
     this->buttons = makeObject(BUTTON_TAG, btntmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
     
@@ -64,6 +59,13 @@ bool Lifts::init() {
         s->getPhysicsBody()->setCollisionBitmask(0x0000000F);
         AbstractLabirint::addChild(s, 2);
     }
+    
+    TMXObjectGroup *lifttmx = map->getObjectGroup("lifts");
+    this->lifts = makeObject(LIFT_TAG, lifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
+    setLiftStatus();
+    
+    for (auto l:lifts)
+        l->setGlobalZOrder(4);
     
     this->scheduleUpdate();
     return true;

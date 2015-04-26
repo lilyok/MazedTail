@@ -18,6 +18,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Rotators.cpp \
                    ../../Classes/Shifts.cpp \
                    ../../Classes/AbstractLabirint.cpp \
+                   ../../Classes/Lifts.cpp \
                    ../../Classes/Bot.cpp \
                    ../../Classes/BotsManager.cpp
 

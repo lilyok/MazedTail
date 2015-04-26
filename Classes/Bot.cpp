@@ -23,21 +23,21 @@ Bot::Bot(float xZero, float yZero, float obj_width, float obj_height, float x, f
     spritecache->addSpriteFramesWithFile(plist_name);
     Vector<SpriteFrame *> animGoingFrames;
     animGoingFrames.reserve(8);
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left03.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left01.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left06.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left07.png"));
-    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"left02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"03.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"02.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"01.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"06.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"07.png"));
+    animGoingFrames.pushBack(spritecache->getSpriteFrameByName(sprite_name+"02.png"));
     
     // create the animation out of the frames
     Animation *animationGoing = Animation::createWithSpriteFrames(animGoingFrames, ANIMATION_DELAY);// / scale_map);
     botAnimateGoing = Animate::create(animationGoing);
     botAnimateGoing->retain();
     
-    bot =Sprite::createWithSpriteFrameName(sprite_name+"left01.png");
+    bot =Sprite::createWithSpriteFrameName(sprite_name+"01.png");
     auto w = bot->getContentSize().width;
     auto h = bot->getContentSize().height;
     bot->setTag(tag);

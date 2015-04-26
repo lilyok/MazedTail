@@ -89,7 +89,7 @@ bool Doors::init() {
     }
     
     
-    botsManager = new BotsManager(xZero, yZero, map, "bunny", "bunny.plist", "bunny_", scale_map, BUNNY_TAG);
+    botsManager = new BotsManager(xZero, yZero, map, "bunny", "bunny.plist", "bunny_left", scale_map, BUNNY_TAG);
     bunnies = botsManager->getBotsSprites();
     for(auto bunny:bunnies){
         AbstractLabirint::addChild(bunny, 2);

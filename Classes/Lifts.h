@@ -13,6 +13,9 @@
 #include "cocos2d.h"
 #include <stdio.h>
 
+#include "BotsManager.h"
+#define BOT_DELTA 50
+
 class Lifts: public AbstractLabirint{
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -29,14 +32,15 @@ public:
     CREATE_FUNC(Lifts);
     
 private:
+    BotsManager*  botsManager;
+    cocos2d::Vector<cocos2d::Sprite*> snowman;
+    
     cocos2d::Vector<cocos2d::Sprite*> lifts;
     cocos2d::Vector<cocos2d::Sprite*> buttons;
     cocos2d::ParticleSystemQuad* m_emitter;
 
     cocos2d::Vector<cocos2d::ParticleSystemQuad*> m_emitters;
 
-    cocos2d::Vector<cocos2d::Sprite*> butterfly;
-    
     cocos2d::Vector<cocos2d::ParticleSystemQuad*> initFires();
     void changeFireColor(cocos2d::ParticleSystemQuad* p, std::string name);
     void changeFiresColor(std::string name);
@@ -48,7 +52,7 @@ private:
     bool isBlue = true;
     bool isGreen = true;
     
-//    int num_spider_delta = 0;
+    int num_bot_delta = 0;
 //    int num_shift_delta = 0;
 //    int num_shift = -1;
     

@@ -7235,7 +7235,7 @@
   <object id="21" x="2115.28" y="1792.7" width="444.209" height="512.956"/>
   <object id="22" x="2363.83" y="766.79" width="195.664" height="512.956"/>
   <object id="23" x="4088.78" y="63.7467" width="957.166" height="195.664"/>
-  <object id="82" name="newlevel" x="70.3994" y="3.15996" width="490.196" height="61.9195"/>
+  <object id="82" name="newlevel" x="70.3994" y="3.15996" width="497.248" height="322.85"/>
   <object id="83" name="dummy" x="5020.64" y="2301.34" width="98.0392" height="521.156"/>
  </objectgroup>
  <objectgroup name="lifts" visible="0">
@@ -7327,7 +7327,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="showman">
+ <objectgroup name="snowman">
   <object id="92" x="3684.87" y="1406.15" width="182.046" height="175.769">
    <ellipse/>
   </object>

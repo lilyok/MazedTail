@@ -13,6 +13,7 @@ USING_NS_CC;
 #define LIFT_TAG 100
 #define BUTTON_TAG 105
 #define FIRE_TAG 666
+#define SNOWMAN_TAG 600
 
 Scene *Lifts::createScene() {
     // 'scene' is an autorelease object
@@ -38,7 +39,6 @@ bool Lifts::init() {
     }
     
     
-    
     TMXObjectGroup *lifttmx = map->getObjectGroup("lifts");
     this->lifts = makeObject(LIFT_TAG, lifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
     setLiftStatus();
@@ -54,6 +54,16 @@ bool Lifts::init() {
     m_emitter->setEndColor(Color4F(0, 0, 100, 255));
     this->m_emitter->stopSystem();
     addChild(m_emitter, 3);
+    
+    
+    botsManager = new BotsManager(xZero, yZero, map, "snowman", "sm.plist", "snowman", scale_map, SNOWMAN_TAG);
+    snowman = botsManager->getBotsSprites();
+    for(auto s:snowman){
+        s->getPhysicsBody()->setCategoryBitmask(0x0000000F);
+        s->getPhysicsBody()->setContactTestBitmask(0x0000000F);
+        s->getPhysicsBody()->setCollisionBitmask(0x0000000F);
+        AbstractLabirint::addChild(s, 2);
+    }
     
     this->scheduleUpdate();
     return true;
@@ -121,7 +131,12 @@ Vector<ParticleSystemQuad*> Lifts::initFires() {
 }
 
 void Lifts::ownEvent(){
- 
+    if (num_bot_delta < BOT_DELTA) {
+        num_bot_delta++;
+    } else {
+        botsManager->changeDirectionAll();
+        num_bot_delta = 0;
+    }
 }
 
 void Lifts::setLiftStatus(){
@@ -136,8 +151,8 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
             } else {
-                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFFF);
-                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
+                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFF0);
+                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "blue") {
             if (!isBlue)
@@ -148,8 +163,8 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
             } else {
-                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFFF);
-                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
+                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFF0);
+                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "red") {
             if (isBlue)
@@ -160,8 +175,8 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
             } else {
-                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFFF);
-                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
+                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFF0);
+                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "pink") {
             if (isGreen)
@@ -172,8 +187,8 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
             } else {
-                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFFF);
-                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFFF);
+                l->getPhysicsBody()->setCollisionBitmask(0xFFFFFFF0);
+                l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         }
         //l->setOpacity(200);
@@ -234,11 +249,10 @@ void Lifts::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 
 bool Lifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-       /* if (nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) {
+        if (nodeA->getTag() == SNOWMAN_TAG or nodeB->getTag() == SNOWMAN_TAG) {
             collisionWithEnemy(nodeA, nodeB);
         }
-        */
-        if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
+        else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
             auto name = nodeB->getName();
             if (nodeA->getTag() == BUTTON_TAG)
                 name = nodeA->getName();
@@ -275,68 +289,66 @@ bool Lifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
 
 
 void Lifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
-//    if (life_num > 0) {
-//        life_num--;
-//        
-//        char *res = new char[50];
-//        sprintf(res, "life%i.png", life_num);
-//        SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
-//        mylife->setSpriteFrame(sp);
-//        Sprite *bf;
-//        if (nodeA->getTag() == FALLING_TAG)
-//            bf = butterfly.at(stoi(nodeA->getName()));
-//        else
-//            bf = butterfly.at(stoi(nodeB->getName()));
-//        
-//        int num = stoi(bf->getName());
-//        if (num % 3 == 0)
-//            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 255, 255), TintTo::create(0.5, 255, 255, 255), NULL));
-//        else if (stoi(bf->getName()) % 3 == 1)
-//            bf->runAction(Sequence::create(TintTo::create(0.5f, 255, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
-//        else
-//            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 0, 255), TintTo::create(0.5, 255, 255, 255), NULL));
-//        
-//        
-//        
-//        if (life_num == 0) {
-//            mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
-//            isRestart = true;
-//            stopTakingPoints();
-//            isPaused = false;
-//            pauseScene();
-//            pause();
-//        } else
-//            mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
-//    }
+    if (life_num > 0) {
+        life_num--;
+        
+        char *res = new char[50];
+        sprintf(res, "life%i.png", life_num);
+        SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
+        mylife->setSpriteFrame(sp);
+        Sprite *sm;
+        if (nodeA->getTag() == SNOWMAN_TAG)
+            sm = snowman.at(stoi(nodeA->getName()));
+        else
+            sm = snowman.at(stoi(nodeB->getName()));
+        
+        int num = stoi(sm->getName());
+        if (stoi(sm->getName()) % 3 == 0)
+            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
+        else if (stoi(sm->getName()) % 3 == 1)
+            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
+        else
+            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
+        
+        if (life_num == 0) {
+            mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
+            isRestart = true;
+            stopTakingPoints();
+            isPaused = false;
+            pauseScene();
+            pause();
+        } else
+            mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
+    }
 }
 
 void Lifts::resumeScene() {
     AbstractLabirint::resumeScene();
-    for (auto sprite: butterfly) {
+    for (auto sprite: snowman) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
     }
     
-    resumeAllObjectLayer(butterfly);
+    resumeAllObjectLayer(snowman);
     resumeAllObjectLayer(pluses);
 }
 
 void Lifts::pauseScene() {
     AbstractLabirint::pauseScene();
-    for (auto sprite: butterfly) {
+    for (auto sprite: snowman) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(butterfly);
+    pauseAllObjectLayer(snowman);
     pauseAllObjectLayer(pluses);
 }
 
 void Lifts::stopScene() {
     AbstractLabirint::stopScene();
-    for (auto sprite: butterfly) {
+    for (auto sprite: snowman) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    stopAllObjectLayer(butterfly);
+    stopAllObjectLayer(snowman);
     stopAllObjectLayer(pluses);
 }
 

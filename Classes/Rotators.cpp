@@ -63,7 +63,7 @@ bool Rotators::init() {
     }
 
     
-    botsManager = new BotsManager(xZero, yZero, map, "tort", "tort.plist", "tort_", scale_map, TORT_TAG);
+    botsManager = new BotsManager(xZero, yZero, map, "tort", "tort.plist", "tort_left", scale_map, TORT_TAG);
     torts = botsManager->getBotsSprites();
     for(auto tort:torts){
         AbstractLabirint::addChild(tort, 2);

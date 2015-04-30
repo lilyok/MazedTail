@@ -164,6 +164,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     mylife->setBlendFunc((BlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA});
     mylife->setPosition(origin.x + visibleSize.width / 2, origin.y + mylife->getContentSize().height*icon_scale/2);
     addChild(mylife, 3);
+    mylife->setLocalZOrder(5);
     
     // load the Sprite Sheet
     auto spritecache = SpriteFrameCache::getInstance();

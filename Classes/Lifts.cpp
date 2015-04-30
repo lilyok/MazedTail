@@ -14,6 +14,7 @@ USING_NS_CC;
 #define BUTTON_TAG 105
 #define FIRE_TAG 666
 #define SNOWMAN_TAG 600
+#define SMOKE_TAG 111
 
 Scene *Lifts::createScene() {
     // 'scene' is an autorelease object
@@ -33,7 +34,7 @@ Scene *Lifts::createScene() {
 bool Lifts::init() {
     //////////////////////////////
     // 1. super init first
-    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("fog.plist");
     if (!AbstractLabirint::init("lifts.tmx", "back4.png")) {
         return false;
     }
@@ -43,10 +44,9 @@ bool Lifts::init() {
     
     m_emitters = initFires();
     
-    this->m_emitter = ParticleFire::create();
+    this->m_emitter = ParticleSmoke::create();
     this->m_emitter->setScale(scale_map / 2);
-    m_emitter->setStartColor(Color4F(5, 5, 5, 155));
-    m_emitter->setEndColor(Color4F(0, 0, 100, 255));
+    m_emitter->setEndColor(Color4F(0, 0, 5, 50));
     this->m_emitter->stopSystem();
     addChild(m_emitter, 3);
     
@@ -65,7 +65,7 @@ bool Lifts::init() {
     setLiftStatus();
     
     for (auto l:lifts)
-        l->setGlobalZOrder(4);
+        l->setLocalZOrder(4);
     
     this->scheduleUpdate();
     return true;
@@ -119,8 +119,6 @@ Vector<ParticleSystemQuad*> Lifts::initFires() {
         p_emitter->setEndRadiusVar(fmax(h,w)*2);
         p_emitter->setScale(scale_map);
         
-      //  m_emitter->stopSystem();
-        
         auto name = button->getName();
         changeFireColor(p_emitter, name);
         p_emitter->setPosition(w/2, h/2);
@@ -141,14 +139,23 @@ void Lifts::ownEvent(){
     }
 }
 
+void Lifts::setSmoke(Sprite* l) {
+    l->runAction(FadeTo::create(0.5f, 255));
+}
+
+void Lifts::delSmoke(Sprite* l) {
+    l->runAction(FadeTo::create(0.5f, 0));
+}
+
 void Lifts::setLiftStatus(){
     for (auto l : lifts){
         auto name = l->getName();
         if (name == "green") {
-            if (!isGreen)
-                l->setOpacity(200);
+            if (!isGreen) {
+                setSmoke(l);
+            }
             else
-                l->setOpacity(0);
+                delSmoke(l);
             if ((isGreen && isHeroTop) || (!isGreen && !isHeroTop)) {
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
@@ -157,10 +164,11 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "blue") {
-            if (!isBlue)
-                l->setOpacity(200);
+            if (!isBlue) {
+                setSmoke(l);
+            }
             else
-                l->setOpacity(0);
+                delSmoke(l);
             if ((isBlue && isHeroTop) || (!isBlue && !isHeroTop)) {
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
@@ -169,10 +177,11 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "red") {
-            if (isBlue)
-                l->setOpacity(200);
+            if (isBlue) {
+                setSmoke(l);
+            }
             else
-                l->setOpacity(0);
+                delSmoke(l);
             if ((!isBlue && isHeroTop) || (isBlue && !isHeroTop)) {
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
@@ -181,10 +190,11 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         } else if (name == "pink") {
-            if (isGreen)
-                l->setOpacity(200);
+            if (isGreen) {
+                setSmoke(l);
+            }
             else
-                l->setOpacity(0);
+                delSmoke(l);
             if ((!isGreen && isHeroTop) || (isGreen && !isHeroTop)) {
                 l->getPhysicsBody()->setCollisionBitmask(0);
                 l->getPhysicsBody()->setContactTestBitmask(0);
@@ -193,7 +203,6 @@ void Lifts::setLiftStatus(){
                 l->getPhysicsBody()->setContactTestBitmask(0xFFFFFFF0);
             }
         }
-        //l->setOpacity(200);
     }
 }
 
@@ -203,20 +212,27 @@ Sprite *Lifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
     auto h = size.height;
     
     if (tag == LIFT_TAG || tag == BUTTON_TAG) {
-        sprite = Sprite::create("black_pixel.png");
+        Vector<SpriteFrame *> animFogFrames;
+        animFogFrames.reserve(6);
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog01.png"));
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog02.png"));
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog03.png"));
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog04.png"));
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog03.png"));
+        animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog02.png"));
+        
+        // create the animation out of the frames
+        double randtime = (rand() % 5) * 0.1f + 0.3f;
+        Animation *animationFog = Animation::createWithSpriteFrames(animFogFrames, randtime);// / scale_map);
+        sprite = Sprite::createWithSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog01.png"));
+        sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
+        
+        sprite->runAction(RepeatForever::create(Animate::create(animationFog)));
         sprite->setOpacity(0);
     } else {
         sprite = Sprite::create();
         sprite->setOpacity(0);
     }
-    sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
-    
-    sprite->setTextureRect(Rect(p.x, p.y, size.width, size.height));
-    
-    
-    auto current_scaleX = w / sprite->getContentSize().width;
-    auto current_scaleY = h / sprite->getContentSize().height;
-    sprite->setScale(current_scaleX, current_scaleY);
     return sprite;
 }
 
@@ -329,7 +345,7 @@ void Lifts::resumeScene() {
     for (auto sprite: snowman) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
     }
-    
+    resumeAllObjectLayer(lifts);
     resumeAllObjectLayer(snowman);
     resumeAllObjectLayer(pluses);
 }
@@ -340,6 +356,7 @@ void Lifts::pauseScene() {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
+    pauseAllObjectLayer(lifts);
     pauseAllObjectLayer(snowman);
     pauseAllObjectLayer(pluses);
 }
@@ -350,6 +367,7 @@ void Lifts::stopScene() {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
+    stopAllObjectLayer(lifts);
     stopAllObjectLayer(snowman);
     stopAllObjectLayer(pluses);
 }

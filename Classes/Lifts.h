@@ -47,6 +47,9 @@ private:
     
     void ownEvent();
     
+    void setSmoke(cocos2d::Sprite* s);
+    void delSmoke(cocos2d::Sprite* s);
+    
     void setLiftStatus();
     bool isHeroTop = true;
     bool isBlue = true;

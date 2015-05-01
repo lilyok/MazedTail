@@ -73,22 +73,22 @@ bool Lifts::init() {
 
 void Lifts::changeFireColor(ParticleSystemQuad* p, std::string name) {
     if (name == "bluered" or name == "thisbluered") {
-        if (isBlue) {
-            p->setStartColor(Color4F(5, 5, 255, 155));
-            p->setEndColor(Color4F(0, 0, 255, 255));
+        if (!isBlue) {
+            p->setStartColor(Color4F(0, 255, 255, 255));
+            p->setEndColor(Color4F(0, 1, 1, 255));
         }
         else {
-            p->setStartColor(Color4F(255, 5, 5, 155));
-            p->setEndColor(Color4F(255, 0, 0, 255));
+            p->setStartColor(Color4F(50, 0, 0, 255));
+            p->setEndColor(Color4F(1, 0, 0, 255));
         }
     } else {
-        if (isGreen) {
-            p->setStartColor(Color4F(5, 255, 5, 155));
-            p->setEndColor(Color4F(0, 255, 0, 255));
+        if (!isGreen) {
+            p->setStartColor(Color4F(0, 50, 0, 255));
+            p->setEndColor(Color4F(0, 1, 0, 255));
         }
         else {
-            p->setStartColor(Color4F(255, 5, 255, 155));
-            p->setEndColor(Color4F(255, 0, 255, 255));
+            p->setStartColor(Color4F(50, 0, 50, 255));
+            p->setEndColor(Color4F(1, 0, 1, 255));
         }
     }
 }
@@ -113,11 +113,7 @@ Vector<ParticleSystemQuad*> Lifts::initFires() {
         auto h = button->getContentSize().height;
         auto w = button->getContentSize().width;
         ParticleSun *p_emitter = ParticleSun::createWithTotalParticles(100);
-        p_emitter->setEmitterMode(ParticleSystem::Mode::RADIUS);
-        p_emitter->setStartRadius(0);
-        p_emitter->setStartRadiusVar(fmax(h,w)*2);
-        p_emitter->setEndRadiusVar(fmax(h,w)*2);
-        p_emitter->setScale(scale_map);
+        p_emitter->setScale(scale_map*3);
         
         auto name = button->getName();
         changeFireColor(p_emitter, name);
@@ -211,7 +207,7 @@ Sprite *Lifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
     auto w = size.width;
     auto h = size.height;
     
-    if (tag == LIFT_TAG || tag == BUTTON_TAG) {
+    if (tag == LIFT_TAG) {
         Vector<SpriteFrame *> animFogFrames;
         animFogFrames.reserve(6);
         animFogFrames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("fog01.png"));
@@ -228,6 +224,12 @@ Sprite *Lifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
         sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
         
         sprite->runAction(RepeatForever::create(Animate::create(animationFog)));
+        sprite->setOpacity(0);
+    } else if (tag == BUTTON_TAG) {
+        sprite = Sprite::create("black_pixel.png");
+        sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+        sprite->setTextureRect(Rect(p.x, p.y, size.width, size.height));
+        
         sprite->setOpacity(0);
     } else {
         sprite = Sprite::create();

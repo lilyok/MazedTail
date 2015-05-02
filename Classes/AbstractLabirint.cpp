@@ -14,7 +14,7 @@ Scene *AbstractLabirint::createScene(std::string map_name, std::string back_name
     //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
     auto layer = AbstractLabirint::create(map_name, back_name);
-    layer->setPhyWorld(scene->getPhysicsWorld());
+    //layer->setPhyWorld(scene->getPhysicsWorld());
     //layer->setPhyWorld(scene->getPhysicsWorld()); //lilil
     // add layer as a child to scene
     scene->addChild(layer);
@@ -324,7 +324,6 @@ bool AbstractLabirint::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event
         goHero(true);
     }
     
-    
     return true;
 }
 
@@ -503,7 +502,7 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
             auto tagname = tag;
             if (name == "dummy") tagname = 0;
             else if (name == "newlevel") tagname = NEWLEVEL_TAG;
-            auto sprite = this->makePhysicsObjAt(name, tagname, _point, _size, form, v, n, mask);
+            auto sprite = this->makePhysicsObjAt(name, tagname, _point, _size, form, isDynamic, v, n, mask);
             
             if (name == "") name = std::to_string(i);
             i++;
@@ -542,6 +541,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(std::string name, int tag, Point p, S
     sprite->setTag(tag);
     body->setDynamic(isDynamic);
     body->setContactTestBitmask(mask);
+    body->setCollisionBitmask(mask);
     sprite->setPosition(p);
     addChild(sprite, 1);
     

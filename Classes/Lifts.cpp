@@ -7,6 +7,7 @@
 //
 
 #include "Lifts.h"
+#include "Holes.h"
 #include "MenuScene.h"
 USING_NS_CC;
 
@@ -379,5 +380,5 @@ Scene* Lifts::returnRestartedScene(){
 }
 
 Scene* Lifts::returnNewScene(){
-    return Lifts::createScene();
+    return Holes::createScene();
 }

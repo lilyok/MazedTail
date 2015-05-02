@@ -43,7 +43,7 @@ bool Shifts::init() {
 
     
     TMXObjectGroup *shifttmx = map->getObjectGroup("shifts");
-    this->shifts = makeObject(SHIFT_TAG, shifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
+    this->shifts = makeObject(SHIFT_TAG, shifttmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
 
     auto spidercache = SpriteFrameCache::getInstance();
     spidercache->addSpriteFramesWithFile("bf.plist");

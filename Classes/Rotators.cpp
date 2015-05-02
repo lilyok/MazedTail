@@ -53,7 +53,7 @@ bool Rotators::init() {
     }
     
     TMXObjectGroup *doortmx = map->getObjectGroup("rotates");
-    this->rotators = makeObject(DOOR_TAG, doortmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
+    this->rotators = makeObject(DOOR_TAG, doortmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
 
     for (auto rotator : this->rotators) {
         auto name = rotator->getName() + "wall.png";

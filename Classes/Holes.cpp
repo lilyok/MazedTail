@@ -10,7 +10,7 @@
 #include "MenuScene.h"
 USING_NS_CC;
 
-#define HOLE_TAG 100
+#define HOLE_TAG 110
 #define RABBIT_TAG 600
 #define HOLER_TAG 666
 #define JUMP_TAG 777
@@ -43,7 +43,7 @@ bool Holes::init() {
     this->holes = makeObject(HOLE_TAG, holetmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0);
     
     TMXObjectGroup *rabbittmx = map->getObjectGroup("rabbit");
-    this->rabbits = makeObject(RABBIT_TAG, rabbittmx, scale_map, xZero, yZero, BALL, true, 0, 0);
+    this->rabbits = makeObject(RABBIT_TAG, rabbittmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
     auto rsize = rabbits.size();
     for (auto i = 1; i <= rsize; i++) {
         isA.push_back(false);
@@ -61,6 +61,8 @@ bool Holes::init() {
             rabbits.at(i-1)->runAction(TintTo::create(0.5, 255, 0, 0));
         else if (i % rsize == 6)
             rabbits.at(i-1)->runAction(TintTo::create(0.5, 0, 255, 0));
+        rabbits.at(i-1)->getPhysicsBody()->setMass(0.5);
+      //  rabbits.at(i-1)->getPhysicsBody()->setRotationEnable(true);
     }
     
     this->scheduleUpdate();
@@ -70,6 +72,12 @@ bool Holes::init() {
 
 void Holes::ownEvent(){
     auto i = 0;
+    if (mysprite->getOpacity() == 253) {
+        mysprite->setOpacity(255);
+        mysprite->getPhysicsBody()->resetForces();
+        hole_name = "";
+    }
+    
     for (auto r : rabbits){
         if (r->getOpacity() != 255) {
             r->getPhysicsBody()->resetForces();
@@ -78,14 +86,24 @@ void Holes::ownEvent(){
         }
         if (r->getOpacity() == 0) {
             auto name = r->getName();
-
-            if (isA.at(i)) name += "b";
-            else name += "a";
+            auto new_hole_name = hole_name;
+            if (isA.at(i)) {
+                name += "b";
+                new_hole_name += "b";
+            }
+            else {
+                name += "a";
+                new_hole_name += "a";
+            }
             isA[i] = !isA.at(i);
             for (auto h: holes) {
                 if (h->getName() == name) {
                     r->setPosition(h->getPosition());
                     r->setOpacity(1);
+                    if (name == new_hole_name) {
+                        mysprite->setPosition(h->getPosition());
+                        mysprite->runAction(FadeTo::create(2.0f, 253));
+                    }
                 }
             }
             
@@ -168,18 +186,23 @@ Sprite *Holes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
         sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
         
         sprite->setOpacity(0);
+        sprite->runAction(RepeatForever::create(Sequence::create(
+                                                                 RotateTo::create(0.0f, 0),
+                                                                 RotateTo::create(2.1f, 0),
+                                                                 RotateBy::create(6.0f, 40*(randtime - 0.5)),NULL)));
         sprite->runAction(RepeatForever::create(
-                          Sequence::create(stopstart,
-                                           FadeTo::create(1.0f, 253),
-                                           Animate::create(animationStart),
-                                           FadeTo::create(0.0f, 254),
-                                           Repeat::create(Animate::create(animationJump), 3),
-                                           FadeTo::create(0.0f, 253),
-                                           Animate::create(animationStop),
-                                           FadeTo::create(0.0f, 252),
-                                           Repeat::create(holer, 10),
-                                           FadeTo::create(1.0f, 0),
-                                           NULL)));
+                                               Sequence::create(stopstart,
+                                               RotateTo::create(0.0f, 0),
+                                               FadeTo::create(1.0f, 253),
+                                               Animate::create(animationStart),
+                                               FadeTo::create(0.0f, 254),
+                                               Repeat::create(Animate::create(animationJump), 3),
+                                               FadeTo::create(0.0f, 253),
+                                               Animate::create(animationStop),
+                                               FadeTo::create(0.0f, 252),
+                                               Repeat::create(holer, 10),
+                                               FadeTo::create(1.0f, 0),
+                                               NULL)));
        // sprite->setOpacity(0);
     } else {
         return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
@@ -215,7 +238,8 @@ void Holes::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == RABBIT_TAG or nodeB->getTag() == RABBIT_TAG) {
-//            collisionWithEnemy(nodeA, nodeB);
+            collisionWithEnemy(nodeA, nodeB);
+            if (nodeA->getOpacity() < 254 or nodeB->getOpacity() < 254) return false;
         }
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
@@ -235,37 +259,39 @@ bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
 
 
 void Holes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
-//    if (life_num > 0) {
-//        life_num--;
-//        
-//        char *res = new char[50];
-//        sprintf(res, "life%i.png", life_num);
-//        SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
-//        mylife->setSpriteFrame(sp);
-//        Sprite *sm;
-//        if (nodeA->getTag() == SNOWMAN_TAG)
-//            sm = snowman.at(stoi(nodeA->getName()));
-//        else
-//            sm = snowman.at(stoi(nodeB->getName()));
-//        
-//        int num = stoi(sm->getName());
-//        if (stoi(sm->getName()) % 3 == 0)
-//            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-//        else if (stoi(sm->getName()) % 3 == 1)
-//            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-//        else
-//            sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-//        
-//        if (life_num == 0) {
-//            mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
-//            isRestart = true;
-//            stopTakingPoints();
-//            isPaused = false;
-//            pauseScene();
-//            pause();
-//        } else
-//            mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
-//    }
+    if (nodeA->getOpacity() > 253 and nodeB->getOpacity() > 253) {
+        if (life_num > 0) {
+            life_num--;
+            
+            char *res = new char[50];
+            sprintf(res, "life%i.png", life_num);
+            SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
+            mylife->setSpriteFrame(sp);
+     
+            if (life_num == 0) {
+                mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
+                isRestart = true;
+                stopTakingPoints();
+                isPaused = false;
+                pauseScene();
+                pause();
+            } else
+                mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
+        }
+    } else if (nodeA->getOpacity() == 252 or nodeB->getOpacity() == 252) {
+       // mysprite->pause();
+        hole_name = nodeA->getName();
+        auto pos = nodeA->getPosition();
+        if (nodeA->getTag() == HERO_SPRITE_TAG) {
+            pos = nodeB->getPosition();
+            hole_name = nodeB->getName();
+        }
+        stopTakingPoints();
+        mysprite->setPosition(pos);
+        mysprite->runAction(FadeTo::create(1.0f, 0));
+        
+        
+    }
 }
 
 void Holes::resumeScene() {
@@ -307,3 +333,30 @@ Scene* Holes::returnRestartedScene(){
 Scene* Holes::returnNewScene(){
     return Holes::createScene();
 }
+
+bool Holes::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
+    if (hole_name == "")
+        return AbstractLabirint::onTouchBegan(touch, event);
+    return false;
+}
+
+void Holes::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) {
+    if (hole_name == "")
+        AbstractLabirint::onTouchMoved(touch, event);
+}
+
+void Holes::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event) {
+    if (hole_name == "")
+        AbstractLabirint::onTouchEnded(touch, event);
+}
+
+void Holes::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event) {
+    if (hole_name == "")
+        AbstractLabirint::onTouchCancelled(touch, event);
+}
+
+
+
+
+
+

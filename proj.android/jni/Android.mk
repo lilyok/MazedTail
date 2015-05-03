@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Shifts.cpp \
                    ../../Classes/AbstractLabirint.cpp \
                    ../../Classes/Lifts.cpp \
+                   ../../Classes/Holes.cpp \
                    ../../Classes/Bot.cpp \
                    ../../Classes/BotsManager.cpp
 

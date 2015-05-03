@@ -13,7 +13,6 @@
 #include "cocos2d.h"
 #include <stdio.h>
 
-#include "BotsManager.h"
 #define BOT_DELTA 100
 
 class Holes: public AbstractLabirint{
@@ -23,6 +22,11 @@ public:
     
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
+    virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+    virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
+    virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
+    virtual void onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event);
+    
     cocos2d::Sprite *makeTexturedSprite(std::string name, int tag, cocos2d::Point p, cocos2d::Size size);
     
     
@@ -39,7 +43,7 @@ private:
     
     void ownEvent();
     
-    
+    std::string hole_name = "";
     int num_bot_delta = BOT_DELTA;
     //    int num_shift_delta = 0;
     //    int num_shift = -1;

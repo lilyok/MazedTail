@@ -13,8 +13,6 @@
 #include "cocos2d.h"
 #include <stdio.h>
 
-#define BOT_DELTA 100
-
 class Holes: public AbstractLabirint{
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -44,10 +42,6 @@ private:
     void ownEvent();
     
     std::string hole_name = "";
-    int num_bot_delta = BOT_DELTA;
-    //    int num_shift_delta = 0;
-    //    int num_shift = -1;
-    
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);

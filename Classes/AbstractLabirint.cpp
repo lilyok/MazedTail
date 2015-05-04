@@ -515,10 +515,21 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
 }
 
 Sprite *AbstractLabirint::makeTexturedSprite(std::string name, int tag, Point p, Size size) {
-    auto sprite = Sprite::create();
-    sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
-    sprite->setTextureRect(Rect(p.x - size.width / 2, p.y - size.height / 2, size.width, size.height));
-    sprite->setOpacity(0);
+    Sprite * sprite;
+    auto w = size.width;
+    auto h = size.height;
+    if (name == "dummy") {
+        sprite = Sprite::create("start.png");
+        sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
+    } else if (name == "newlevel") {
+        sprite = Sprite::create("finish.png");
+        sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
+    } else {
+        sprite = Sprite::create();
+        sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+        sprite->setTextureRect(Rect(p.x - size.width / 2, p.y - size.height / 2, size.width, size.height));
+        sprite->setOpacity(0);
+    }
     return sprite;
 }
 

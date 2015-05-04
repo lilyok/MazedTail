@@ -81,7 +81,7 @@ bool MenuScene::init()
 
 void MenuScene::menuStartCallback(cocos2d::Ref* pSender)
 {
-    Scene *pScene = Holes::createScene();//Portals::createScene();
+    Scene *pScene = Holes::createScene();
     cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, pScene));
 }
 

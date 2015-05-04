@@ -65,6 +65,21 @@ bool Holes::init() {
       //  rabbits.at(i-1)->getPhysicsBody()->setRotationEnable(true);
     }
     
+    
+    this->m_emitter = ParticleFire::create();
+    this->m_emitter->setScale(scale_map / 2);
+   // m_emitter->setStartColor(Color4F(0, 0, 255, 255));
+    m_emitter->setEndColor(Color4F(0, 0, 255, 255));
+    this->m_emitter->stopSystem();
+    addChild(m_emitter, 3);
+
+    
+    this->g_emitter = ParticleGalaxy::create();
+    this->g_emitter->setScale(scale_map / 2);
+    this->g_emitter->stopSystem();
+    addChild(g_emitter, 3);
+
+    
     this->scheduleUpdate();
     return true;
 }
@@ -75,7 +90,8 @@ void Holes::ownEvent(){
     if (mysprite->getOpacity() == 253) {
         mysprite->setOpacity(255);
         mysprite->getPhysicsBody()->resetForces();
-        hole_name = "";
+        
+        g_emitter->stopSystem();
     }
     
     for (auto r : rabbits){
@@ -95,21 +111,25 @@ void Holes::ownEvent(){
                 name += "a";
                 new_hole_name += "a";
             }
+            
             isA[i] = !isA.at(i);
+
             for (auto h: holes) {
                 if (h->getName() == name) {
                     r->setPosition(h->getPosition());
                     r->setOpacity(1);
                     if (name == new_hole_name) {
                         mysprite->setPosition(h->getPosition());
-                        mysprite->runAction(FadeTo::create(2.0f, 253));
+                        mysprite->runAction(FadeTo::create(5.0f, 253));
+                        g_emitter->setPosition(h->getPosition());
+                        g_emitter->setScale(scale_map);
+                        g_emitter->resetSystem();
+                        hole_name = "";
                     }
                 }
             }
             
-        } /*else if (r->getOpacity() == 252) {
-            //
-        }*/
+        }
         else if(r->getOpacity() == 254) {
             r->getPhysicsBody()->resetForces();
             r->getPhysicsBody()->setGravityEnable(true);
@@ -126,7 +146,6 @@ void Holes::ownEvent(){
 
     }
 }
-
 
 Sprite *Holes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
     Sprite * sprite;
@@ -175,7 +194,7 @@ Sprite *Holes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
         Animation *animationStop = Animation::createWithSpriteFrames(animStopRH, 0.1f);
         Animation *animationHole = Animation::createWithSpriteFrames(animHole, 0.2f);
         
-        auto stopstart = Animate::create(Animation::createWithSpriteFrames(animStartStop, 1.0));
+        auto stopstart = Animate::create(Animation::createWithSpriteFrames(animStartStop, 0.0001f));
         stopstart->setTag(STOPSTART_TAG);
         auto jumping = Animate::create(animationJump);
         jumping->setTag(JUMP_TAG);
@@ -191,7 +210,7 @@ Sprite *Holes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
                                                                  RotateTo::create(2.1f, 0),
                                                                  RotateBy::create(6.0f, 40*(randtime - 0.5)),NULL)));
         sprite->runAction(RepeatForever::create(
-                                               Sequence::create(stopstart,
+                                               Sequence::create(
                                                RotateTo::create(0.0f, 0),
                                                FadeTo::create(1.0f, 253),
                                                Animate::create(animationStart),
@@ -202,8 +221,9 @@ Sprite *Holes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
                                                FadeTo::create(0.0f, 252),
                                                Repeat::create(holer, 10),
                                                FadeTo::create(1.0f, 0),
+                                               stopstart,
+                                               RotateBy::create(2.0f, 0),
                                                NULL)));
-       // sprite->setOpacity(0);
     } else {
         return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
     }
@@ -231,6 +251,8 @@ void Holes::onContactSeperate(const cocos2d::PhysicsContact &contact) {
         if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
             if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG)
                 isPlus = false;
+            else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG)
+                m_emitter->stopSystem();
         }
     }
 }
@@ -244,6 +266,11 @@ bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
+        }
+        else if (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG) {
+            m_emitter->setPosition(contact.getContactData()->points[0]);
+            m_emitter->setScale(scale_map);
+            m_emitter->resetSystem();
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             isNewLevel = true;
@@ -290,39 +317,43 @@ void Holes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         mysprite->setPosition(pos);
         mysprite->runAction(FadeTo::create(1.0f, 0));
         
+        g_emitter->setPosition(pos);
+        g_emitter->setScale(scale_map);
+        g_emitter->resetSystem();
+        
         
     }
 }
 
 void Holes::resumeScene() {
     AbstractLabirint::resumeScene();
-//    for (auto sprite: snowman) {
-//        sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
-//    }
-//    resumeAllObjectLayer(Holes);
-//    resumeAllObjectLayer(snowman);
+    for (auto sprite: rabbits) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+        sprite->getPhysicsBody()->setGravityEnable(true);
+    }
+    resumeAllObjectLayer(rabbits);
     resumeAllObjectLayer(pluses);
 }
 
 void Holes::pauseScene() {
     AbstractLabirint::pauseScene();
-//    for (auto sprite: snowman) {
-//        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-//        sprite->getPhysicsBody()->resetForces();
-//    }
-//    pauseAllObjectLayer(Holes);
-//    pauseAllObjectLayer(snowman);
+    for (auto sprite: rabbits) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    pauseAllObjectLayer(rabbits);
     pauseAllObjectLayer(pluses);
 }
 
 void Holes::stopScene() {
     AbstractLabirint::stopScene();
-//    for (auto sprite: snowman) {
-//        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-//        sprite->getPhysicsBody()->resetForces();
-//    }
-//    stopAllObjectLayer(Holes);
-//    stopAllObjectLayer(snowman);
+    for (auto sprite: rabbits) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    stopAllObjectLayer(rabbits);
     stopAllObjectLayer(pluses);
 }
 

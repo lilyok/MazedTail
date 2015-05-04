@@ -3657,12 +3657,12 @@
   <object id="31" x="635.838" y="0" width="4473.99" height="69.3642"/>
   <object id="37" x="-8.88178e-16" y="-5.78035" width="121.387" height="2878.61"/>
   <object id="39" x="3.19744e-14" y="2809.25" width="5115.61" height="63.5838"/>
-  <object id="40" name="dummy" x="4951.76" y="2364.5" width="161.85" height="439.306"/>
-  <object id="41" name="newlevel" x="121.387" y="-7.99361e-15" width="517.498" height="74.4775"/>
+  <object id="40" name="dummy" x="4972.72" y="2422.15" width="140.886" height="381.654"/>
+  <object id="41" name="newlevel" x="189.521" y="5.24109" width="391.712" height="126.888"/>
   <object id="44" x="4982.66" y="11.5607" width="132.948" height="2791.91"/>
  </objectgroup>
  <objectgroup name="hero">
-  <object id="43" x="4784.91" y="2502.89" width="154.202" height="149.806">
+  <object id="43" x="4847.8" y="2550.06" width="154.202" height="149.806">
    <ellipse/>
   </object>
  </objectgroup>

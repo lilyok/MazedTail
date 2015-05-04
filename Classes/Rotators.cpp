@@ -86,21 +86,22 @@ void Rotators::ownEvent(){
 Sprite *Rotators::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
     auto w = size.width;
     auto h = size.height;
-    auto name = "bluewall.png";
-    if (tag == BUTTON_TAG) {
-        if (sprite_name == "orange")
-            name = "orangeflower.png";
-        else
-            name = "blueflower.png";
-    }
-    auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
-    auto current_scaleX = w / sprite->getContentSize().width;
-    auto current_scaleY = h / sprite->getContentSize().height;
-    sprite->setScale(current_scaleX, current_scaleY);
-    sprite->setOpacity(0);
-//    sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
-//    sprite->setTextureRect(Rect(p.x - scale_map*size.width / 2, p.y - scale_map*size.height / 2, scale_map*size.width, scale_map*size.height));
-    return sprite;
+    if (tag == DOOR_TAG || tag == BUTTON_TAG) {
+        auto name = "bluewall.png";
+        if (tag == BUTTON_TAG) {
+            if (sprite_name == "orange")
+                name = "orangeflower.png";
+            else
+                name = "blueflower.png";
+        }
+        auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
+        auto current_scaleX = w / sprite->getContentSize().width;
+        auto current_scaleY = h / sprite->getContentSize().height;
+        sprite->setScale(current_scaleX, current_scaleY);
+        sprite->setOpacity(0);
+        return sprite;
+    } else
+        return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
 

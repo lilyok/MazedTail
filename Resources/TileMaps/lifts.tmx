@@ -3607,7 +3607,7 @@
    <tile gid="1"/>
   </data>
  </layer>
- <objectgroup name="collisions" visible="0">
+ <objectgroup name="collisions">
   <object id="3" x="-5.28821" y="-5.28821" width="68.7467" height="2882.07"/>
   <object id="4" x="571.126" y="-5.28821" width="4542.57" height="63.4585"/>
   <object id="5" x="-2" y="2817.61" width="5124.27" height="63.4585"/>
@@ -3628,10 +3628,10 @@
   <object id="21" x="2115.28" y="1792.7" width="444.209" height="512.956"/>
   <object id="22" x="2363.83" y="766.79" width="195.664" height="512.956"/>
   <object id="23" x="4088.78" y="63.7467" width="957.166" height="195.664"/>
-  <object id="82" name="newlevel" x="70.3994" y="3.15996" width="497.248" height="322.85"/>
-  <object id="83" name="dummy" x="5020.64" y="2301.34" width="98.0392" height="521.156"/>
+  <object id="82" name="newlevel" x="70.3994" y="3.15996" width="493.618" height="148.621"/>
+  <object id="83" name="dummy" x="4984.34" y="2310.23" width="130.707" height="499.377"/>
  </objectgroup>
- <objectgroup name="lifts">
+ <objectgroup name="lifts" visible="0">
   <object id="24" name="green" x="3071.02" y="63.4585" width="512" height="512"/>
   <object id="25" name="green" x="3583.08" y="63.2184" width="512" height="512"/>
   <object id="26" name="green" x="4095.31" y="256.986" width="512" height="512"/>
@@ -3689,8 +3689,8 @@
   <object id="79" name="pinkgreen" x="3262.79" y="1405.39" width="128" height="64"/>
   <object id="80" name="pinkgreen" x="4796.99" y="379.508" width="128" height="64"/>
  </objectgroup>
- <objectgroup name="hero" visible="0">
-  <object id="81" x="4843.35" y="2496.15" width="138.675" height="138.675">
+ <objectgroup name="hero">
+  <object id="81" x="4876.08" y="2528.88" width="138.675" height="138.675">
    <ellipse/>
   </object>
  </objectgroup>

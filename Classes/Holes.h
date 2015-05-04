@@ -37,7 +37,9 @@ private:
     std::vector<bool> isA;
     cocos2d::Vector<cocos2d::Sprite*> rabbits;
     cocos2d::Vector<cocos2d::Sprite*> holes;
-    
+    cocos2d::ParticleSystemQuad* m_emitter;
+    cocos2d::ParticleSystemQuad* g_emitter;
+
     
     void ownEvent();
     

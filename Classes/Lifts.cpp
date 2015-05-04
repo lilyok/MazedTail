@@ -41,7 +41,7 @@ bool Lifts::init() {
     }
     
     TMXObjectGroup *btntmx = map->getObjectGroup("buttons");
-    this->buttons = makeObject(BUTTON_TAG, btntmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
+    this->buttons = makeObject(BUTTON_TAG, btntmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
     
     m_emitters = initFires();
     
@@ -62,7 +62,7 @@ bool Lifts::init() {
     }
     
     TMXObjectGroup *lifttmx = map->getObjectGroup("lifts");
-    this->lifts = makeObject(LIFT_TAG, lifttmx, scale_map, xZero, yZero, BRICK, true, 0, 0);
+    this->lifts = makeObject(LIFT_TAG, lifttmx, scale_map, xZero, yZero, BRICK, false, 0, 0);
     setLiftStatus();
     
     for (auto l:lifts)
@@ -233,8 +233,7 @@ Sprite *Lifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Poi
         
         sprite->setOpacity(0);
     } else {
-        sprite = Sprite::create();
-        sprite->setOpacity(0);
+        return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
     }
     return sprite;
 }

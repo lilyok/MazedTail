@@ -3643,8 +3643,8 @@
   <object id="40" x="3842.9" y="1664.45" width="698.415" height="133.422"/>
   <object id="41" x="4416.62" y="1284.53" width="126.751" height="513.676"/>
   <object id="42" x="4420.95" y="2180.45" width="693.796" height="126.751"/>
-  <object id="54" name="dummy" x="4994.58" y="2318.53" width="113.759" height="427.952"/>
-  <object id="55" name="newlevel" x="130.011" y="5.41712" width="450.719" height="267.916"/>
+  <object id="54" name="dummy" x="4989.06" y="2318.53" width="130.306" height="422.436"/>
+  <object id="55" name="newlevel" x="130.011" y="5.41712" width="450.719" height="179.664"/>
  </objectgroup>
  <objectgroup name="portals">
   <object id="44" name="orange1" x="128.107" y="896.916" width="8" height="8"/>
@@ -3683,7 +3683,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="hero" visible="0">
-  <object id="64" x="4599.13" y="2432.29" width="150" height="150"/>
+ <objectgroup name="hero">
+  <object id="64" x="4858.37" y="2426.77" width="150" height="150"/>
  </objectgroup>
 </map>

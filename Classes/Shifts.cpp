@@ -163,20 +163,18 @@ Sprite *Shifts::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Po
     if (tag == SHIFT_TAG) {
         sprite = Sprite::create("greenwall.png");
         sprite->setOpacity(255);
-    } else {
-         sprite = Sprite::create();
-         sprite->setOpacity(0);
-    }
-    sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
-    
-    sprite->setTextureRect(Rect(p.x, p.y, size.width, size.height));
-    
-    
-    auto current_scaleX = w / sprite->getContentSize().width;
-    auto current_scaleY = h / sprite->getContentSize().height;
-    sprite->setScale(current_scaleX, current_scaleY);
-//    sprite->setOpacity(0);
-    return sprite;
+        
+        sprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+        
+        sprite->setTextureRect(Rect(p.x, p.y, size.width, size.height));
+        
+        
+        auto current_scaleX = w / sprite->getContentSize().width;
+        auto current_scaleY = h / sprite->getContentSize().height;
+        sprite->setScale(current_scaleX, current_scaleY);
+        return sprite;
+    } else
+        return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
 

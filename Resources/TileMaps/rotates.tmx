@@ -3626,8 +3626,8 @@
   <object id="18" x="4218.64" y="903.242" width="889.791" height="126.804"/>
   <object id="19" x="2944.39" y="441.498" width="1273.72" height="133.582"/>
   <object id="21" x="1.51538" y="451.54" width="2046.25" height="124.572"/>
-  <object id="49" name="dummy" x="5078.95" y="2384.21" width="31.5789" height="363.158"/>
-  <object id="50" name="newlevel" x="4736.84" y="15.7895" width="257.894" height="231.579"/>
+  <object id="49" name="dummy" x="4993.38" y="2378.51" width="111.442" height="391.681"/>
+  <object id="50" name="newlevel" x="4584.82" y="130.88" width="411.916" height="140.307"/>
   <object id="52" x="4236.84" y="2689.47" width="236.842" height="184.211"/>
  </objectgroup>
  <objectgroup name="health">
@@ -3645,7 +3645,7 @@
   </object>
  </objectgroup>
  <objectgroup name="hero">
-  <object id="48" x="4956.58" y="2561.76" width="140" height="140">
+  <object id="48" x="4865.31" y="2516.12" width="140" height="140">
    <ellipse/>
   </object>
  </objectgroup>

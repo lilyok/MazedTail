@@ -282,16 +282,17 @@ void AbstractLabirint::update(float delta) {
         cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
     }
     else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
-        cocos2d::UserDefault *def=UserDefault::getInstance();
-        auto high_score=def->getIntegerForKey(HIGH_SCORE) + 1;
-        def->setIntegerForKey(HIGH_SCORE, high_score);
-        def->flush();
         isNewLeveled = false;
         isNewLevel = false;
         auto newScene = returnNewScene();
         cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
     }
     else if (isNewLevel) {
+        cocos2d::UserDefault *def=UserDefault::getInstance();
+        auto high_score=def->getIntegerForKey(HIGH_SCORE) + 1;
+        def->setIntegerForKey(HIGH_SCORE, high_score);
+        def->flush();
+        
         isPaused = false;
         isNewLevel = false;
         isNewLeveled = true;

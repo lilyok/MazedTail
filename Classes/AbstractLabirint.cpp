@@ -3,10 +3,10 @@
 //
 
 #include "AbstractLabirint.h"
-#include "MenuScene.h"
+#include "LevelsScene.h"
 
 USING_NS_CC;
-
+const char *HIGH_SCORE="l";
 
 Scene *AbstractLabirint::createScene(std::string map_name, std::string back_name) {
     // 'scene' is an autorelease object
@@ -42,8 +42,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     icon_scale = (this->visibleSize.height/16.0) / 64.0;
     if (icon_scale > 1)
         icon_scale = 1.0;
-    
-    
+        
     
     menuSprite = Sprite::create("black_pixel.png");
     menuSprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
@@ -272,7 +271,7 @@ void AbstractLabirint::update(float delta) {
     if ((closeItem->getNumberOfRunningActions() <= 0) && (closeItem->getOpacity() == 0)) {
         if (isClose) {
             isClose = false;
-            auto newScene = MenuScene::createScene();
+            auto newScene = LevelsScene::createScene();
             cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
         }
     }
@@ -283,6 +282,10 @@ void AbstractLabirint::update(float delta) {
         cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
     }
     else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
+        cocos2d::UserDefault *def=UserDefault::getInstance();
+        auto high_score=def->getIntegerForKey(HIGH_SCORE) + 1;
+        def->setIntegerForKey(HIGH_SCORE, high_score);
+        def->flush();
         isNewLeveled = false;
         isNewLevel = false;
         auto newScene = returnNewScene();

@@ -4,7 +4,6 @@
 //
 #include "Doors.h"
 
-#include "MenuScene.h"
 #include "Rotators.h"
 
 USING_NS_CC;

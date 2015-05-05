@@ -7,7 +7,6 @@
 //
 
 #include "Shifts.h"
-#include "MenuScene.h"
 #include "Lifts.h"
 
 USING_NS_CC;
@@ -261,6 +260,7 @@ void Shifts::resumeScene() {
     AbstractLabirint::resumeScene();
     for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+        sprite->getPhysicsBody()->setGravityEnable(true);
     }
     
     resumeAllObjectLayer(butterfly);
@@ -272,6 +272,7 @@ void Shifts::pauseScene() {
     for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
     }
     pauseAllObjectLayer(butterfly);
     pauseAllObjectLayer(pluses);
@@ -281,7 +282,8 @@ void Shifts::stopScene() {
     AbstractLabirint::stopScene();
     for (auto sprite: butterfly) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-        sprite->getPhysicsBody()->resetForces();        
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
     }
     stopAllObjectLayer(butterfly);
     stopAllObjectLayer(pluses);

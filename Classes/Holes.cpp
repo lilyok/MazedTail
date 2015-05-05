@@ -7,7 +7,6 @@
 //
 
 #include "Holes.h"
-#include "MenuScene.h"
 USING_NS_CC;
 
 #define HOLE_TAG 110

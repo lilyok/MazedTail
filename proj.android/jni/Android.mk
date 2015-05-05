@@ -12,7 +12,7 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/MenuScene.cpp \
+                   ../../Classes/LevelsScene.cpp \
                    ../../Classes/Portals.cpp \
                    ../../Classes/Doors.cpp \
                    ../../Classes/Rotators.cpp \

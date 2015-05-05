@@ -7,8 +7,6 @@
 #include "Portals.h"
 #include "Doors.h"
 
-#include "MenuScene.h"
-
 USING_NS_CC;
 #define PORTAL_TAG 100
 #define FALLING_TAG 20

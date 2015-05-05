@@ -8,7 +8,6 @@
 
 #include "Lifts.h"
 #include "Holes.h"
-#include "MenuScene.h"
 USING_NS_CC;
 
 #define LIFT_TAG 100

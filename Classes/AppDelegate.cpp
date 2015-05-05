@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
-#include "MenuScene.h"
+//#include "MenuScene.h"
+#include "LevelsScene.h"
 
 USING_NS_CC;
 
@@ -16,18 +17,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("My Game");
+        glview = GLView::create("MazedTale");
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = MenuScene::createScene();
+    auto scene = LevelsScene::createScene();
 
     // run
     director->runWithScene(scene);

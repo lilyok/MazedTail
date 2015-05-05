@@ -126,7 +126,7 @@ protected:
     cocos2d::MenuItemImage* continueItem;
     cocos2d::MenuItemImage* closeItem;
     cocos2d::MenuItemImage* pauseItem;
-    
+
     
     cocos2d::TMXTiledMap *map;
 

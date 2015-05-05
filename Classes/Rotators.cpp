@@ -7,7 +7,6 @@
 //
 
 #include "Rotators.h"
-#include "MenuScene.h"
 #include "Shifts.h"
 USING_NS_CC;
 

@@ -20,6 +20,7 @@
 #define MIN_FOR_DIRECTION 10
 #define MY_VELOCITY 500
 #define COUNT_OF_DELTA 5
+#include "SimpleAudioEngine.h"
 
 class AbstractLabirint : public cocos2d::Layer
 {
@@ -110,6 +111,9 @@ protected:
     bool isPaused = false;
     bool isClose = false;
     bool isPlus = false;
+    
+    bool isAll = false;
+    
     float touchX = NOTOUCH;
     float touchY = NOTOUCH;
     int life_num = 3;
@@ -144,6 +148,8 @@ protected:
     void startGoingAnimation();
     
     void stopTakingPoints();
+    
+    CocosDenshion::SimpleAudioEngine* audio;
 };
 
 

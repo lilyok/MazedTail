@@ -269,9 +269,11 @@ void Lifts::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 bool Lifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == SNOWMAN_TAG or nodeB->getTag() == SNOWMAN_TAG) {
+            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
         else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
+            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
             auto name = nodeB->getName();
             if (nodeA->getTag() == BUTTON_TAG)
                 name = nodeA->getName();
@@ -298,6 +300,7 @@ bool Lifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             m_emitter->resetSystem();
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
+            audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             isNewLevel = true;
             return false;
         }
@@ -330,6 +333,7 @@ void Lifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
             sm->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
         
         if (life_num == 0) {
+            audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
             isRestart = true;
             stopTakingPoints();

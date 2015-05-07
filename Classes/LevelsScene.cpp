@@ -69,7 +69,7 @@ bool LevelsScene::init()
     Size s = map->getContentSize();
     
     const char *HIGH_SCORE="l";
-    auto high_score=UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
+    auto high_score = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
     //////////////////////////////////////////////////
     if (visibleSize.height / s.height < visibleSize.width / s.width)
         this->scale_map = visibleSize.height / s.height;
@@ -209,7 +209,6 @@ bool LevelsScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
                                                TintTo::create(0.2, 255, 255, 255),
                                                ScaleTo::create(0.1, scale_map), NULL));
             level_i = i;
-            //changeLevel(level->getName());
         }
         i++;
     }
@@ -285,8 +284,6 @@ void LevelsScene::start()
         }
             
     }
-//    Scene *pScene = Portals::createScene();
-//    cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, pScene));
 }
 
 

@@ -3,12 +3,6 @@
  <tileset firstgid="1" name="vided" tilewidth="64" tileheight="64">
   <image source="vided.png" width="192" height="192"/>
  </tileset>
- <tileset firstgid="10" name="start" tilewidth="64" tileheight="64">
-  <image source="start.png" width="128" height="384"/>
- </tileset>
- <tileset firstgid="22" name="finish" tilewidth="64" tileheight="64">
-  <image source="finish.png" width="384" height="128"/>
- </tileset>
  <layer name="background" width="80" height="45">
   <data>
    <tile gid="3"/>
@@ -3632,7 +3626,7 @@
   <object id="42" name="newlevel" x="58.7723" y="6.48929" width="392.735" height="139.653"/>
  </objectgroup>
  <objectgroup name="hero">
-  <object id="45" x="4867.06" y="2522.4" width="167.167" height="169.016" rotation="12.9109">
+  <object id="45" x="4710.5" y="2528.92" width="167.167" height="169.016" rotation="12.9109">
    <ellipse/>
   </object>
  </objectgroup>

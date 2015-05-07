@@ -151,12 +151,14 @@ void Doors::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == BUNNY_TAG or nodeB->getTag() == BUNNY_TAG) {
+            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
         } else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
+            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
             auto btn_name = nodeB->getName();
             if (nodeA->getTag() == BUTTON_TAG)
                 btn_name = nodeA->getName();
@@ -180,6 +182,7 @@ bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             m_emitter->setScale(scale_map);
             m_emitter->resetSystem();
         } else {
+            audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             isNewLevel = true;
             return false;
         }
@@ -224,6 +227,7 @@ void Doors::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         
         
         if (life_num == 0) {
+            audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
             isRestart = true;
             stopTakingPoints();

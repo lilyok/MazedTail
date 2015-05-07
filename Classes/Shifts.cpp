@@ -204,6 +204,7 @@ void Shifts::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 bool Shifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) {
+            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
@@ -211,6 +212,7 @@ bool Shifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *no
             return false;
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
+            audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             isNewLevel = true;
             return false;
         }
@@ -245,6 +247,7 @@ void Shifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         
         
         if (life_num == 0) {
+            audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
             isRestart = true;
             stopTakingPoints();

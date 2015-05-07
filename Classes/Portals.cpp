@@ -209,6 +209,7 @@ void Portals::entranceIntoPortal(Node *nodeA, Node *nodeB) {
             auto dPos = Vec2(nextPortalPos.x - node->getPosition().x, 0);
             
             if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
+                audio->playEffect("bruitmetallique.wav", false, 3.0f, 0.0f, 1.0f);
                 auto xDes = 0.0;
                 auto yDes = 0.0;
                 if (mysprite->getPositionX() - current_portal->getPositionX() != 0)
@@ -241,6 +242,7 @@ void Portals::entranceIntoPortal(Node *nodeA, Node *nodeB) {
 bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == FALLING_TAG or nodeB->getTag() == FALLING_TAG) {
+            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
         else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
@@ -253,6 +255,8 @@ bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
             m_emitter->setScale(scale_map);
             m_emitter->resetSystem();
         } else {
+            audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+
             isNewLevel = true;
             return false;
         }
@@ -285,6 +289,7 @@ void Portals::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         falling->runAction(Sequence::create(TintTo::create(0.5f, 44, 215, 243), TintTo::create(0.5, 255, 255, 255), NULL));
         
         if (life_num == 0) {
+            audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
             isRestart = true;
             stopTakingPoints();

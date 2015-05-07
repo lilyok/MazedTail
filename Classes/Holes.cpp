@@ -259,6 +259,9 @@ void Holes::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
         if (nodeA->getTag() == RABBIT_TAG or nodeB->getTag() == RABBIT_TAG) {
+            if (nodeA->getOpacity() >= 254 and nodeB->getOpacity() >= 254)
+                audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
+            
             collisionWithEnemy(nodeA, nodeB);
             if (nodeA->getOpacity() < 254 or nodeB->getOpacity() < 254) return false;
         }
@@ -272,6 +275,7 @@ bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             m_emitter->resetSystem();
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
+            audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             isNewLevel = true;
             return false;
         }
@@ -295,6 +299,7 @@ void Holes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
             mylife->setSpriteFrame(sp);
      
             if (life_num == 0) {
+                audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
                 mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
                 isRestart = true;
                 stopTakingPoints();
@@ -305,13 +310,13 @@ void Holes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
                 mysprite->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
         }
     } else if (nodeA->getOpacity() == 252 or nodeB->getOpacity() == 252) {
-       // mysprite->pause();
         hole_name = nodeA->getName();
         auto pos = nodeA->getPosition();
         if (nodeA->getTag() == HERO_SPRITE_TAG) {
             pos = nodeB->getPosition();
             hole_name = nodeB->getName();
         }
+        audio->playEffect("ccgiggle.wav", false, 1.0f, 0.0f, 0.5f);
         stopTakingPoints();
         mysprite->setPosition(pos);
         mysprite->runAction(FadeTo::create(1.0f, 0));
@@ -361,7 +366,7 @@ Scene* Holes::returnRestartedScene(){
 }
 
 Scene* Holes::returnNewScene(){
-    return Holes::createScene();
+    return NULL;//LevelsScene::createScene();
 }
 
 bool Holes::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {

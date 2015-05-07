@@ -43,6 +43,8 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     if (icon_scale > 1)
         icon_scale = 1.0;
         
+    audio = CocosDenshion::SimpleAudioEngine::getInstance();
+    audio->playBackgroundMusic("allegro.mp3", true);
     
     menuSprite = Sprite::create("black_pixel.png");
     menuSprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
@@ -268,6 +270,10 @@ void AbstractLabirint::onExit() {
 }
 
 void AbstractLabirint::update(float delta) {
+    if (getChildByName("continued") && getChildByName("continued")->getNumberOfRunningActions() <= 0) {
+        removeChildByName("continued");
+        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, LevelsScene::createScene()));
+    }
     if ((closeItem->getNumberOfRunningActions() <= 0) && (closeItem->getOpacity() == 0)) {
         if (isClose) {
             isClose = false;
@@ -285,14 +291,27 @@ void AbstractLabirint::update(float delta) {
         isNewLeveled = false;
         isNewLevel = false;
         auto newScene = returnNewScene();
-        cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
+        audio->pauseBackgroundMusic();
+        pauseAllObjects();
+        
+        if (newScene) {
+            cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
+        }
+        else {
+            auto sprite = Sprite::create("ByeWorld.png");
+            sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+            sprite->setOpacity(0);
+            sprite->setName("continued");
+            addChild(sprite, 5);
+            sprite->runAction(Sequence::create(FadeTo::create(1.0, 255), FadeTo::create(1.0, 0), NULL));
+        }
     }
     else if (isNewLevel) {
         cocos2d::UserDefault *def=UserDefault::getInstance();
         auto high_score=def->getIntegerForKey(HIGH_SCORE) + 1;
         def->setIntegerForKey(HIGH_SCORE, high_score);
         def->flush();
-        
+        isAll = true;
         isPaused = false;
         isNewLevel = false;
         isNewLeveled = true;
@@ -311,8 +330,10 @@ void AbstractLabirint::update(float delta) {
                 }
             }
         }
-        if ((touchX != NOTOUCH) && (touchY != NOTOUCH))
+        if ((touchX != NOTOUCH) && (touchY != NOTOUCH)) {
+            audio->playEffect("step.wav", false, 0.2f, 0.0f, 0.1f);
             goHero();
+        }
 
         ownEvent();
     }
@@ -652,6 +673,8 @@ void AbstractLabirint::collisionWithHealth(Node *nodeA, Node *nodeB) {
         auto plus = pluses.at(stoi(node->getName()));
         
         if (life_num < 3) {
+            audio->playEffect("chime.wav", false, 3.0f, 0.0f, 1.0f);
+
             life_num++;
             char *res = new char[50];
             sprintf(res, "life%i.png", life_num);
@@ -708,6 +731,7 @@ void AbstractLabirint::prettyShowItem(MenuItemImage* item, Vec2 endPosition){
 }
 
 void AbstractLabirint::pause(){
+    audio->pauseBackgroundMusic();
     if(!isPaused) {
         isPaused = true;
         finishMenuAction();
@@ -757,8 +781,10 @@ void AbstractLabirint::resume(bool isResumeScene){
     }
     menuSprite->runAction(cocos2d::FadeTo::create(1.0, 0));
     
-    if (isResumeScene)
+    if (isResumeScene && !isAll) {
+        audio->resumeBackgroundMusic();
         resumeScene();
+    }
 }
 
 void AbstractLabirint::hideBottom(){
@@ -784,6 +810,7 @@ void AbstractLabirint::menuRestartCallback(Ref * pSender) {
 
 void AbstractLabirint::menuCloseCallback(Ref * pSender) {
     hideBottom();
+    audio->stopBackgroundMusic();
     isClose = true;
     
 }

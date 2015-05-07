@@ -110,6 +110,7 @@
 		92D2AEBE1AD1CD95007B363F /* tort.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92D2AEBC1AD1CD95007B363F /* tort.plist */; };
 		92D2AEBF1AD1CD95007B363F /* tort.png in Resources */ = {isa = PBXBuildFile; fileRef = 92D2AEBD1AD1CD95007B363F /* tort.png */; };
 		92D5C7301AF977F1009E0CB0 /* backall.png in Resources */ = {isa = PBXBuildFile; fileRef = 92D5C72F1AF977F1009E0CB0 /* backall.png */; };
+		92D5C7321AFBB0A1009E0CB0 /* clearblack.png in Resources */ = {isa = PBXBuildFile; fileRef = 92D5C7311AFBB0A1009E0CB0 /* clearblack.png */; };
 		92E0FAAE1AACB93D00D3DC91 /* Doors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FAAC1AACB93D00D3DC91 /* Doors.cpp */; };
 		92E0FAB11AACCD7100D3DC91 /* color_buttons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAAF1AACCD7100D3DC91 /* color_buttons.plist */; };
 		92E0FAB21AACCD7100D3DC91 /* color_buttons.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAB01AACCD7100D3DC91 /* color_buttons.png */; };
@@ -383,6 +384,7 @@
 		92D2AEBC1AD1CD95007B363F /* tort.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tort.plist; sourceTree = "<group>"; };
 		92D2AEBD1AD1CD95007B363F /* tort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tort.png; sourceTree = "<group>"; };
 		92D5C72F1AF977F1009E0CB0 /* backall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backall.png; sourceTree = "<group>"; };
+		92D5C7311AFBB0A1009E0CB0 /* clearblack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clearblack.png; sourceTree = "<group>"; };
 		92E0FAAC1AACB93D00D3DC91 /* Doors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Doors.cpp; path = ../Classes/Doors.cpp; sourceTree = "<group>"; };
 		92E0FAAD1AACB93D00D3DC91 /* Doors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Doors.h; path = ../Classes/Doors.h; sourceTree = "<group>"; };
 		92E0FAAF1AACCD7100D3DC91 /* color_buttons.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = color_buttons.plist; sourceTree = "<group>"; };
@@ -638,6 +640,7 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92D5C7311AFBB0A1009E0CB0 /* clearblack.png */,
 				92D5C72F1AF977F1009E0CB0 /* backall.png */,
 				92B5C4911AF9305100D8CECD /* doors.png */,
 				92B5C4921AF9305100D8CECD /* holes.png */,
@@ -924,6 +927,7 @@
 				92B5C4771AF80CA400D8CECD /* portals.tmx in Resources */,
 				92D2AEBE1AD1CD95007B363F /* tort.plist in Resources */,
 				92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */,
+				92D5C7321AFBB0A1009E0CB0 /* clearblack.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				92B5C4741AF80CA400D8CECD /* hole.tmx in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,

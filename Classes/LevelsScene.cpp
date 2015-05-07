@@ -146,10 +146,16 @@ bool LevelsScene::init()
             buttons.pushBack(sprite);
         }
     }
-    
+
     this->scheduleUpdate();
 
     return true;
+}
+
+void LevelsScene::finishSplash(float dt){
+    getChildByName("black")->runAction(FadeTo::create(2, 0));
+
+    getChildByName("splash")->runAction(FadeTo::create(2, 0));
 }
 
 void LevelsScene::onEnter() {
@@ -163,6 +169,28 @@ void LevelsScene::onEnter() {
     
     dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+    // add "HelloWorld" splash screen"
+    auto menuSprite = Sprite::create("clearblack.png");
+    menuSprite->getTexture()->setTexParameters({.minFilter =  GL_LINEAR, .magFilter =  GL_LINEAR, .wrapS =  GL_REPEAT, .wrapT =  GL_REPEAT});
+    menuSprite->setTextureRect(Rect(origin.x, origin.y, visibleSize.width, visibleSize.height));
+    
+    menuSprite->setPosition(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2);
+    menuSprite->setName("black");
+    menuSprite->setOpacity(255);
+    addChild(menuSprite, 4);
+    
+    
+    auto sprite = Sprite::create("HelloWorld.png");
+    
+    // position the sprite on the center of the screen
+    
+    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+
+    sprite->setName("splash");
+    //sprite->setOpacity(0);
+    // add the sprite as a child to this layer
+    this->addChild(sprite, 5);
+    this->scheduleOnce(schedule_selector(LevelsScene::finishSplash),0.0f);
 }
 
 

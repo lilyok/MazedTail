@@ -49,6 +49,8 @@ public:
     bool isStart = false;
     int level_i = -1;
     
+    void finishSplash(float dt);
+    
     CREATE_FUNC(LevelsScene);
     // implement the "static node()" method manually
     //    LAYER_NODE_FUNC(LevelsScene);

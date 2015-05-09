@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.LilCompany.MazedTale"
-      android:versionCode="1"
-      android:versionName="1.0"
+      android:versionCode="2"
+      android:versionName="1.01"
       android:installLocation="auto">
 
     <uses-sdk android:minSdkVersion="9"/>
@@ -16,7 +16,7 @@
 	              android:value="cocos2dcpp" />
 
         <activity android:name="org.cocos2dx.cpp.AppActivity"
-                  android:label="@string/app_name"
+                  android:label="MazedTale"
                   android:screenOrientation="landscape"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                   android:configChanges="orientation">
@@ -34,5 +34,5 @@
                       android:largeScreens="true"
                       android:xlargeScreens="true"/>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-</manifest> 
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>

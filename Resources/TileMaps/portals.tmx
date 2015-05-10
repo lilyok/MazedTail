@@ -3684,6 +3684,6 @@
   </object>
  </objectgroup>
  <objectgroup name="hero">
-  <object id="64" x="4853.06" y="2463.94" width="150" height="150"/>
+  <object id="64" x="4858.22" y="2423.12" width="150" height="150"/>
  </objectgroup>
 </map>

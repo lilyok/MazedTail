@@ -42,8 +42,10 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     icon_scale = (this->visibleSize.height/16.0) / 64.0;
     if (icon_scale > 1)
         icon_scale = 1.0;
-        
+    
+    
     audio = CocosDenshion::SimpleAudioEngine::getInstance();
+    
     audio->playBackgroundMusic("allegro.mp3", true);
     
     menuSprite = Sprite::create("black_pixel.png");
@@ -270,6 +272,10 @@ void AbstractLabirint::onExit() {
 }
 
 void AbstractLabirint::update(float delta) {
+    if (!isNewLeveled && !isNewLevel && !isAll && isOnlyStart){
+        audio->resumeBackgroundMusic();
+        isOnlyStart = false;
+    }
     if (getChildByName("continued") && getChildByName("continued")->getNumberOfRunningActions() <= 0) {
         removeChildByName("continued");
         cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, LevelsScene::createScene()));
@@ -287,7 +293,8 @@ void AbstractLabirint::update(float delta) {
         auto newScene = returnRestartedScene();
         cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
     }
-    else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0)) {
+    else if ((isNewLeveled) && (menuSprite->getNumberOfRunningActions() <= 0) && (menuSprite->getOpacity() == 0))
+    {
         isNewLeveled = false;
         isNewLevel = false;
         auto newScene = returnNewScene();
@@ -303,6 +310,7 @@ void AbstractLabirint::update(float delta) {
             sprite->setOpacity(0);
             sprite->setName("continued");
             addChild(sprite, 5);
+            
             sprite->runAction(Sequence::create(FadeTo::create(1.0, 255), FadeTo::create(1.0, 0), NULL));
         }
     }
@@ -784,6 +792,8 @@ void AbstractLabirint::resume(bool isResumeScene){
     if (isResumeScene && !isAll) {
         audio->resumeBackgroundMusic();
         resumeScene();
+    } else {
+        isAll = false;
     }
 }
 

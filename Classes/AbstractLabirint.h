@@ -113,6 +113,7 @@ protected:
     bool isPlus = false;
     
     bool isAll = false;
+    bool isOnlyStart = true;
     
     float touchX = NOTOUCH;
     float touchY = NOTOUCH;

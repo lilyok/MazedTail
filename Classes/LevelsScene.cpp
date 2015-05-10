@@ -128,22 +128,18 @@ bool LevelsScene::init()
             h = objPoint.at("height").asFloat();
             auto name = objPoint.at("name").asString();
             Point _point = Point(xZero + scale_map * (x + w / 2.0f), yZero + scale_map * (y + h / 2.0f));
-            Size _size = Size(scale_map * w, scale_map * h);
             
-            Sprite* sprite;
+            Sprite* btnsprite;
             if (name == "start")
-                sprite = Sprite::create("PlayNormal.png");
+                btnsprite = Sprite::create("PlayNormal.png");
             else
-                sprite = Sprite::create("CloseNormal.png");
-            
-            auto sprite_scale_w = _size.width / sprite->getContentSize().width;
-            auto sprite_scale_h = _size.width / sprite->getContentSize().width;
-            sprite->setScale(sprite_scale_w, sprite_scale_h);
-            sprite->setName(name);
-            sprite->setPosition(_point);
-            sprite->setScale(icon_scale);
-            addChild(sprite, 1);
-            buttons.pushBack(sprite);
+                btnsprite = Sprite::create("CloseNormal.png");
+ 
+            btnsprite->setName(name);
+            btnsprite->setPosition(_point);
+            btnsprite->setScale(icon_scale);
+            addChild(btnsprite, 1);
+            buttons.pushBack(btnsprite);
         }
     }
 
@@ -214,8 +210,8 @@ bool LevelsScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
     }
     
     for (auto button : buttons) {
-        auto w = button->getContentSize().width * scale_map;
-        auto h = button->getContentSize().height * scale_map;
+        auto w = button->getContentSize().width * icon_scale;
+        auto h = button->getContentSize().height * icon_scale;
         auto x = button->getPosition().x;
         auto y = button->getPosition().y;
         

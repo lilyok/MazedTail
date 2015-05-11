@@ -13,6 +13,12 @@
 #include "Shifts.h"
 #include "Lifts.h"
 #include "Holes.h"
+#include "Eyes.h"
+#include "Hands.h"
+#include "Noses.h"
+#include "Tongue.h"
+#include "Ears.h"
+#include "Balance.h"
 
 USING_NS_CC;
 
@@ -65,11 +71,41 @@ bool LevelsScene::init()
     back_sprite->setPosition(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2);
     addChild(back_sprite, 0);
     
-    this->map = TMXTiledMap::create("menu.tmx");
+    prepareMap("");
+    
+    this->scheduleUpdate();
+
+    return true;
+}
+
+void LevelsScene::clearMap() {
+    for (auto level: levels)
+        if (getChildByName(level->getName())) removeChildByName(level->getName());
+    for (auto btn: buttons)
+        if (getChildByName(btn->getName())) removeChildByName(btn->getName());
+    if (getChildByName("map")) removeChildByName("map");    
+    levels.clear();
+    buttons.clear();
+    map = NULL;
+}
+
+void LevelsScene::prepareMap(std::string name) {
+    clearMap();
+
+    const char *HIGH_SCORE="l";
+    auto high_score = 7;//UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
+    
+    if (name == "") {
+        char *res = new char[50];
+        cur_menu = 1 + int(high_score / MAX_LEVELS);
+        std::sprintf(res, "menu%i.tmx", cur_menu);
+        name = res;
+    }
+    
+    this->map = TMXTiledMap::create(name);
     Size s = map->getContentSize();
     
-    const char *HIGH_SCORE="l";
-    auto high_score = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
+
     //////////////////////////////////////////////////
     if (visibleSize.height / s.height < visibleSize.width / s.width)
         this->scale_map = visibleSize.height / s.height;
@@ -80,8 +116,9 @@ bool LevelsScene::init()
     
     map->setScale(scale_map);
     map->setPosition(Vec2(xZero, yZero));
+    map->setName("map");
     addChild(map, 0);
-
+    
     TMXObjectGroup *lev = map->getObjectGroup("levels");
     if (lev != nullptr) {
         float x, y, w, h;
@@ -105,10 +142,12 @@ bool LevelsScene::init()
             sprite->setName(name);
             sprite->setPosition(_point);
             sprite->setRotation(r);
-            if (i > high_score)
+            if (i  + MAX_LEVELS * (cur_menu - 1) > high_score)
                 sprite->setOpacity(100);
             r += 30;
             if (r > 30) r = -30;
+            
+            sprite->setName(name);
             addChild(sprite, 1);
             levels.pushBack(sprite);
             i++;
@@ -132,20 +171,22 @@ bool LevelsScene::init()
             Sprite* btnsprite;
             if (name == "start")
                 btnsprite = Sprite::create("PlayNormal.png");
-            else
+            else if (name == "close")
                 btnsprite = Sprite::create("CloseNormal.png");
- 
+            else if (name == "next")
+                btnsprite = Sprite::create("next.png");
+            else if (name == "back")
+                btnsprite = Sprite::create("back.png");
+            
             btnsprite->setName(name);
             btnsprite->setPosition(_point);
             btnsprite->setScale(icon_scale);
+            
+            btnsprite->setName(name);
             addChild(btnsprite, 1);
             buttons.pushBack(btnsprite);
         }
     }
-
-    this->scheduleUpdate();
-
-    return true;
 }
 
 void LevelsScene::finishSplash(float dt){
@@ -204,7 +245,7 @@ bool LevelsScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
                                                TintTo::create(0.2, 255, 200, 255),
                                                TintTo::create(0.2, 255, 255, 255),
                                                ScaleTo::create(0.1, scale_map), NULL));
-            level_i = i;
+            level_i = i + MAX_LEVELS * (cur_menu - 1);
         }
         i++;
     }
@@ -222,8 +263,12 @@ bool LevelsScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
                                               ScaleTo::create(0.1, icon_scale), NULL));
             if (button->getName() == "close")
                 isClose = true;
-            else
+            else if (button->getName() == "start")
                 isStart = true;
+            else if (button->getName() == "next")
+                isNext = true;
+            else if (button->getName() == "back")
+                isBack = true;
         }
     }
     return true;
@@ -232,11 +277,19 @@ bool LevelsScene::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {
 void LevelsScene::update(float delta) {
     Sprite* start;
     Sprite* close;
+    Sprite* next;
+    Sprite* back;
+    char *res = new char[50];
+    
     for(auto b : buttons)
         if (b->getName() == "start")
             start = b;
-        else
+        else if (b->getName() == "close")
             close = b;
+        else if (b->getName() == "next")
+            next = b;
+        else if (b->getName() == "back")
+            back = b;
     
     if (isClose && close->getNumberOfRunningActions() <= 0) {
         isClose = false;
@@ -244,8 +297,24 @@ void LevelsScene::update(float delta) {
     } else if (isStart && start->getNumberOfRunningActions() <= 0) {
         isStart = false;
         LevelsScene::start();
-    } else if (level_i > -1 && levels.at(level_i)->getNumberOfRunningActions() <= 0) {
-        auto i = level_i;
+    } else if (isNext && next->getNumberOfRunningActions() <= 0) {
+        isNext = false;
+        cur_menu++;
+        if (cur_menu <= MAX_MENU) {
+            std::sprintf(res, "menu%i.tmx", cur_menu);
+            prepareMap(res);
+        } else {
+            cur_menu = MAX_MENU;
+        }
+    } else if (isBack && back->getNumberOfRunningActions() <= 0) {
+        isBack = false;
+        cur_menu--;
+    
+        std::sprintf(res, "menu%i.tmx", cur_menu);
+        prepareMap(res);
+    } else if (level_i > (cur_menu - 1) * MAX_LEVELS - 1 &&
+               levels.at(level_i - (cur_menu - 1) * MAX_LEVELS)->getNumberOfRunningActions() <= 0) {
+        auto i = level_i - (cur_menu - 1) * MAX_LEVELS;
         level_i = -1;
         changeLevel(levels.at(i)->getName());
     }
@@ -266,6 +335,18 @@ void LevelsScene::changeLevel(std::string name) {
         newScene = Lifts::createScene();
     else if (name == "holes")
         newScene = Holes::createScene();
+    else if (name == "eyes")
+        newScene = Eyes::createScene();
+    else if (name == "touch")
+        newScene = Hands::createScene();
+    else if (name == "noses")
+        newScene = Noses::createScene();
+    else if (name == "tongue")
+        newScene = Tongue::createScene();
+    else if (name == "ears")
+        newScene = Ears::createScene();
+    else if (name == "balance")
+        newScene = Balance::createScene();
     
     cocos2d::Director::getInstance()->replaceScene(TransitionCrossFade::create(1.0, newScene));
 }

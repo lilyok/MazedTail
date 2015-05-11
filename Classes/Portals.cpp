@@ -32,7 +32,7 @@ bool Portals::init() {
     // 1. super init first
     
     
-    if (!AbstractLabirint::init("portals.tmx", "back.png")) {
+    if (!AbstractLabirint::init("portals.tmx", "back0.png")) {
         return false;
     }
     

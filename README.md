@@ -8,3 +8,8 @@ cocos run -s ~/LilCompany/MazedTail -p ios
 write into /Users/lilil/LilCompany/MazedTail/proj.android/jni/Android.mk new classes to LOCAL_SRC_FILES
 
 MBP-lilil:proj.android lilil$ pwd /Users/lilil/LilCompany/MazedTail/proj.android MBP-lilil:proj.android lilil$ python build_native.py -p 21
+
+
+MacBook-Pro-lilil:proj.android lilil$ pwd
+/Users/lilil/LilCompany/MazedTail/proj.android
+MacBook-Pro-lilil:proj.android lilil$ ant release

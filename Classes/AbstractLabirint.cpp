@@ -79,6 +79,7 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     
     map->setScale(scale_map);
     map->setPosition(Vec2(xZero, yZero));
+    map->setName(map_name);
     addChild(map, 0);
     
     /////////////////////////////

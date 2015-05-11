@@ -11,7 +11,8 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
-
+#define MAX_MENU 2
+#define MAX_LEVELS 6
 /**
  * This scene contains the start button.
  * It inherits after CCLayer because it has only one layer.
@@ -25,6 +26,8 @@ public:
     void start();    
     void close();
     
+    void clearMap();
+    void prepareMap(std::string name);
     void changeLevel(std::string name);
     float icon_scale = 1.0;
     float scale_map = 1.0;
@@ -47,6 +50,10 @@ public:
 
     bool isClose = false;
     bool isStart = false;
+    bool isNext = false;
+    bool isBack = false;
+    int cur_menu = 1;
+
     int level_i = -1;
     
     void finishSplash(float dt);

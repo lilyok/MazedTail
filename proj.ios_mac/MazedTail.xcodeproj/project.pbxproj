@@ -73,6 +73,21 @@
 		921543001AA4A5D500C33E8E /* RestartNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 921542FA1AA4A5D500C33E8E /* RestartNormal.png */; };
 		921543011AA4A5D500C33E8E /* RestartSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 921542FB1AA4A5D500C33E8E /* RestartSelected.png */; };
 		921543051AA4C1F400C33E8E /* black_pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 921543041AA4C1F400C33E8E /* black_pixel.png */; };
+		924932B21AFF907A00728833 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B11AFF907A00728833 /* next.png */; };
+		924932B61AFF987900728833 /* menu2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 924932B51AFF987900728833 /* menu2.tmx */; };
+		924932BD1AFFFCB700728833 /* balance.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B71AFFFCB700728833 /* balance.png */; };
+		924932BE1AFFFCB700728833 /* ears.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B81AFFFCB700728833 /* ears.png */; };
+		924932BF1AFFFCB700728833 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B91AFFFCB700728833 /* eyes.png */; };
+		924932C01AFFFCB700728833 /* noses.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BA1AFFFCB700728833 /* noses.png */; };
+		924932C11AFFFCB700728833 /* tongue.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BB1AFFFCB700728833 /* tongue.png */; };
+		924932C21AFFFCB700728833 /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BC1AFFFCB700728833 /* touch.png */; };
+		924932C41B0003B000728833 /* back0.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932C31B0003B000728833 /* back0.png */; };
+		924932C71B00EFF300728833 /* Eyes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932C51B00EFF300728833 /* Eyes.cpp */; };
+		924932D31B00F61700728833 /* Balance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932C91B00F61700728833 /* Balance.cpp */; };
+		924932D41B00F61700728833 /* Ears.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CA1B00F61700728833 /* Ears.cpp */; };
+		924932D51B00F61700728833 /* Noses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CB1B00F61700728833 /* Noses.cpp */; };
+		924932D61B00F61700728833 /* Tongue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CC1B00F61700728833 /* Tongue.cpp */; };
+		924932D71B00F61700728833 /* Hands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CD1B00F61700728833 /* Hands.cpp */; };
 		92568E841A9D10210065A049 /* Portals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E821A9D10210065A049 /* Portals.cpp */; };
 		92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92568E8C1A9D116E0065A049 /* Marker Felt.ttf */; };
 		9287F1591ABF521C00750CAD /* flower.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9287F1571ABF521C00750CAD /* flower.plist */; };
@@ -101,7 +116,7 @@
 		92B5C4A51AF9305100D8CECD /* portals.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4941AF9305100D8CECD /* portals.png */; };
 		92B5C4A61AF9305100D8CECD /* rotators.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4951AF9305100D8CECD /* rotators.png */; };
 		92B5C4A71AF9305100D8CECD /* shifts.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4961AF9305100D8CECD /* shifts.png */; };
-		92B5C4AA1AF9306200D8CECD /* menu.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4A81AF9306200D8CECD /* menu.tmx */; };
+		92B5C4AA1AF9306200D8CECD /* menu1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4A81AF9306200D8CECD /* menu1.tmx */; };
 		92B5C4AB1AF9306200D8CECD /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 92B5C4A91AF9306200D8CECD /* menu.png */; };
 		92BEBA531AB61A3F006746DE /* life.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92BEBA511AB61A3F006746DE /* life.plist */; };
 		92BEBA541AB61A3F006746DE /* life.png in Resources */ = {isa = PBXBuildFile; fileRef = 92BEBA521AB61A3F006746DE /* life.png */; };
@@ -354,6 +369,27 @@
 		921542FA1AA4A5D500C33E8E /* RestartNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartNormal.png; sourceTree = "<group>"; };
 		921542FB1AA4A5D500C33E8E /* RestartSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartSelected.png; sourceTree = "<group>"; };
 		921543041AA4C1F400C33E8E /* black_pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_pixel.png; sourceTree = "<group>"; };
+		924932B11AFF907A00728833 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		924932B51AFF987900728833 /* menu2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menu2.tmx; sourceTree = "<group>"; };
+		924932B71AFFFCB700728833 /* balance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balance.png; sourceTree = "<group>"; };
+		924932B81AFFFCB700728833 /* ears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ears.png; sourceTree = "<group>"; };
+		924932B91AFFFCB700728833 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
+		924932BA1AFFFCB700728833 /* noses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noses.png; sourceTree = "<group>"; };
+		924932BB1AFFFCB700728833 /* tongue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tongue.png; sourceTree = "<group>"; };
+		924932BC1AFFFCB700728833 /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touch.png; sourceTree = "<group>"; };
+		924932C31B0003B000728833 /* back0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back0.png; sourceTree = "<group>"; };
+		924932C51B00EFF300728833 /* Eyes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Eyes.cpp; path = ../Classes/Eyes.cpp; sourceTree = "<group>"; };
+		924932C61B00EFF300728833 /* Eyes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Eyes.h; path = ../Classes/Eyes.h; sourceTree = "<group>"; };
+		924932C91B00F61700728833 /* Balance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Balance.cpp; path = ../Classes/Balance.cpp; sourceTree = "<group>"; };
+		924932CA1B00F61700728833 /* Ears.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ears.cpp; path = ../Classes/Ears.cpp; sourceTree = "<group>"; };
+		924932CB1B00F61700728833 /* Noses.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Noses.cpp; path = ../Classes/Noses.cpp; sourceTree = "<group>"; };
+		924932CC1B00F61700728833 /* Tongue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tongue.cpp; path = ../Classes/Tongue.cpp; sourceTree = "<group>"; };
+		924932CD1B00F61700728833 /* Hands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hands.cpp; path = ../Classes/Hands.cpp; sourceTree = "<group>"; };
+		924932CE1B00F61700728833 /* Balance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Balance.h; path = ../Classes/Balance.h; sourceTree = "<group>"; };
+		924932CF1B00F61700728833 /* Ears.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ears.h; path = ../Classes/Ears.h; sourceTree = "<group>"; };
+		924932D01B00F61700728833 /* Noses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Noses.h; path = ../Classes/Noses.h; sourceTree = "<group>"; };
+		924932D11B00F61700728833 /* Tongue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tongue.h; path = ../Classes/Tongue.h; sourceTree = "<group>"; };
+		924932D21B00F61700728833 /* Hands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hands.h; path = ../Classes/Hands.h; sourceTree = "<group>"; };
 		92568E821A9D10210065A049 /* Portals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Portals.cpp; path = ../Classes/Portals.cpp; sourceTree = "<group>"; };
 		92568E831A9D10210065A049 /* Portals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Portals.h; path = ../Classes/Portals.h; sourceTree = "<group>"; };
 		92568E8C1A9D116E0065A049 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
@@ -385,7 +421,7 @@
 		92B5C4941AF9305100D8CECD /* portals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = portals.png; sourceTree = "<group>"; };
 		92B5C4951AF9305100D8CECD /* rotators.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotators.png; sourceTree = "<group>"; };
 		92B5C4961AF9305100D8CECD /* shifts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shifts.png; sourceTree = "<group>"; };
-		92B5C4A81AF9306200D8CECD /* menu.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menu.tmx; sourceTree = "<group>"; };
+		92B5C4A81AF9306200D8CECD /* menu1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menu1.tmx; sourceTree = "<group>"; };
 		92B5C4A91AF9306200D8CECD /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		92BEBA511AB61A3F006746DE /* life.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = life.plist; sourceTree = "<group>"; };
 		92BEBA521AB61A3F006746DE /* life.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = life.png; sourceTree = "<group>"; };
@@ -511,6 +547,16 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				924932C91B00F61700728833 /* Balance.cpp */,
+				924932CA1B00F61700728833 /* Ears.cpp */,
+				924932CB1B00F61700728833 /* Noses.cpp */,
+				924932CC1B00F61700728833 /* Tongue.cpp */,
+				924932CD1B00F61700728833 /* Hands.cpp */,
+				924932CE1B00F61700728833 /* Balance.h */,
+				924932CF1B00F61700728833 /* Ears.h */,
+				924932D01B00F61700728833 /* Noses.h */,
+				924932D11B00F61700728833 /* Tongue.h */,
+				924932D21B00F61700728833 /* Hands.h */,
 				92FA9C651ADB015D00354941 /* Shifts.cpp */,
 				92FA9C661ADB015D00354941 /* Shifts.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
@@ -533,6 +579,8 @@
 				92FA9CA71AF41C3A00354941 /* Holes.h */,
 				92B5C4831AF9119000D8CECD /* LevelsScene.cpp */,
 				92B5C4841AF9119000D8CECD /* LevelsScene.h */,
+				924932C51B00EFF300728833 /* Eyes.cpp */,
+				924932C61B00EFF300728833 /* Eyes.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -660,6 +708,14 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				924932C31B0003B000728833 /* back0.png */,
+				924932B71AFFFCB700728833 /* balance.png */,
+				924932B81AFFFCB700728833 /* ears.png */,
+				924932B91AFFFCB700728833 /* eyes.png */,
+				924932BA1AFFFCB700728833 /* noses.png */,
+				924932BB1AFFFCB700728833 /* tongue.png */,
+				924932BC1AFFFCB700728833 /* touch.png */,
+				924932B11AFF907A00728833 /* next.png */,
 				92DB67061AFC06C60049354F /* ByeWorld.png */,
 				92DB67071AFC06C60049354F /* twang.wav */,
 				92DB67081AFC06C60049354F /* ccgiggle.wav */,
@@ -737,7 +793,8 @@
 		92B5C4601AF80CA400D8CECD /* TileMaps */ = {
 			isa = PBXGroup;
 			children = (
-				92B5C4A81AF9306200D8CECD /* menu.tmx */,
+				924932B51AFF987900728833 /* menu2.tmx */,
+				92B5C4A81AF9306200D8CECD /* menu1.tmx */,
 				92B5C4A91AF9306200D8CECD /* menu.png */,
 				92B5C4611AF80CA400D8CECD /* blue.png */,
 				92B5C4621AF80CA400D8CECD /* doors.tmx */,
@@ -920,12 +977,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924932C01AFFFCB700728833 /* noses.png in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				92FA9CA11AF41C0F00354941 /* hole.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				92DB67191AFC06C60049354F /* step.wav in Resources */,
+				924932BD1AFFFCB700728833 /* balance.png in Resources */,
+				924932C21AFFFCB700728833 /* touch.png in Resources */,
 				921542F31AA36BF800C33E8E /* spider.png in Resources */,
-				92B5C4AA1AF9306200D8CECD /* menu.tmx in Resources */,
+				92B5C4AA1AF9306200D8CECD /* menu1.tmx in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				92B5C4701AF80CA400D8CECD /* blue.png in Resources */,
 				92E0FAB11AACCD7100D3DC91 /* color_buttons.plist in Resources */,
@@ -953,6 +1013,7 @@
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				92FA9C971AED622600354941 /* sm.png in Resources */,
+				924932C11AFFFCB700728833 /* tongue.png in Resources */,
 				921543051AA4C1F400C33E8E /* black_pixel.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				92E0FAD51AAE3CA900D3DC91 /* back1.png in Resources */,
@@ -960,6 +1021,7 @@
 				92D2AEBE1AD1CD95007B363F /* tort.plist in Resources */,
 				92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */,
 				92D5C7321AFBB0A1009E0CB0 /* clearblack.png in Resources */,
+				924932B21AFF907A00728833 /* next.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				92DB67101AFC06C60049354F /* ByeWorld.png in Resources */,
 				92B5C4741AF80CA400D8CECD /* hole.tmx in Resources */,
@@ -978,11 +1040,13 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				92E0FAD91AB45CAE00D3DC91 /* bunny.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				924932BE1AFFFCB700728833 /* ears.png in Resources */,
 				92FA9C9F1AF41C0F00354941 /* back5.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				92BEBA571ABE17F7006746DE /* tgirl.plist in Resources */,
 				92D5C7301AF977F1009E0CB0 /* backall.png in Resources */,
 				921543001AA4A5D500C33E8E /* RestartNormal.png in Resources */,
+				924932C41B0003B000728833 /* back0.png in Resources */,
 				9287F1591ABF521C00750CAD /* flower.plist in Resources */,
 				92DB67111AFC06C60049354F /* twang.wav in Resources */,
 				92B5C4781AF80CA400D8CECD /* reds.png in Resources */,
@@ -996,6 +1060,7 @@
 				92FA9C931AEC26AD00354941 /* back4.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				921542F51AA486B300C33E8E /* back.png in Resources */,
+				924932B61AFF987900728833 /* menu2.tmx in Resources */,
 				92FA9CA01AF41C0F00354941 /* hole.plist in Resources */,
 				92FA9C991AEEE2BA00354941 /* fog.png in Resources */,
 				62347DF95CABFF9627DD5CBA /* plus.plist in Resources */,
@@ -1007,6 +1072,7 @@
 				92DB67171AFC06C60049354F /* pain.wav in Resources */,
 				623477A9165040346181CE38 /* plus.png in Resources */,
 				92B5C4A21AF9305100D8CECD /* doors.png in Resources */,
+				924932BF1AFFFCB700728833 /* eyes.png in Resources */,
 				92B5C47E1AF80CA400D8CECD /* yellow.png in Resources */,
 				92FA9C961AED622600354941 /* sm.plist in Resources */,
 				921542FC1AA4A5D500C33E8E /* PauseNormal.png in Resources */,
@@ -1036,17 +1102,23 @@
 			files = (
 				92FA9C671ADB015D00354941 /* Shifts.cpp in Sources */,
 				92568E841A9D10210065A049 /* Portals.cpp in Sources */,
+				924932D31B00F61700728833 /* Balance.cpp in Sources */,
 				92E0FAAE1AACB93D00D3DC91 /* Doors.cpp in Sources */,
+				924932D41B00F61700728833 /* Ears.cpp in Sources */,
 				92FA9C911AEC23F000354941 /* Lifts.cpp in Sources */,
+				924932D61B00F61700728833 /* Tongue.cpp in Sources */,
 				92FA9CA81AF41C3A00354941 /* Holes.cpp in Sources */,
 				92E0FAE21AB4B05C00D3DC91 /* Bot.cpp in Sources */,
 				92B5C4851AF9119000D8CECD /* LevelsScene.cpp in Sources */,
 				92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				924932C71B00EFF300728833 /* Eyes.cpp in Sources */,
+				924932D71B00F61700728833 /* Hands.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				623471B593DC63E11ADA3CB1 /* AbstractLabirint.cpp in Sources */,
+				924932D51B00F61700728833 /* Noses.cpp in Sources */,
 				9287F16E1ABF52B800750CAD /* Rotators.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

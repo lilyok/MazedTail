@@ -7,6 +7,7 @@
 //
 
 #include "Holes.h"
+#include "Eyes.h"
 USING_NS_CC;
 
 #define HOLE_TAG 110
@@ -281,9 +282,7 @@ bool Holes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
         }
         
     }
-//    if (nodeA->getTag() == HOLE_TAG or nodeB->getTag() == HOLE_TAG) {
-//        return false;
-//    }
+
     return true;
 }
 
@@ -366,7 +365,7 @@ Scene* Holes::returnRestartedScene(){
 }
 
 Scene* Holes::returnNewScene(){
-    return NULL;//LevelsScene::createScene();
+    return Eyes::createScene();
 }
 
 bool Holes::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) {

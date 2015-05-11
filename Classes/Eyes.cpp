@@ -37,7 +37,7 @@ bool Eyes::init() {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
     
     
-    if (!AbstractLabirint::init("rotates.tmx", "back2.png")) {
+    if (!AbstractLabirint::init("eyes.tmx", "back1.png")) {
         return false;
     }
     

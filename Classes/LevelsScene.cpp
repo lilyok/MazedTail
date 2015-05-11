@@ -335,7 +335,7 @@ void LevelsScene::changeLevel(std::string name) {
         newScene = Lifts::createScene();
     else if (name == "holes")
         newScene = Holes::createScene();
-    else if (name == "eyes")
+    else if (name == "eyemenu")
         newScene = Eyes::createScene();
     else if (name == "touch")
         newScene = Hands::createScene();

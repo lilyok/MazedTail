@@ -77,7 +77,6 @@
 		924932B61AFF987900728833 /* menu2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 924932B51AFF987900728833 /* menu2.tmx */; };
 		924932BD1AFFFCB700728833 /* balance.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B71AFFFCB700728833 /* balance.png */; };
 		924932BE1AFFFCB700728833 /* ears.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B81AFFFCB700728833 /* ears.png */; };
-		924932BF1AFFFCB700728833 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932B91AFFFCB700728833 /* eyes.png */; };
 		924932C01AFFFCB700728833 /* noses.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BA1AFFFCB700728833 /* noses.png */; };
 		924932C11AFFFCB700728833 /* tongue.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BB1AFFFCB700728833 /* tongue.png */; };
 		924932C21AFFFCB700728833 /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932BC1AFFFCB700728833 /* touch.png */; };
@@ -88,6 +87,9 @@
 		924932D51B00F61700728833 /* Noses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CB1B00F61700728833 /* Noses.cpp */; };
 		924932D61B00F61700728833 /* Tongue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CC1B00F61700728833 /* Tongue.cpp */; };
 		924932D71B00F61700728833 /* Hands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 924932CD1B00F61700728833 /* Hands.cpp */; };
+		924932DC1B01516600728833 /* eyes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 924932DA1B01516600728833 /* eyes.tmx */; };
+		924932DD1B01516600728833 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932DB1B01516600728833 /* eyes.png */; };
+		924932DF1B01523400728833 /* eyemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932DE1B01523400728833 /* eyemenu.png */; };
 		92568E841A9D10210065A049 /* Portals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E821A9D10210065A049 /* Portals.cpp */; };
 		92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92568E8C1A9D116E0065A049 /* Marker Felt.ttf */; };
 		9287F1591ABF521C00750CAD /* flower.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9287F1571ABF521C00750CAD /* flower.plist */; };
@@ -373,7 +375,6 @@
 		924932B51AFF987900728833 /* menu2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = menu2.tmx; sourceTree = "<group>"; };
 		924932B71AFFFCB700728833 /* balance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balance.png; sourceTree = "<group>"; };
 		924932B81AFFFCB700728833 /* ears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ears.png; sourceTree = "<group>"; };
-		924932B91AFFFCB700728833 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		924932BA1AFFFCB700728833 /* noses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noses.png; sourceTree = "<group>"; };
 		924932BB1AFFFCB700728833 /* tongue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tongue.png; sourceTree = "<group>"; };
 		924932BC1AFFFCB700728833 /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touch.png; sourceTree = "<group>"; };
@@ -390,6 +391,9 @@
 		924932D01B00F61700728833 /* Noses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Noses.h; path = ../Classes/Noses.h; sourceTree = "<group>"; };
 		924932D11B00F61700728833 /* Tongue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tongue.h; path = ../Classes/Tongue.h; sourceTree = "<group>"; };
 		924932D21B00F61700728833 /* Hands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hands.h; path = ../Classes/Hands.h; sourceTree = "<group>"; };
+		924932DA1B01516600728833 /* eyes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eyes.tmx; sourceTree = "<group>"; };
+		924932DB1B01516600728833 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
+		924932DE1B01523400728833 /* eyemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyemenu.png; sourceTree = "<group>"; };
 		92568E821A9D10210065A049 /* Portals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Portals.cpp; path = ../Classes/Portals.cpp; sourceTree = "<group>"; };
 		92568E831A9D10210065A049 /* Portals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Portals.h; path = ../Classes/Portals.h; sourceTree = "<group>"; };
 		92568E8C1A9D116E0065A049 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
@@ -708,10 +712,10 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				924932DE1B01523400728833 /* eyemenu.png */,
 				924932C31B0003B000728833 /* back0.png */,
 				924932B71AFFFCB700728833 /* balance.png */,
 				924932B81AFFFCB700728833 /* ears.png */,
-				924932B91AFFFCB700728833 /* eyes.png */,
 				924932BA1AFFFCB700728833 /* noses.png */,
 				924932BB1AFFFCB700728833 /* tongue.png */,
 				924932BC1AFFFCB700728833 /* touch.png */,
@@ -793,6 +797,8 @@
 		92B5C4601AF80CA400D8CECD /* TileMaps */ = {
 			isa = PBXGroup;
 			children = (
+				924932DA1B01516600728833 /* eyes.tmx */,
+				924932DB1B01516600728833 /* eyes.png */,
 				924932B51AFF987900728833 /* menu2.tmx */,
 				92B5C4A81AF9306200D8CECD /* menu1.tmx */,
 				92B5C4A91AF9306200D8CECD /* menu.png */,
@@ -1018,6 +1024,7 @@
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				92E0FAD51AAE3CA900D3DC91 /* back1.png in Resources */,
 				92B5C4771AF80CA400D8CECD /* portals.tmx in Resources */,
+				924932DD1B01516600728833 /* eyes.png in Resources */,
 				92D2AEBE1AD1CD95007B363F /* tort.plist in Resources */,
 				92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */,
 				92D5C7321AFBB0A1009E0CB0 /* clearblack.png in Resources */,
@@ -1030,6 +1037,7 @@
 				92FA9C801ADB029C00354941 /* greenwall.png in Resources */,
 				92B5C4AB1AF9306200D8CECD /* menu.png in Resources */,
 				92E0FAD81AB45CAE00D3DC91 /* bunny.plist in Resources */,
+				924932DF1B01523400728833 /* eyemenu.png in Resources */,
 				92B5C47D1AF80CA400D8CECD /* vided.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				92B5C4A71AF9305100D8CECD /* shifts.png in Resources */,
@@ -1072,10 +1080,10 @@
 				92DB67171AFC06C60049354F /* pain.wav in Resources */,
 				623477A9165040346181CE38 /* plus.png in Resources */,
 				92B5C4A21AF9305100D8CECD /* doors.png in Resources */,
-				924932BF1AFFFCB700728833 /* eyes.png in Resources */,
 				92B5C47E1AF80CA400D8CECD /* yellow.png in Resources */,
 				92FA9C961AED622600354941 /* sm.plist in Resources */,
 				921542FC1AA4A5D500C33E8E /* PauseNormal.png in Resources */,
+				924932DC1B01516600728833 /* eyes.tmx in Resources */,
 				92B5C4811AF80F8200D8CECD /* finish.png in Resources */,
 				921542FD1AA4A5D500C33E8E /* PauseSelected.png in Resources */,
 				92DB67161AFC06C60049354F /* allegro.mp3 in Resources */,

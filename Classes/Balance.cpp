@@ -120,6 +120,7 @@ bool Balance::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
         }*/
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+            setNextLevelNum(11);//12
             isNewLevel = true;
             return false;
         }

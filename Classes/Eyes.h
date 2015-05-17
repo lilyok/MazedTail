@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <AbstractLabirint.h>
 #include "cocos2d.h"
+#define INS_DELTA 100
 
 class Eyes: public AbstractLabirint{
 public:
@@ -29,6 +30,14 @@ public:
     CREATE_FUNC(Eyes);
     
 private:
+    cocos2d::Vector<cocos2d::Sprite*> inseye;
+    cocos2d::Vector<cocos2d::Sprite*> eyes;
+    cocos2d::Vector<cocos2d::Sprite*> bullets;
+    
+    std::vector<cocos2d::Vec2> bulletpositions;
+    std::vector<cocos2d::Vec2> bulletv;
+    
+    
     void ownEvent();    
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
@@ -44,6 +53,7 @@ private:
     cocos2d::Scene* returnRestartedScene();
     cocos2d::Scene* returnNewScene();
     
+    int num_ins_delta = 0;
     
 };
 #endif /* defined(__MazedTail__Eyes__) */

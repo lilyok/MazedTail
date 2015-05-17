@@ -272,7 +272,17 @@ void AbstractLabirint::onExit() {
     Layer::onExit();
 }
 
+void AbstractLabirint::setNextLevelNum(int next_level) {
+    cocos2d::UserDefault *def=UserDefault::getInstance();
+    auto high_score=def->getIntegerForKey(HIGH_SCORE);
+    if (high_score < next_level) {
+        def->setIntegerForKey(HIGH_SCORE, next_level);
+        def->flush();
+    }
+}
+
 void AbstractLabirint::update(float delta) {
+    //life_num = 3;
     if (!isNewLeveled && !isNewLevel && !isAll && isOnlyStart){
         audio->resumeBackgroundMusic();
         isOnlyStart = false;
@@ -316,10 +326,6 @@ void AbstractLabirint::update(float delta) {
         }
     }
     else if (isNewLevel) {
-        cocos2d::UserDefault *def=UserDefault::getInstance();
-        auto high_score=def->getIntegerForKey(HIGH_SCORE) + 1;
-        def->setIntegerForKey(HIGH_SCORE, high_score);
-        def->flush();
         isAll = true;
         isPaused = false;
         isNewLevel = false;
@@ -539,6 +545,7 @@ Vector<Sprite *> AbstractLabirint::makeObject(int tag, TMXObjectGroup *objects, 
             auto sprite = this->makePhysicsObjAt(name, tagname, _point, _size, form, isDynamic, v, n, mask);
             
             if (name == "") name = std::to_string(i);
+            
             i++;
             sprite->setName(name);
             sprites.pushBack(sprite);
@@ -587,6 +594,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(std::string name, int tag, Point p, S
     body->setDynamic(isDynamic);
     body->setContactTestBitmask(mask);
     body->setCollisionBitmask(mask);
+    body->setCategoryBitmask(mask);
     sprite->setPosition(p);
     addChild(sprite, 1);
     

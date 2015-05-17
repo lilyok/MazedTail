@@ -213,6 +213,7 @@ bool Shifts::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *no
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+            setNextLevelNum(4);
             isNewLevel = true;
             return false;
         }
@@ -230,21 +231,6 @@ void Shifts::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-        Sprite *bf;
-        if (nodeA->getTag() == FALLING_TAG)
-            bf = butterfly.at(stoi(nodeA->getName()));
-        else
-            bf = butterfly.at(stoi(nodeB->getName()));
-        
-        int num = stoi(bf->getName());
-        if (num % 3 == 0)
-            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 255, 255), TintTo::create(0.5, 255, 255, 255), NULL));
-        else if (stoi(bf->getName()) % 3 == 1)
-            bf->runAction(Sequence::create(TintTo::create(0.5f, 255, 255, 0), TintTo::create(0.5, 255, 255, 255), NULL));
-        else
-            bf->runAction(Sequence::create(TintTo::create(0.5f, 0, 0, 255), TintTo::create(0.5, 255, 255, 255), NULL));
-        
-        
         
         if (life_num == 0) {
             audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);

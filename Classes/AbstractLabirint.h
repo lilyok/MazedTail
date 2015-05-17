@@ -151,6 +151,8 @@ protected:
     void stopTakingPoints();
     
     CocosDenshion::SimpleAudioEngine* audio;
+    
+    void setNextLevelNum(int next_level);
 };
 
 

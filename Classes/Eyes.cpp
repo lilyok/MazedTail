@@ -12,9 +12,9 @@ USING_NS_CC;
 
 #define TORT_TAG 20
 
-#define BUTTON_TAG 105
-#define DOOR_TAG 100
-
+#define BULLET_TAG 105
+#define EYES_TAG 100
+#define INSEYES_TAG 110
 
 Scene *Eyes::createScene() {
     // 'scene' is an autorelease object
@@ -34,41 +34,127 @@ Scene *Eyes::createScene() {
 bool Eyes::init() {
     //////////////////////////////
     // 1. super init first
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("eye.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("inseye.plist");
     
-    
-    if (!AbstractLabirint::init("eyes.tmx", "back1.png")) {
+    if (!AbstractLabirint::init("eyes.tmx", "back6.png")) {
         return false;
     }
     
+    TMXObjectGroup *eyestmx = map->getObjectGroup("eyes");
+    this->eyes = makeObject(EYES_TAG, eyestmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFF000);
+
+    auto inseyeCount = 3;
+    auto inseyeAnimSize = 2;
     
+    TMXObjectGroup *inseyetmx = map->getObjectGroup("inseye");
+    this->inseye = makeObject(INSEYES_TAG, inseyetmx, SpriteFrameCache::getInstance(), "inseye", inseyeCount, inseyeAnimSize, scale_map, xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
+
+
     this->scheduleUpdate();
     return true;
 }
 
 void Eyes::ownEvent(){
+    if (num_ins_delta < INS_DELTA) {
+        num_ins_delta++;
+    } else {
+        for (auto ins : inseye){
+            ins->getPhysicsBody()->resetForces();
+            ins->getPhysicsBody()->setVelocity(Vec2(0,0));
+            float vx = 0.5 * (1 - rand() % 3);
+            float vy = 1;
+            ins->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
+        }
+        num_ins_delta = 0;
+    }
 
 }
 
 Sprite *Eyes::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
-   /* auto w = size.width;
-    auto h = size.height;
-    if (tag == DOOR_TAG || tag == BUTTON_TAG) {
-        auto name = "bluewall.png";
-        if (tag == BUTTON_TAG) {
-            if (sprite_name == "orange")
-                name = "orangeflower.png";
-            else
-                name = "blueflower.png";
+    if (tag == EYES_TAG) {
+        Sprite * sprite;
+        auto w = size.width;
+        auto h = size.height;
+        
+        Vector<SpriteFrame *> animEyes;
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye01.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye02.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye03.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye04.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye05.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye04.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye03.png"));
+        animEyes.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye02.png"));
+        
+        
+        
+        // create the animation out of the frames
+        Animation *animationEyes = Animation::createWithSpriteFrames(animEyes, 0.1);
+        auto dv = 70*scale_map;
+        
+        sprite = Sprite::createWithSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("eye01.png"));
+        Vec2 v = Vec2(0, dv);
+        sprite->setScale(w/sprite->getContentSize().width, h/sprite->getContentSize().height);
+        
+        if (sprite_name == "bottom") {
+            sprite->setRotation(0);
+            v.y = -dv;
         }
-        auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
-        auto current_scaleX = w / sprite->getContentSize().width;
-        auto current_scaleY = h / sprite->getContentSize().height;
-        sprite->setScale(current_scaleX, current_scaleY);
-        sprite->setOpacity(0);
+        else if (sprite_name == "top") {
+            sprite->setRotation(180);
+            v.y = dv;
+        }
+        else if (sprite_name == "left") {
+            sprite->setRotation(90);
+            v.x = -dv;
+            v.y = 0;
+        }
+        else if (sprite_name == "right") {
+            sprite->setRotation(-90);
+            v.x = dv;
+            v.y = 0;
+        }
+        bulletv.push_back(v);
+        
+        sprite->setPosition(p);
+        sprite->runAction(RepeatForever::create(Animate::create(animationEyes)));
+        
+        auto bullet = Sprite::create("eyebullet.png");
+        char *bname = new char[50];
+        sprintf(bname, "%zi", bulletpositions.size());
+        bullet->setName(bname);
+        bulletpositions.push_back(p);
+        bullet->setScale(w/2/bullet->getContentSize().width);
+        bullet->setPosition(p);
+        bullet->setTag(BULLET_TAG);
+        auto body = PhysicsBody::createCircle(w / 4.0,
+                                         PhysicsMaterial(0.1f, 0.0f, 0.0f));
+        body->setGravityEnable(false);
+        body->setDynamic(true);
+        body->setMass(0.1);
+        body->setContactTestBitmask(0x0000FFFF);
+        body->setCollisionBitmask(0x000000FF);
+        body->setRotationEnable(false);
+        bullet->setPhysicsBody(body);
+        bullet->getPhysicsBody()->applyForce(v);
+        bullet->setOpacity(0);
+        bullet->runAction(FadeTo::create(1, 255));
+        
+        auto bh = bullet->getContentSize().height;
+        auto bw = bullet->getContentSize().width;
+        ParticleFire *p_emitter = ParticleFire::createWithTotalParticles(500);
+        p_emitter->setGravity(v);
+        
+        p_emitter->setScale(scale_map*5);
+        p_emitter->setPosition(bw/2, bh/2);
+        bullet->addChild(p_emitter, 4);
+        bullets.pushBack(bullet);
+        
+        addChild(bullet, 3);
         return sprite;
-    } else*/
-    return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
+    } else
+        return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
 
@@ -98,43 +184,38 @@ void Eyes::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 
 bool Eyes::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-        /*if (nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG) {
+        if (nodeA->getTag() == INSEYES_TAG or nodeB->getTag() == INSEYES_TAG or
+            nodeA->getTag() == BULLET_TAG or nodeB->getTag() == BULLET_TAG) {
             audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
-        else */if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
-        } /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
-            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
-            auto btn_name = nodeB->getName();
-            if (nodeA->getTag() == BUTTON_TAG)
-                btn_name = nodeA->getName();
-            
-            for (auto btn : buttons) {
-                if (btn->getName() == btn_name)
-                    
-                    btn->runAction(Sequence::create(TintTo::create(0.75f, 200, 255, 0), TintTo::create(0.75, 255, 255, 255), NULL));
-            }
-            
-            return false;
-        }*/
+        }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+            setNextLevelNum(7);
             isNewLevel = true;
             return false;
         }
         
-    } /* else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
-                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
-                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
-                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
-                    if (nodeA->getTag() == TORT_TAG)
-                        botsManager->changeDirection(nodeA->getName());
-                    else
-                        botsManager->changeDirection(nodeB->getName());
-                    
-                }*/
+    }
+    else if (nodeA->getTag() == BULLET_TAG or nodeB->getTag()== BULLET_TAG)  {
+        if (nodeA->getTag() == EYES_TAG or nodeB->getTag()== EYES_TAG) {
+            
+            return false;
+        } else {
+            auto node = nodeB;
+            if (nodeA->getTag() == BULLET_TAG)
+                node = nodeA;
+            
+            node->setOpacity(0);
+            node->runAction(FadeTo::create(1, 255));
+            node->setPosition(bulletpositions.at(stoi(node->getName())));
+        }
+    }
+
     
     return true;
 }
@@ -148,22 +229,6 @@ void Eyes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-/*        Sprite *tort;
-        if (nodeA->getTag() == TORT_TAG)
-            tort = torts.at(stoi(nodeA->getName()));
-        else
-            tort = torts.at(stoi(nodeB->getName()));
-        
-        int num = stoi(tort->getName());
-        if (num % 3 == 0)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-        else if (stoi(tort->getName()) % 3 == 1)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-        else
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-        
-        
-        */
         if (life_num == 0) {
             audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
@@ -179,31 +244,56 @@ void Eyes::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Eyes::resumeScene() {
     AbstractLabirint::resumeScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: inseye) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+        sprite->getPhysicsBody()->setGravityEnable(true);
+    }
+    auto i = 0;
+    for (auto sprite: bullets) {
+        sprite->getPhysicsBody()->applyForce(bulletv.at(i));
+        i++;
     }
     
-    resumeAllObjectLayer(torts);*/
+    resumeAllObjectLayer(eyes);
+    resumeAllObjectLayer(inseye);
+    resumeAllObjectLayer(bullets);
+    
     resumeAllObjectLayer(pluses);
+    cocos2d::Node::resume();
 }
 
 void Eyes::pauseScene() {
     AbstractLabirint::pauseScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: inseye) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    for (auto sprite: bullets) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(torts);*/
+    pauseAllObjectLayer(eyes);
+    pauseAllObjectLayer(inseye);
+    pauseAllObjectLayer(bullets);
+    
     pauseAllObjectLayer(pluses);
 }
 
 void Eyes::stopScene() {
     AbstractLabirint::stopScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: inseye) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    stopAllObjectLayer(torts);*/
+    for (auto sprite: bullets) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    stopAllObjectLayer(eyes);
+    stopAllObjectLayer(inseye);
+    stopAllObjectLayer(bullets);
+   
     stopAllObjectLayer(pluses);
 }
 

@@ -93,7 +93,7 @@ void LevelsScene::prepareMap(std::string name) {
     clearMap();
 
     const char *HIGH_SCORE="l";
-    auto high_score = 7;//UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
+    auto high_score = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE);
     
     if (name == "") {
         char *res = new char[50];
@@ -142,7 +142,7 @@ void LevelsScene::prepareMap(std::string name) {
             sprite->setName(name);
             sprite->setPosition(_point);
             sprite->setRotation(r);
-            if (i  + MAX_LEVELS * (cur_menu - 1) > high_score)
+            if (i  + MAX_LEVELS * (cur_menu - 1) > fmin(high_score, 7)) //changed when sdded levels
                 sprite->setOpacity(100);
             r += 30;
             if (r > 30) r = -30;

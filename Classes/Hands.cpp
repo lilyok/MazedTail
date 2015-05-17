@@ -1,5 +1,5 @@
 //
-//  Touch.cpp
+//  Hands.cpp
 //  MazedTail
 //
 //  Created by lilil on 22.03.15.
@@ -12,9 +12,9 @@ USING_NS_CC;
 
 #define TORT_TAG 20
 
-#define BUTTON_TAG 105
-#define DOOR_TAG 100
-
+#define PUSHPIN_TAG 105
+#define HAND_TAG 100
+#define INSHAND_TAG 110
 
 Scene *Hands::createScene() {
     // 'scene' is an autorelease object
@@ -34,40 +34,87 @@ Scene *Hands::createScene() {
 bool Hands::init() {
     //////////////////////////////
     // 1. super init first
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
-    
-    
-    if (!AbstractLabirint::init("rotates.tmx", "back2.png")) {
+    if (!AbstractLabirint::init("hands.tmx", "back7.png")) {
         return false;
     }
     
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("inshand.plist");
     
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("handlist.plist");
+    Vector<SpriteFrame *> animHand;
+    animHand.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand01.png"));
+    animHand.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand02.png"));
+    animHand.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand03.png"));
+    animHand.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand04.png"));
+    
+    
+    
+    // create the animation out of the frames
+    auto animationHand = Animation::createWithSpriteFrames(animHand, 0.05);
+    animateHand = Animate::create(animationHand);
+    animateHand->retain();
+    
+    TMXObjectGroup *pushpintmx = map->getObjectGroup("pushpin");
+    this->pushpin = makeObject(PUSHPIN_TAG, pushpintmx, scale_map, xZero, yZero, BALL, true, 0, 0, 0xFFFFF000);
+    for (auto pin : pushpin) {
+        pin->getPhysicsBody()->resetForces();
+        pin->getPhysicsBody()->setGravityEnable(false);
+        pin->getPhysicsBody()->setMass(0.001);
+        pin->getPhysicsBody()->setLinearDamping(10.0f);
+    }
+    
+    TMXObjectGroup *handtmx = map->getObjectGroup("hands");
+    this->hands = makeObject(HAND_TAG, handtmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFF000);
+    for (auto hand : hands) {
+        reorderChild(hand, 3);
+    }
+    
+    TMXObjectGroup *inshandtmx = map->getObjectGroup("inshand");
+    this->inshand = makeObject(INSHAND_TAG, inshandtmx, SpriteFrameCache::getInstance(), "inshand", 1, 3, scale_map, xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
     this->scheduleUpdate();
     return true;
 }
 
 void Hands::ownEvent(){
-
+    if (cur_hand && cur_hand->getOpacity() == 253) {
+        audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
+        collisionWithEnemy(cur_hand, mysprite);
+        cur_hand = NULL;
+    }
+    if (num_ins_delta < INS_DELTA) {
+        num_ins_delta++;
+    } else {
+        for (auto ins : inshand){
+            ins->getPhysicsBody()->resetForces();
+            ins->getPhysicsBody()->setVelocity(Vec2(0,0));
+            float vx = 0.5 * (1 - rand() % 3);
+            float vy = 1;
+            ins->getPhysicsBody()->applyImpulse(Vec2(Vec2(vx*scale_map, vy*scale_map)));
+        }
+        num_ins_delta = 0;
+    }
 }
 
 Sprite *Hands::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
-   /* auto w = size.width;
+    auto w = size.width;
     auto h = size.height;
-    if (tag == DOOR_TAG || tag == BUTTON_TAG) {
-        auto name = "bluewall.png";
-        if (tag == BUTTON_TAG) {
-            if (sprite_name == "orange")
-                name = "orangeflower.png";
-            else
-                name = "blueflower.png";
-        }
-        auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
+    if (tag == PUSHPIN_TAG) {
+        auto sprite = Sprite::create("pushpin.png");
         auto current_scaleX = w / sprite->getContentSize().width;
         auto current_scaleY = h / sprite->getContentSize().height;
         sprite->setScale(current_scaleX, current_scaleY);
-        sprite->setOpacity(0);
         return sprite;
-    } else*/
+    }else if (tag == HAND_TAG) {
+        auto sprite = Sprite::createWithSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hand01.png"));
+        sprite->setScale(2*w/sprite->getContentSize().width, h/sprite->getContentSize().height);
+        
+        if (sprite_name == "top") {
+            sprite->setRotation(180);
+        }
+        
+        sprite->setPosition(p);
+        return sprite;
+    } else
     return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
@@ -93,48 +140,53 @@ void Hands::onContactSeperate(const cocos2d::PhysicsContact &contact) {
             if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG)
                 isPlus = false;
         }
+        if (nodeA->getTag() == HAND_TAG or nodeB->getTag() == HAND_TAG) {
+            auto node = nodeA;
+            if(nodeB->getTag() == HAND_TAG)
+                node = nodeB;
+            node->stopAllActions();
+            node->runAction(Sequence::create(TintTo::create(0.5, 255, 255, 255), FadeTo::create(0, 255), NULL));
+        }
     }
 }
 
 bool Hands::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-        /*if (nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG) {
-            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
+        if (nodeA->getTag() == HAND_TAG or nodeB->getTag() == HAND_TAG) {
+            auto node = nodeA;
+            if (nodeB->getTag() == HAND_TAG)
+                node = nodeB;
+            
+            if (node->getOpacity() == 255 && node->getNumberOfRunningActions() <= 0) {
+                node->runAction(Sequence::create(animateHand, FadeTo::create(0, 253), animateHand->reverse(), FadeTo::create(0, 254), NULL));
+                cur_hand = node;
+            }
+            return false;
+        } else if (nodeA->getTag() == INSHAND_TAG or nodeB->getTag() == INSHAND_TAG) {
             collisionWithEnemy(nodeA, nodeB);
         }
-        else */if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
-        } /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
-            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
-            auto btn_name = nodeB->getName();
-            if (nodeA->getTag() == BUTTON_TAG)
-                btn_name = nodeA->getName();
-            
-            for (auto btn : buttons) {
-                if (btn->getName() == btn_name)
-                    
-                    btn->runAction(Sequence::create(TintTo::create(0.75f, 200, 255, 0), TintTo::create(0.75, 255, 255, 255), NULL));
-            }
-            
-            return false;
-        }*/
+        }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+            setNextLevelNum(7);//8
             isNewLevel = true;
             return false;
         }
         
-    } /* else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
-                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
-                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
-                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
-                    if (nodeA->getTag() == TORT_TAG)
-                        botsManager->changeDirection(nodeA->getName());
-                    else
-                        botsManager->changeDirection(nodeB->getName());
-                    
-                }*/
+    } else if (nodeA->getTag() == HAND_TAG or nodeB->getTag() == HAND_TAG) {
+        auto node = nodeA;
+        if(nodeB->getTag() == HAND_TAG)
+            node = nodeB;
+        if (node->getOpacity() == 255 && node->getNumberOfRunningActions() <= 0) {
+            node->runAction(Sequence::create(animateHand, animateHand->reverse(), NULL));
+            node->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), FadeTo::create(0, 254), NULL));
+            audio->playEffect("pain.wav", false, 0.5f, 0.0f, 1.0f);
+        }
+        return false;
+    }
     
     return true;
 }
@@ -148,22 +200,7 @@ void Hands::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-/*        Sprite *tort;
-        if (nodeA->getTag() == TORT_TAG)
-            tort = torts.at(stoi(nodeA->getName()));
-        else
-            tort = torts.at(stoi(nodeB->getName()));
-        
-        int num = stoi(tort->getName());
-        if (num % 3 == 0)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-        else if (stoi(tort->getName()) % 3 == 1)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-        else
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-        
-        
-        */
+
         if (life_num == 0) {
             audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
@@ -179,31 +216,44 @@ void Hands::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Hands::resumeScene() {
     AbstractLabirint::resumeScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: inshand) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+        sprite->getPhysicsBody()->setGravityEnable(true);
     }
-    
-    resumeAllObjectLayer(torts);*/
+    resumeAllObjectLayer(inshand);
+    resumeAllObjectLayer(hands);
     resumeAllObjectLayer(pluses);
 }
 
 void Hands::pauseScene() {
     AbstractLabirint::pauseScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: pushpin) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(torts);*/
+    for (auto sprite: inshand) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    pauseAllObjectLayer(inshand);
+    pauseAllObjectLayer(hands);
     pauseAllObjectLayer(pluses);
 }
 
 void Hands::stopScene() {
     AbstractLabirint::stopScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: pushpin) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    stopAllObjectLayer(torts);*/
+    for (auto sprite: inshand) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    pauseAllObjectLayer(inshand);
+    stopAllObjectLayer(hands);
     stopAllObjectLayer(pluses);
 }
 
@@ -212,7 +262,7 @@ Scene* Hands::returnRestartedScene(){
 }
 
 Scene* Hands::returnNewScene(){
-    return Noses::createScene();
+    return NULL;  //Noses::createScene();
 }
 
 

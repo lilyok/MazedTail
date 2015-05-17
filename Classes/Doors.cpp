@@ -183,6 +183,7 @@ bool Doors::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
             m_emitter->resetSystem();
         } else {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
+            setNextLevelNum(2);
             isNewLevel = true;
             return false;
         }

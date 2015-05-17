@@ -90,6 +90,18 @@
 		924932DC1B01516600728833 /* eyes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 924932DA1B01516600728833 /* eyes.tmx */; };
 		924932DD1B01516600728833 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932DB1B01516600728833 /* eyes.png */; };
 		924932DF1B01523400728833 /* eyemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932DE1B01523400728833 /* eyemenu.png */; };
+		924932E31B05451C00728833 /* eyebullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932E01B05451C00728833 /* eyebullet.png */; };
+		924932E41B05451C00728833 /* eye.plist in Resources */ = {isa = PBXBuildFile; fileRef = 924932E11B05451C00728833 /* eye.plist */; };
+		924932E51B05451C00728833 /* eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932E21B05451C00728833 /* eye.png */; };
+		924932E81B065B9E00728833 /* inseye.plist in Resources */ = {isa = PBXBuildFile; fileRef = 924932E61B065B9E00728833 /* inseye.plist */; };
+		924932E91B065B9E00728833 /* inseye.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932E71B065B9E00728833 /* inseye.png */; };
+		924932EC1B07A41F00728833 /* handlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 924932EA1B07A41F00728833 /* handlist.plist */; };
+		924932ED1B07A41F00728833 /* handlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932EB1B07A41F00728833 /* handlist.png */; };
+		924932F01B07A42C00728833 /* hands.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 924932EE1B07A42C00728833 /* hands.tmx */; };
+		924932F11B07A42C00728833 /* hands.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932EF1B07A42C00728833 /* hands.png */; };
+		924932F31B07B16C00728833 /* pushpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932F21B07B16C00728833 /* pushpin.png */; };
+		924932F61B07EA8500728833 /* inshand.plist in Resources */ = {isa = PBXBuildFile; fileRef = 924932F41B07EA8500728833 /* inshand.plist */; };
+		924932F71B07EA8500728833 /* inshand.png in Resources */ = {isa = PBXBuildFile; fileRef = 924932F51B07EA8500728833 /* inshand.png */; };
 		92568E841A9D10210065A049 /* Portals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92568E821A9D10210065A049 /* Portals.cpp */; };
 		92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92568E8C1A9D116E0065A049 /* Marker Felt.ttf */; };
 		9287F1591ABF521C00750CAD /* flower.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9287F1571ABF521C00750CAD /* flower.plist */; };
@@ -394,6 +406,18 @@
 		924932DA1B01516600728833 /* eyes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eyes.tmx; sourceTree = "<group>"; };
 		924932DB1B01516600728833 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		924932DE1B01523400728833 /* eyemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyemenu.png; sourceTree = "<group>"; };
+		924932E01B05451C00728833 /* eyebullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyebullet.png; sourceTree = "<group>"; };
+		924932E11B05451C00728833 /* eye.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = eye.plist; sourceTree = "<group>"; };
+		924932E21B05451C00728833 /* eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye.png; sourceTree = "<group>"; };
+		924932E61B065B9E00728833 /* inseye.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inseye.plist; sourceTree = "<group>"; };
+		924932E71B065B9E00728833 /* inseye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inseye.png; sourceTree = "<group>"; };
+		924932EA1B07A41F00728833 /* handlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = handlist.plist; sourceTree = "<group>"; };
+		924932EB1B07A41F00728833 /* handlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = handlist.png; sourceTree = "<group>"; };
+		924932EE1B07A42C00728833 /* hands.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = hands.tmx; sourceTree = "<group>"; };
+		924932EF1B07A42C00728833 /* hands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hands.png; sourceTree = "<group>"; };
+		924932F21B07B16C00728833 /* pushpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pushpin.png; sourceTree = "<group>"; };
+		924932F41B07EA8500728833 /* inshand.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inshand.plist; sourceTree = "<group>"; };
+		924932F51B07EA8500728833 /* inshand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inshand.png; sourceTree = "<group>"; };
 		92568E821A9D10210065A049 /* Portals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Portals.cpp; path = ../Classes/Portals.cpp; sourceTree = "<group>"; };
 		92568E831A9D10210065A049 /* Portals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Portals.h; path = ../Classes/Portals.h; sourceTree = "<group>"; };
 		92568E8C1A9D116E0065A049 /* Marker Felt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Marker Felt.ttf"; sourceTree = "<group>"; };
@@ -712,6 +736,16 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				924932F41B07EA8500728833 /* inshand.plist */,
+				924932F51B07EA8500728833 /* inshand.png */,
+				924932F21B07B16C00728833 /* pushpin.png */,
+				924932EA1B07A41F00728833 /* handlist.plist */,
+				924932EB1B07A41F00728833 /* handlist.png */,
+				924932E61B065B9E00728833 /* inseye.plist */,
+				924932E71B065B9E00728833 /* inseye.png */,
+				924932E01B05451C00728833 /* eyebullet.png */,
+				924932E11B05451C00728833 /* eye.plist */,
+				924932E21B05451C00728833 /* eye.png */,
 				924932DE1B01523400728833 /* eyemenu.png */,
 				924932C31B0003B000728833 /* back0.png */,
 				924932B71AFFFCB700728833 /* balance.png */,
@@ -797,6 +831,8 @@
 		92B5C4601AF80CA400D8CECD /* TileMaps */ = {
 			isa = PBXGroup;
 			children = (
+				924932EE1B07A42C00728833 /* hands.tmx */,
+				924932EF1B07A42C00728833 /* hands.png */,
 				924932DA1B01516600728833 /* eyes.tmx */,
 				924932DB1B01516600728833 /* eyes.png */,
 				924932B51AFF987900728833 /* menu2.tmx */,
@@ -991,6 +1027,7 @@
 				924932BD1AFFFCB700728833 /* balance.png in Resources */,
 				924932C21AFFFCB700728833 /* touch.png in Resources */,
 				921542F31AA36BF800C33E8E /* spider.png in Resources */,
+				924932F61B07EA8500728833 /* inshand.plist in Resources */,
 				92B5C4AA1AF9306200D8CECD /* menu1.tmx in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				92B5C4701AF80CA400D8CECD /* blue.png in Resources */,
@@ -1009,9 +1046,12 @@
 				921542F21AA36BF800C33E8E /* spider.plist in Resources */,
 				9287F1701ABF53F900750CAD /* back2.png in Resources */,
 				92B5C4821AF80F8200D8CECD /* start.png in Resources */,
+				924932F71B07EA8500728833 /* inshand.png in Resources */,
 				92B5C4761AF80CA400D8CECD /* oranges.png in Resources */,
 				9287F15A1ABF521C00750CAD /* flower.png in Resources */,
+				924932E51B05451C00728833 /* eye.png in Resources */,
 				92B5C4A31AF9305100D8CECD /* holes.png in Resources */,
+				924932F01B07A42C00728833 /* hands.tmx in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				92FA9C881AE2CEB700354941 /* bf.png in Resources */,
 				92E0FAB21AACCD7100D3DC91 /* color_buttons.png in Resources */,
@@ -1028,6 +1068,7 @@
 				92D2AEBE1AD1CD95007B363F /* tort.plist in Resources */,
 				92568E961A9D116E0065A049 /* Marker Felt.ttf in Resources */,
 				92D5C7321AFBB0A1009E0CB0 /* clearblack.png in Resources */,
+				924932ED1B07A41F00728833 /* handlist.png in Resources */,
 				924932B21AFF907A00728833 /* next.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				92DB67101AFC06C60049354F /* ByeWorld.png in Resources */,
@@ -1040,7 +1081,9 @@
 				924932DF1B01523400728833 /* eyemenu.png in Resources */,
 				92B5C47D1AF80CA400D8CECD /* vided.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
+				924932E91B065B9E00728833 /* inseye.png in Resources */,
 				92B5C4A71AF9305100D8CECD /* shifts.png in Resources */,
+				924932E41B05451C00728833 /* eye.plist in Resources */,
 				92DB67181AFC06C60049354F /* btnclick.wav in Resources */,
 				92FA9C9B1AF2D7D500354941 /* fog.plist in Resources */,
 				92B5C4A51AF9305100D8CECD /* portals.png in Resources */,
@@ -1057,8 +1100,10 @@
 				924932C41B0003B000728833 /* back0.png in Resources */,
 				9287F1591ABF521C00750CAD /* flower.plist in Resources */,
 				92DB67111AFC06C60049354F /* twang.wav in Resources */,
+				924932F11B07A42C00728833 /* hands.png in Resources */,
 				92B5C4781AF80CA400D8CECD /* reds.png in Resources */,
 				92DB67141AFC06C60049354F /* bruitmetallique.wav in Resources */,
+				924932EC1B07A41F00728833 /* handlist.plist in Resources */,
 				92DB67151AFC06C60049354F /* chime.wav in Resources */,
 				921542FF1AA4A5D500C33E8E /* PlaySelected.png in Resources */,
 				92DB67131AFC06C60049354F /* harpup.wav in Resources */,
@@ -1072,10 +1117,12 @@
 				92FA9CA01AF41C0F00354941 /* hole.plist in Resources */,
 				92FA9C991AEEE2BA00354941 /* fog.png in Resources */,
 				62347DF95CABFF9627DD5CBA /* plus.plist in Resources */,
+				924932E81B065B9E00728833 /* inseye.plist in Resources */,
 				92B5C4731AF80CA400D8CECD /* green.png in Resources */,
 				92BEBA531AB61A3F006746DE /* life.plist in Resources */,
 				92B5C4A41AF9305100D8CECD /* mists.png in Resources */,
 				92B5C4711AF80CA400D8CECD /* doors.tmx in Resources */,
+				924932E31B05451C00728833 /* eyebullet.png in Resources */,
 				92B5C47A1AF80CA400D8CECD /* shifts.tmx in Resources */,
 				92DB67171AFC06C60049354F /* pain.wav in Resources */,
 				623477A9165040346181CE38 /* plus.png in Resources */,
@@ -1083,6 +1130,7 @@
 				92B5C47E1AF80CA400D8CECD /* yellow.png in Resources */,
 				92FA9C961AED622600354941 /* sm.plist in Resources */,
 				921542FC1AA4A5D500C33E8E /* PauseNormal.png in Resources */,
+				924932F31B07B16C00728833 /* pushpin.png in Resources */,
 				924932DC1B01516600728833 /* eyes.tmx in Resources */,
 				92B5C4811AF80F8200D8CECD /* finish.png in Resources */,
 				921542FD1AA4A5D500C33E8E /* PauseSelected.png in Resources */,

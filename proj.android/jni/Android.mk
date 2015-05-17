@@ -20,6 +20,12 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AbstractLabirint.cpp \
                    ../../Classes/Lifts.cpp \
                    ../../Classes/Holes.cpp \
+                   ../../Classes/Eyes.cpp \
+                   ../../Classes/Ears.cpp \
+                   ../../Classes/Balance.cpp \
+                   ../../Classes/Noses.cpp \
+                   ../../Classes/Tongue.cpp \
+                   ../../Classes/Hands.cpp \
                    ../../Classes/Bot.cpp \
                    ../../Classes/BotsManager.cpp
 

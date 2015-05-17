@@ -256,7 +256,7 @@ bool Portals::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *n
             m_emitter->resetSystem();
         } else {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
-
+            setNextLevelNum(1);
             isNewLevel = true;
             return false;
         }

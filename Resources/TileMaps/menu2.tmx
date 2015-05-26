@@ -3610,7 +3610,7 @@
  <objectgroup name="levels">
   <object id="1" name="eyemenu" x="619.891" y="591.238" width="802.435" height="343.11"/>
   <object id="3" name="touch" x="2156.51" y="591.24" width="802.435" height="343.11"/>
-  <object id="4" name="noses" x="3696.43" y="591.24" width="802.435" height="343.11"/>
+  <object id="4" name="nose" x="3696.43" y="591.24" width="802.435" height="343.11"/>
   <object id="5" name="tongue" x="620.944" y="1681.73" width="802.435" height="343.11"/>
   <object id="6" name="ears" x="2160.82" y="1681.73" width="802.435" height="343.11"/>
   <object id="7" name="balance" x="3694.16" y="1681.73" width="802.435" height="343.11"/>

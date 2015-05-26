@@ -171,7 +171,7 @@ bool Hands::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
         }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
-            setNextLevelNum(7);//8
+            setNextLevelNum(8);
             isNewLevel = true;
             return false;
         }

@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <AbstractLabirint.h>
 #include "cocos2d.h"
+#include "BotsManager.h"
+#define BOT_DELTA 50
 
 class Tongue: public AbstractLabirint{
 public:
@@ -29,7 +31,15 @@ public:
     CREATE_FUNC(Tongue);
     
 private:
-    void ownEvent();    
+    BotsManager*  botsManager;
+    cocos2d::Vector<cocos2d::Sprite*> tongue;
+    
+    cocos2d::Vector<cocos2d::Sprite*> cannons;
+    std::vector<cocos2d::Vec2> bulletpositions;
+    std::vector<cocos2d::Vec2> bulletv;
+    cocos2d::Vector<cocos2d::Sprite*> bullets;
+    
+    void ownEvent();
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);

@@ -142,7 +142,7 @@ void LevelsScene::prepareMap(std::string name) {
             sprite->setName(name);
             sprite->setPosition(_point);
             sprite->setRotation(r);
-            if (i  + MAX_LEVELS * (cur_menu - 1) > fmin(high_score, 7)) //changed when sdded levels
+            if (i  + MAX_LEVELS * (cur_menu - 1) > fmin(high_score, 9)) //changed when sdded levels
                 sprite->setOpacity(100);
             r += 30;
             if (r > 30) r = -30;
@@ -339,7 +339,7 @@ void LevelsScene::changeLevel(std::string name) {
         newScene = Eyes::createScene();
     else if (name == "touch")
         newScene = Hands::createScene();
-    else if (name == "noses")
+    else if (name == "nose")
         newScene = Noses::createScene();
     else if (name == "tongue")
         newScene = Tongue::createScene();

@@ -619,7 +619,7 @@ Sprite *AbstractLabirint::makePhysicsObjAt(int tag, Point p, Size size, bool isD
                                       PhysicsMaterial(1.0f, 1.0f, 0.0f));
     } else if (form == BALL) {
         body = PhysicsBody::createCircle(MAX(size.width, size.height) / 2.0,
-                                         PhysicsMaterial(1.0f, 1.0f, 0.2f));
+                                         PhysicsMaterial(1.0f, 1.0f, 0.0f));
     }
     sprite->setTag(tag);
     if (isDynamic) {

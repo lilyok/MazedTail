@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <AbstractLabirint.h>
 #include "cocos2d.h"
+#define INS_DELTA 100
 
 class Noses: public AbstractLabirint{
 public:
@@ -29,6 +30,15 @@ public:
     CREATE_FUNC(Noses);
     
 private:
+    cocos2d::Vector<cocos2d::Sprite*> noses;
+    cocos2d::Vector<cocos2d::Sprite*> smells;
+    cocos2d::Vector<cocos2d::Sprite*> cheeses;
+    cocos2d::Vector<cocos2d::Sprite*> insnose;
+    
+    int num_ins_delta = 0;
+    int sf = 0;
+    std::string last_name = "";
+    
     void ownEvent();    
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);

@@ -12,8 +12,9 @@ USING_NS_CC;
 
 #define TORT_TAG 20
 
-#define BUTTON_TAG 105
-#define DOOR_TAG 100
+#define TONGUE_TAG 110
+#define BULLET_TAG 105
+#define CANNON_TAG 100
 
 
 Scene *Tongue::createScene() {
@@ -34,11 +35,25 @@ Scene *Tongue::createScene() {
 bool Tongue::init() {
     //////////////////////////////
     // 1. super init first
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
+   // SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
     
     
-    if (!AbstractLabirint::init("rotates.tmx", "back2.png")) {
+    if (!AbstractLabirint::init("lips.tmx", "back9.png")) {
         return false;
+    }
+    TMXObjectGroup *eyestmx = map->getObjectGroup("cannon");
+    this->cannons = makeObject(CANNON_TAG, eyestmx, scale_map, xZero, yZero, BRICK, true, 0, 0, 0xFFFFF000);
+    for (auto c : cannons) {
+        c->getPhysicsBody()->setGravityEnable(false);
+        c->getPhysicsBody()->setRotationEnable(true);
+        c->setRotation(180);
+        c->getPhysicsBody()->setMoment(100);
+    }
+    
+    botsManager = new BotsManager(xZero, yZero, map, "tongue", "tonguelist.plist", "tonguelist", scale_map, TONGUE_TAG);
+    tongue = botsManager->getBotsSprites();
+    for(auto t:tongue){
+        AbstractLabirint::addChild(t, 2);
     }
     
     
@@ -47,27 +62,59 @@ bool Tongue::init() {
 }
 
 void Tongue::ownEvent(){
-
+    for (auto c : cannons) {
+        auto nm = c->getName();
+        auto dv = 70*scale_map;
+        Vec2 v = Vec2(0, dv);
+        auto r = c->getPhysicsBody()->getRotation();
+        while (r < 0) r = 360 + r;
+        v.rotate(Vec2(0,0), 0 + r);
+        bulletv[stoi(nm)] = v;
+        
+    }
 }
 
 Sprite *Tongue::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
-   /* auto w = size.width;
+    auto w = size.width;
     auto h = size.height;
-    if (tag == DOOR_TAG || tag == BUTTON_TAG) {
-        auto name = "bluewall.png";
-        if (tag == BUTTON_TAG) {
-            if (sprite_name == "orange")
-                name = "orangeflower.png";
-            else
-                name = "blueflower.png";
-        }
-        auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
+    if (tag == CANNON_TAG) {
+        auto sprite = Sprite::create("cannon.png");
         auto current_scaleX = w / sprite->getContentSize().width;
         auto current_scaleY = h / sprite->getContentSize().height;
         sprite->setScale(current_scaleX, current_scaleY);
-        sprite->setOpacity(0);
+        
+        auto dv = 70*scale_map;
+        Vec2 v = Vec2(0, dv);
+        bulletv.push_back(v);
+        
+        auto bullet = Sprite::create("lemon.png");
+        char *bname = new char[50];
+        sprintf(bname, "%zi", bulletpositions.size());
+        bullet->setName(bname);
+        bulletpositions.push_back(p);
+        bullet->setScale(w/2/bullet->getContentSize().width);
+        bullet->setPosition(p);
+        bullet->setTag(BULLET_TAG);
+        auto body = PhysicsBody::createCircle(w / 4.0,
+                                              PhysicsMaterial(0.1f, 0.0f, 0.0f));
+        body->setGravityEnable(false);
+        body->setDynamic(true);
+        body->setMass(0.1);
+        body->setContactTestBitmask(0x0000FFFF);
+        body->setCollisionBitmask(0x000000FF);
+        body->setRotationEnable(false);
+        bullet->setPhysicsBody(body);
+        bullet->getPhysicsBody()->applyForce(v);
+        bullet->setOpacity(0);
+        bullet->runAction(FadeTo::create(1, 255));
+ 
+        bullets.pushBack(bullet);
+        
+        addChild(bullet, 3);
+
+        
         return sprite;
-    } else*/
+    } else
     return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
@@ -98,27 +145,14 @@ void Tongue::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 
 bool Tongue::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-        /*if (nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG) {
+        if (nodeA->getTag() == TONGUE_TAG or nodeB->getTag() == TONGUE_TAG) {
             audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
             collisionWithEnemy(nodeA, nodeB);
         }
-        else */if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
-        } /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
-            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
-            auto btn_name = nodeB->getName();
-            if (nodeA->getTag() == BUTTON_TAG)
-                btn_name = nodeA->getName();
-            
-            for (auto btn : buttons) {
-                if (btn->getName() == btn_name)
-                    
-                    btn->runAction(Sequence::create(TintTo::create(0.75f, 200, 255, 0), TintTo::create(0.75, 255, 255, 255), NULL));
-            }
-            
-            return false;
-        }*/
+        }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             setNextLevelNum(10);
@@ -126,17 +160,43 @@ bool Tongue::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *no
             return false;
         }
         
-    } /* else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
-                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
-                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
-                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
-                    if (nodeA->getTag() == TORT_TAG)
-                        botsManager->changeDirection(nodeA->getName());
-                    else
-                        botsManager->changeDirection(nodeB->getName());
-                    
-                }*/
-    
+    } else if (nodeA->getTag() == BULLET_TAG or nodeB->getTag()== BULLET_TAG)  {
+        if (nodeA->getTag() == CANNON_TAG or nodeB->getTag()== CANNON_TAG) {
+            return false;
+        } else {
+            auto node = nodeB;
+            if (nodeA->getTag() == BULLET_TAG)
+                node = nodeA;
+                
+            node->setOpacity(0);
+            node->runAction(FadeTo::create(1, 255));
+            node->getPhysicsBody()->resetForces();
+            node->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            node->getPhysicsBody()->applyForce(bulletv.at(stoi(node->getName())));
+            node->setPosition(bulletpositions.at(stoi(node->getName())));
+            
+            if (nodeA->getTag() == TONGUE_TAG) {
+                nodeA->runAction(Sequence::create(TintTo::create(0.5f, 100, 0, 100), TintTo::create(0.5, 255, 255, 255), NULL));
+                botsManager->changeDirection(nodeA->getName());
+            }
+            else if (nodeB->getTag() == TONGUE_TAG) {
+                nodeB->runAction(Sequence::create(TintTo::create(0.5f, 100, 0, 100), TintTo::create(0.5, 255, 255, 255), NULL));
+                botsManager->changeDirection(nodeB->getName());
+            }
+        }
+    } else if ((nodeA->getTag() == CANNON_TAG or nodeB->getTag()== CANNON_TAG) and
+               (nodeA->getTag() == COLLISION_TAG or nodeB->getTag()== COLLISION_TAG)) {
+        return false;
+    } else if (nodeA->getTag() == TONGUE_TAG or nodeB->getTag()== TONGUE_TAG) {
+        if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+            return false;
+        }
+        else if (nodeA->getTag() == TONGUE_TAG)
+            botsManager->changeDirection(nodeA->getName());
+        else if (nodeB->getTag() == TONGUE_TAG)
+            botsManager->changeDirection(nodeB->getName());
+    }
+
     return true;
 }
 
@@ -149,22 +209,7 @@ void Tongue::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-/*        Sprite *tort;
-        if (nodeA->getTag() == TORT_TAG)
-            tort = torts.at(stoi(nodeA->getName()));
-        else
-            tort = torts.at(stoi(nodeB->getName()));
-        
-        int num = stoi(tort->getName());
-        if (num % 3 == 0)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-        else if (stoi(tort->getName()) % 3 == 1)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-        else
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-        
-        
-        */
+
         if (life_num == 0) {
             audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));
@@ -180,31 +225,51 @@ void Tongue::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Tongue::resumeScene() {
     AbstractLabirint::resumeScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: tongue) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
     }
-    
-    resumeAllObjectLayer(torts);*/
+    auto i = 0;
+    for (auto sprite: bullets) {
+        sprite->getPhysicsBody()->applyForce(bulletv.at(i));
+        i++;
+    }
+    resumeAllObjectLayer(tongue);
     resumeAllObjectLayer(pluses);
 }
 
 void Tongue::pauseScene() {
     AbstractLabirint::pauseScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: tongue) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    pauseAllObjectLayer(torts);*/
+    for (auto sprite: bullets) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    for (auto sprite: cannons) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    pauseAllObjectLayer(tongue);
     pauseAllObjectLayer(pluses);
 }
 
 void Tongue::stopScene() {
     AbstractLabirint::stopScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: tongue) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
     }
-    stopAllObjectLayer(torts);*/
+    for (auto sprite: bullets) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    for (auto sprite: cannons) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+    }
+    stopAllObjectLayer(tongue);
     stopAllObjectLayer(pluses);
 }
 

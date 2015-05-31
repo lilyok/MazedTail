@@ -29,7 +29,16 @@ public:
     CREATE_FUNC(Ears);
     
 private:
-    void ownEvent();    
+    cocos2d::Vector<cocos2d::Sprite*> earfloor;
+    cocos2d::Vector<cocos2d::Sprite*> stopfloor;
+
+    
+    cocos2d::Vector<cocos2d::Sprite*> dings;
+    cocos2d::Vector<cocos2d::Sprite*> ears;
+    cocos2d::Vector<cocos2d::Sprite*> earbf;
+
+    
+    void ownEvent();
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);

@@ -21,7 +21,7 @@ USING_NS_CC;
 Scene *Noses::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics();
-    //scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+   // scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     // 'layer' is an autorelease object
     auto layer = Noses::create();
     layer->setPhyWorld(scene->getPhysicsWorld());
@@ -238,6 +238,18 @@ bool Noses::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nod
         }
         return false;
     }
+    
+    /* else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
+                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
+                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
+                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
+                    if (nodeA->getTag() == TORT_TAG)
+                        botsManager->changeDirection(nodeA->getName());
+                    else
+                        botsManager->changeDirection(nodeB->getName());
+                    
+                }*/
+    
     return true;
 }
 

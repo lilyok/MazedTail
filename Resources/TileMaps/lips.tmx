@@ -3,9 +3,6 @@
  <tileset firstgid="1" name="lips" tilewidth="64" tileheight="64">
   <image source="lips.png" width="384" height="128"/>
  </tileset>
- <tileset firstgid="13" name="test" tilewidth="64" tileheight="64">
-  <image source="test.png" width="384" height="256"/>
- </tileset>
  <layer name="background" width="80" height="45">
   <data>
    <tile gid="1"/>

@@ -72,6 +72,12 @@ void Tongue::ownEvent(){
         bulletv[stoi(nm)] = v;
         
     }
+    if (num_bot_delta < BOT_DELTA) {
+        num_bot_delta++;
+    } else {
+        botsManager->changeDirectionAll();
+        num_bot_delta = 0;
+    }
 }
 
 Sprite *Tongue::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {

@@ -40,7 +40,7 @@ private:
     cocos2d::Vector<cocos2d::Sprite*> bullets;
     
     void ownEvent();
-    
+    int num_bot_delta = 0;
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);
     

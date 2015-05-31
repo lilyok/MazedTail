@@ -10,10 +10,12 @@
 #include "Balance.h"
 USING_NS_CC;
 
-#define TORT_TAG 20
+#define DING_TAG 20
 
-#define BUTTON_TAG 105
-#define DOOR_TAG 100
+#define EAR_TAG 105
+#define EARBF_TAG 100
+#define EARFLOOR_TAG 110
+#define STOPFLOOR_TAG 115
 
 
 Scene *Ears::createScene() {
@@ -34,14 +36,30 @@ Scene *Ears::createScene() {
 bool Ears::init() {
     //////////////////////////////
     // 1. super init first
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("flower.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("earbf.plist");
     
     
-    if (!AbstractLabirint::init("rotates.tmx", "back2.png")) {
+    if (!AbstractLabirint::init("ears.tmx", "back10.png")) {
         return false;
     }
     
+    auto earfloortmx = map->getObjectGroup("earfloor");
+    this->earfloor = makeObject(EARFLOOR_TAG, earfloortmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFFFFF);
+    auto stopfloortmx = map->getObjectGroup("stopfloor");
+    this->stopfloor = makeObject(STOPFLOOR_TAG, stopfloortmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFFFFF);
     
+    auto dingtmx = map->getObjectGroup("ding");
+    this->dings = makeObject(DING_TAG, dingtmx, scale_map, xZero, yZero, BALL, false, 0, 0, 0xFFFFF000);
+    auto eartmx = map->getObjectGroup("ears");
+    this->ears = makeObject(EAR_TAG, eartmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFF000);
+    auto earbftmx = map->getObjectGroup("earbf");
+    this->earbf = makeObject(EARBF_TAG, earbftmx, SpriteFrameCache::getInstance(), "earbf", 1, 3, scale_map, xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
+    for (auto sprite: earbf) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+        sprite->setOpacity(0);
+    }
     this->scheduleUpdate();
     return true;
 }
@@ -51,23 +69,21 @@ void Ears::ownEvent(){
 }
 
 Sprite *Ears::makeTexturedSprite(std::string sprite_name, int tag, cocos2d::Point p, cocos2d::Size size) {
-   /* auto w = size.width;
+    auto w = size.width;
     auto h = size.height;
-    if (tag == DOOR_TAG || tag == BUTTON_TAG) {
-        auto name = "bluewall.png";
-        if (tag == BUTTON_TAG) {
-            if (sprite_name == "orange")
-                name = "orangeflower.png";
-            else
-                name = "blueflower.png";
-        }
-        auto sprite = Sprite::createWithSpriteFrameName(name);//Sprite::create();
+    if (tag == DING_TAG) {
+        auto sprite = Sprite::create("ding.png");
         auto current_scaleX = w / sprite->getContentSize().width;
         auto current_scaleY = h / sprite->getContentSize().height;
         sprite->setScale(current_scaleX, current_scaleY);
-        sprite->setOpacity(0);
         return sprite;
-    } else*/
+    } else if (tag == EAR_TAG) {
+        auto sprite = Sprite::create("ear.png");
+        auto current_scaleX = w / sprite->getContentSize().width;
+        auto current_scaleY = h / sprite->getContentSize().height;
+        sprite->setScale(current_scaleX, current_scaleY);
+        return sprite;
+    }
     return AbstractLabirint::makeTexturedSprite(sprite_name, tag, p, size);
 }
 
@@ -98,14 +114,52 @@ void Ears::onContactSeperate(const cocos2d::PhysicsContact &contact) {
 
 bool Ears::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *nodeB) {
     if (nodeA->getTag() == HERO_SPRITE_TAG or nodeB->getTag() == HERO_SPRITE_TAG) {
-        /*if (nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG) {
-            audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
-            collisionWithEnemy(nodeA, nodeB);
+        if (nodeA->getTag() == EARBF_TAG or nodeB->getTag() == EARBF_TAG) {
+            if (nodeA->getOpacity()== 255 and nodeB->getOpacity() == 255) {
+                audio->playEffect("pain.wav", false, 2.0f, 0.0f, 1.0f);
+                collisionWithEnemy(nodeA, nodeB);
+            }
+            else {
+                return false;
+            }
         }
-        else */if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
+        else if (nodeA->getTag() == PLUS_TAG or nodeB->getTag() == PLUS_TAG) {
             collisionWithHealth(nodeA, nodeB);
             return false;
-        } /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
+        }
+        else if (nodeA->getTag() == EARFLOOR_TAG or nodeB->getTag() == EARFLOOR_TAG) {
+            auto nm = nodeB->getName();
+            if (nodeA->getTag() == EARFLOOR_TAG)
+                nm = nodeA->getName();
+            for (auto sprite : earbf) {
+                if (sprite->getName() == nm) {
+                    sprite->runAction(FadeTo::create(1.0f, 255));
+                    sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+                    sprite->getPhysicsBody()->setGravityEnable(true);
+                }
+            }
+            
+            
+            return false;
+        }
+        else if (nodeA->getTag() == STOPFLOOR_TAG or nodeB->getTag() == STOPFLOOR_TAG) {
+            auto nm = nodeB->getName();
+            if (nodeA->getTag() == STOPFLOOR_TAG)
+                nm = nodeA->getName();
+            for (auto sprite : earbf) {
+                if (sprite->getName() == nm) {
+                    sprite->runAction(FadeTo::create(1.0f, 0));
+                    sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+                    sprite->getPhysicsBody()->resetForces();
+                    sprite->getPhysicsBody()->setGravityEnable(false);
+                }
+            }
+            
+            
+            return false;
+        }
+        
+        /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
             audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
             auto btn_name = nodeB->getName();
             if (nodeA->getTag() == BUTTON_TAG)

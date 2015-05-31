@@ -36,6 +36,7 @@ private:
     cocos2d::Vector<cocos2d::Sprite*> dings;
     cocos2d::Vector<cocos2d::Sprite*> ears;
     cocos2d::Vector<cocos2d::Sprite*> earbf;
+    cocos2d::Vector<cocos2d::Sprite*> earbfred;
 
     
     void ownEvent();

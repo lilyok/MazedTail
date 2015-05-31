@@ -182,6 +182,8 @@
 		92E0FAD91AB45CAE00D3DC91 /* bunny.png in Resources */ = {isa = PBXBuildFile; fileRef = 92E0FAD71AB45CAE00D3DC91 /* bunny.png */; };
 		92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FADA1AB4A0B400D3DC91 /* BotsManager.cpp */; };
 		92E0FAE21AB4B05C00D3DC91 /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92E0FAE01AB4B05C00D3DC91 /* Bot.cpp */; };
+		92F45DE81B1BB76000CE3153 /* earbfred.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92F45DE61B1BB76000CE3153 /* earbfred.plist */; };
+		92F45DE91B1BB76000CE3153 /* earbfred.png in Resources */ = {isa = PBXBuildFile; fileRef = 92F45DE71B1BB76000CE3153 /* earbfred.png */; };
 		92FA9C671ADB015D00354941 /* Shifts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92FA9C651ADB015D00354941 /* Shifts.cpp */; };
 		92FA9C801ADB029C00354941 /* greenwall.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C7F1ADB029C00354941 /* greenwall.png */; };
 		92FA9C841AE2B33500354941 /* back3.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C831AE2B33500354941 /* back3.png */; };
@@ -529,6 +531,8 @@
 		92E0FADB1AB4A0B400D3DC91 /* BotsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BotsManager.h; path = ../Classes/BotsManager.h; sourceTree = "<group>"; };
 		92E0FAE01AB4B05C00D3DC91 /* Bot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bot.cpp; path = ../Classes/Bot.cpp; sourceTree = "<group>"; };
 		92E0FAE11AB4B05C00D3DC91 /* Bot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bot.h; path = ../Classes/Bot.h; sourceTree = "<group>"; };
+		92F45DE61B1BB76000CE3153 /* earbfred.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = earbfred.plist; sourceTree = "<group>"; };
+		92F45DE71B1BB76000CE3153 /* earbfred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earbfred.png; sourceTree = "<group>"; };
 		92FA9C651ADB015D00354941 /* Shifts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shifts.cpp; path = ../Classes/Shifts.cpp; sourceTree = "<group>"; };
 		92FA9C661ADB015D00354941 /* Shifts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shifts.h; path = ../Classes/Shifts.h; sourceTree = "<group>"; };
 		92FA9C7F1ADB029C00354941 /* greenwall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenwall.png; sourceTree = "<group>"; };
@@ -784,6 +788,8 @@
 		92568E881A9D116E0065A049 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92F45DE61B1BB76000CE3153 /* earbfred.plist */,
+				92F45DE71B1BB76000CE3153 /* earbfred.png */,
 				929DBC351B1A7F19006C7A6C /* earbf.plist */,
 				929DBC361B1A7F19006C7A6C /* earbf.png */,
 				929DBC371B1A7F19006C7A6C /* ear.png */,
@@ -1120,6 +1126,7 @@
 				9287F1701ABF53F900750CAD /* back2.png in Resources */,
 				92B5C4821AF80F8200D8CECD /* start.png in Resources */,
 				924932F71B07EA8500728833 /* inshand.png in Resources */,
+				92F45DE81B1BB76000CE3153 /* earbfred.plist in Resources */,
 				92B5C4761AF80CA400D8CECD /* oranges.png in Resources */,
 				9287F15A1ABF521C00750CAD /* flower.png in Resources */,
 				924932E51B05451C00728833 /* eye.png in Resources */,
@@ -1174,6 +1181,7 @@
 				921542FE1AA4A5D500C33E8E /* PlayNormal.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				92E0FAD91AB45CAE00D3DC91 /* bunny.png in Resources */,
+				92F45DE91B1BB76000CE3153 /* earbfred.png in Resources */,
 				929DBC101B0A4D0B006C7A6C /* noselist.plist in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				929DBC381B1A7F19006C7A6C /* earbf.plist in Resources */,

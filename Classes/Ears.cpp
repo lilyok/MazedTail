@@ -37,6 +37,7 @@ bool Ears::init() {
     //////////////////////////////
     // 1. super init first
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("earbf.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("earbfred.plist");
     
     
     if (!AbstractLabirint::init("ears.tmx", "back10.png")) {
@@ -52,6 +53,10 @@ bool Ears::init() {
     this->dings = makeObject(DING_TAG, dingtmx, scale_map, xZero, yZero, BALL, false, 0, 0, 0xFFFFF000);
     auto eartmx = map->getObjectGroup("ears");
     this->ears = makeObject(EAR_TAG, eartmx, scale_map, xZero, yZero, BRICK, false, 0, 0, 0xFFFFF000);
+
+    auto earbfredtmx = map->getObjectGroup("earbfred");
+    this->earbfred = makeObject(EARBF_TAG, earbfredtmx, SpriteFrameCache::getInstance(), "earbfred", 1, 3, scale_map, xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
+    
     auto earbftmx = map->getObjectGroup("earbf");
     this->earbf = makeObject(EARBF_TAG, earbftmx, SpriteFrameCache::getInstance(), "earbf", 1, 3, scale_map, xZero, yZero, BALL, 0.8f, true, 1.0f, 0.2f, 1.0f);
     for (auto sprite: earbf) {
@@ -139,6 +144,7 @@ bool Ears::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *node
                 }
             }
             
+            ears.at(stoi(nm) - 1)->runAction(Sequence::create(TintTo::create(0.5f, 243, 44, 239), TintTo::create(0.5, 255, 255, 255), NULL));
             
             return false;
         }
@@ -155,24 +161,21 @@ bool Ears::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *node
                 }
             }
             
-            
             return false;
         }
-        
-        /*else if (nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG) {
-            audio->playEffect("btnclick.wav", false, 1.0f, 0.0f, 1.0f);
-            auto btn_name = nodeB->getName();
-            if (nodeA->getTag() == BUTTON_TAG)
-                btn_name = nodeA->getName();
-            
-            for (auto btn : buttons) {
-                if (btn->getName() == btn_name)
-                    
-                    btn->runAction(Sequence::create(TintTo::create(0.75f, 200, 255, 0), TintTo::create(0.75, 255, 255, 255), NULL));
+        else if (nodeA->getTag() == DING_TAG or nodeB->getTag() == DING_TAG) {
+            audio->playEffect("chime.wav", false, 2.0f, 0.0f, 1.0f);
+            for (auto sprite : ears) {
+                sprite->runAction(Sequence::create(TintTo::create(0.5f, 44, 255, 44), TintTo::create(0.5, 255, 255, 255), NULL));
             }
-            
+            for (auto sprite : earbf) {
+                sprite->runAction(FadeTo::create(1.0f, 0));
+                sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+                sprite->getPhysicsBody()->resetForces();
+                sprite->getPhysicsBody()->setGravityEnable(false);
+            }
             return false;
-        }*/
+        }
         else if (nodeA->getTag() == NEWLEVEL_TAG or nodeB->getTag() == NEWLEVEL_TAG) {
             audio->playEffect("harpup.wav", false, 1.0f, 0.0f, 1.0f);
             setNextLevelNum(11);
@@ -234,31 +237,56 @@ void Ears::collisionWithEnemy(Node *nodeA, Node *nodeB) {
 
 void Ears::resumeScene() {
     AbstractLabirint::resumeScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: earbfred) {
         sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+        sprite->getPhysicsBody()->setGravityEnable(true);
+    }
+    for (auto sprite: earbf) {
+        if (sprite->getOpacity() == 255) {
+            sprite->getPhysicsBody()->setVelocity(Vec2(MY_VELOCITY*scale_map, -MY_VELOCITY*scale_map));
+            sprite->getPhysicsBody()->setGravityEnable(true);
+        }
     }
     
-    resumeAllObjectLayer(torts);*/
+    resumeAllObjectLayer(earbf);
+    resumeAllObjectLayer(earbfred);
+    
     resumeAllObjectLayer(pluses);
 }
 
 void Ears::pauseScene() {
     AbstractLabirint::pauseScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: earbf) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
     }
-    pauseAllObjectLayer(torts);*/
+    for (auto sprite: earbfred) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    pauseAllObjectLayer(earbf);
+    pauseAllObjectLayer(earbfred);
+    
     pauseAllObjectLayer(pluses);
 }
 
 void Ears::stopScene() {
     AbstractLabirint::stopScene();
-    /*for (auto sprite: torts) {
+    for (auto sprite: earbf) {
         sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
         sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
     }
-    stopAllObjectLayer(torts);*/
+    for (auto sprite: earbfred) {
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+        sprite->getPhysicsBody()->resetForces();
+        sprite->getPhysicsBody()->setGravityEnable(false);
+    }
+    stopAllObjectLayer(earbf);
+    stopAllObjectLayer(earbfred);
+    
     stopAllObjectLayer(pluses);
 }
 

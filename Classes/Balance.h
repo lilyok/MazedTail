@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include <AbstractLabirint.h>
+#include "BotsManager.h"
 #include "cocos2d.h"
+#define BOT_DELTA 50
 
 class Balance: public AbstractLabirint{
 public:
@@ -29,7 +31,14 @@ public:
     CREATE_FUNC(Balance);
     
 private:
-    void ownEvent();    
+    BotsManager*  botsManager;
+    cocos2d::Vector<cocos2d::Sprite*> balancers;
+    cocos2d::Vector<cocos2d::Sprite*> unknown;
+    cocos2d::Vector<cocos2d::Sprite*> unlines;
+    cocos2d::Vector<cocos2d::Sprite*> movings;
+    cocos2d::Vec2 myforce = cocos2d::Vec2(0,0);
+    
+    void ownEvent();
     
     bool onContactBegin(const cocos2d::PhysicsContact& contact);
     void onContactSeperate(const cocos2d::PhysicsContact& contact);
@@ -43,7 +52,7 @@ private:
     void resumeScene();
     cocos2d::Scene* returnRestartedScene();
     cocos2d::Scene* returnNewScene();
-    
-    
+    int num_bot_delta = 0;
+    int num_of_portals = 0;
 };
 #endif /* defined(__MazedTail__Balance__) */

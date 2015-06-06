@@ -3619,6 +3619,5 @@
   <object id="8" name="start" x="726.493" y="2422.9" width="600" height="300"/>
   <object id="9" name="close" x="3797.58" y="2422.9" width="600" height="300"/>
   <object id="10" name="back" x="143.469" y="765.21" width="216.602" height="1127.54"/>
-  <object id="12" name="next" x="4750.11" y="765.21" width="216.602" height="1127.54"/>
  </objectgroup>
 </map>

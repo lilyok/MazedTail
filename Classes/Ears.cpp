@@ -164,7 +164,7 @@ bool Ears::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *node
             return false;
         }
         else if (nodeA->getTag() == DING_TAG or nodeB->getTag() == DING_TAG) {
-            audio->playEffect("chime.wav", false, 2.0f, 0.0f, 1.0f);
+            audio->playEffect("chime1.wav", false, 0.3f, 0.0f, 1.0f);
             for (auto sprite : ears) {
                 sprite->runAction(Sequence::create(TintTo::create(0.5f, 44, 255, 44), TintTo::create(0.5, 255, 255, 255), NULL));
             }
@@ -183,16 +183,7 @@ bool Ears::checkCollision(PhysicsContact const &contact, Node *nodeA, Node *node
             return false;
         }
         
-    } /* else if ((nodeA->getTag() == TORT_TAG or nodeB->getTag() == TORT_TAG)  and
-                (nodeA->getTag() == COLLISION_TAG or nodeB->getTag() == COLLISION_TAG or
-                 nodeA->getTag() == DOOR_TAG or nodeB->getTag() == DOOR_TAG or
-                 nodeA->getTag() == BUTTON_TAG or nodeB->getTag() == BUTTON_TAG)){
-                    if (nodeA->getTag() == TORT_TAG)
-                        botsManager->changeDirection(nodeA->getName());
-                    else
-                        botsManager->changeDirection(nodeB->getName());
-                    
-                }*/
+    }
     
     return true;
 }
@@ -206,22 +197,7 @@ void Ears::collisionWithEnemy(Node *nodeA, Node *nodeB) {
         sprintf(res, "life%i.png", life_num);
         SpriteFrame *sp = SpriteFrameCache::getInstance()->getSpriteFrameByName(res);
         mylife->setSpriteFrame(sp);
-/*        Sprite *tort;
-        if (nodeA->getTag() == TORT_TAG)
-            tort = torts.at(stoi(nodeA->getName()));
-        else
-            tort = torts.at(stoi(nodeB->getName()));
-        
-        int num = stoi(tort->getName());
-        if (num % 3 == 0)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 250 - num*20, 255, 255), NULL));
-        else if (stoi(tort->getName()) % 3 == 1)
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 250 - num*20, 255), NULL));
-        else
-            tort->runAction(Sequence::create(TintTo::create(0.5f, 255, 0, 0), TintTo::create(0.5, 255, 255, 250 - num*20), NULL));
-        
-        
-        */
+
         if (life_num == 0) {
             audio->playEffect("twang.wav", false, 2.0f, 0.0f, 1.0f);
             mysprite->runAction(TintTo::create(1.0f, 243, 44, 239));

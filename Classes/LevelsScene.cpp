@@ -142,7 +142,7 @@ void LevelsScene::prepareMap(std::string name) {
             sprite->setName(name);
             sprite->setPosition(_point);
             sprite->setRotation(r);
-            if (i  + MAX_LEVELS * (cur_menu - 1) > fmin(high_score, 10)) //changed when sdded levels
+            if (i  + MAX_LEVELS * (cur_menu - 1) > fmin(high_score, 11)) //changed when sdded levels
                 sprite->setOpacity(100);
             r += 30;
             if (r > 30) r = -30;

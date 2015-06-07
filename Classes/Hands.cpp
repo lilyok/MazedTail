@@ -262,7 +262,7 @@ Scene* Hands::returnRestartedScene(){
 }
 
 Scene* Hands::returnNewScene(){
-    return NULL;  //Noses::createScene();
+    return Noses::createScene();
 }
 
 

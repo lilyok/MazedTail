@@ -27,7 +27,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Tongue.cpp \
                    ../../Classes/Hands.cpp \
                    ../../Classes/Bot.cpp \
-                   ../../Classes/BotsManager.cpp
+                   ../../Classes/BotsManager.cpp \
+                   ../../Classes/AdmobHelper.cpp
 
 
 

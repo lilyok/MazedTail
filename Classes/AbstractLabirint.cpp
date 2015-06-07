@@ -4,6 +4,7 @@
 
 #include "AbstractLabirint.h"
 #include "LevelsScene.h"
+#include "AdmobHelper.h"
 
 USING_NS_CC;
 const char *HIGH_SCORE="l";
@@ -29,6 +30,10 @@ bool AbstractLabirint::init(std::string map_name, std::string back_name) {
     if (!Layer::init()) {
         return false;
     }
+    
+    if (AdmobHelper::isAdShowing)
+        AdmobHelper::hideAd();
+
     
     std::vector<std::string> searchPaths;
     searchPaths.push_back("TileMaps");
@@ -777,6 +782,9 @@ void AbstractLabirint::pause(){
             prettyShowItem(closeItem, Vec2(origin.x + visibleSize.width/2,
                                            origin.y + visibleSize.height/2 - continueItem->getContentSize().height*icon_scale));
         }
+        
+        
+        AdmobHelper::showAd();
     } else {
         if ((!isRestart) && (!isNewLeveled))
             resume();
@@ -785,6 +793,7 @@ void AbstractLabirint::pause(){
 
 
 void AbstractLabirint::resume(bool isResumeScene){
+    AdmobHelper::hideAd();
     isPaused = false;
     finishMenuAction();
     prettyShowItem(continueItem, Vec2(origin.x + visibleSize.width/2,

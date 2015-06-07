@@ -192,6 +192,7 @@
 		92F45DF71B1E6A7300CE3153 /* back11.png in Resources */ = {isa = PBXBuildFile; fileRef = 92F45DF21B1E6A7300CE3153 /* back11.png */; };
 		92F45DFA1B2371F500CE3153 /* balance.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 92F45DF81B2371F500CE3153 /* balance.tmx */; };
 		92F45DFB1B2371F500CE3153 /* balancetmx.png in Resources */ = {isa = PBXBuildFile; fileRef = 92F45DF91B2371F500CE3153 /* balancetmx.png */; };
+		92F45DFE1B24E9CB00CE3153 /* AdmobHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92F45DFC1B24E9CB00CE3153 /* AdmobHelper.cpp */; };
 		92FA9C671ADB015D00354941 /* Shifts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 92FA9C651ADB015D00354941 /* Shifts.cpp */; };
 		92FA9C801ADB029C00354941 /* greenwall.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C7F1ADB029C00354941 /* greenwall.png */; };
 		92FA9C841AE2B33500354941 /* back3.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FA9C831AE2B33500354941 /* back3.png */; };
@@ -549,6 +550,8 @@
 		92F45DF21B1E6A7300CE3153 /* back11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back11.png; sourceTree = "<group>"; };
 		92F45DF81B2371F500CE3153 /* balance.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = balance.tmx; sourceTree = "<group>"; };
 		92F45DF91B2371F500CE3153 /* balancetmx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balancetmx.png; sourceTree = "<group>"; };
+		92F45DFC1B24E9CB00CE3153 /* AdmobHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdmobHelper.cpp; path = ../Classes/AdmobHelper.cpp; sourceTree = "<group>"; };
+		92F45DFD1B24E9CB00CE3153 /* AdmobHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdmobHelper.h; path = ../Classes/AdmobHelper.h; sourceTree = "<group>"; };
 		92FA9C651ADB015D00354941 /* Shifts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shifts.cpp; path = ../Classes/Shifts.cpp; sourceTree = "<group>"; };
 		92FA9C661ADB015D00354941 /* Shifts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shifts.h; path = ../Classes/Shifts.h; sourceTree = "<group>"; };
 		92FA9C7F1ADB029C00354941 /* greenwall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenwall.png; sourceTree = "<group>"; };
@@ -677,6 +680,8 @@
 				92B5C4841AF9119000D8CECD /* LevelsScene.h */,
 				924932C51B00EFF300728833 /* Eyes.cpp */,
 				924932C61B00EFF300728833 /* Eyes.h */,
+				92F45DFC1B24E9CB00CE3153 /* AdmobHelper.cpp */,
+				92F45DFD1B24E9CB00CE3153 /* AdmobHelper.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -1305,6 +1310,7 @@
 				92E0FADC1AB4A0B400D3DC91 /* BotsManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				924932C71B00EFF300728833 /* Eyes.cpp in Sources */,
+				92F45DFE1B24E9CB00CE3153 /* AdmobHelper.cpp in Sources */,
 				924932D71B00F61700728833 /* Hands.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
